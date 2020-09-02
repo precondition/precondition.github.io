@@ -387,10 +387,10 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     overflow: hidden;
     margin: 0 20px 40px;
     min-height: 300px;
-    background: #fff center center;
+    background: #181a1b center center;
     background-size: cover;
     border-radius: 5px;
-    box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
+    box-shadow: 8px 14px 38px rgb(17, 19, 21, 0.3),1px 3px 8px rgba(39,44,49,.03);
     transition: all 0.5s ease;
 }
 
@@ -418,7 +418,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     position: relative;
     display: block;
     padding: 25px 25px 0;
-    color: var(--darkgrey);
+    color: #d9d6d1;
 }
 
 .post-card-content-link:hover {
@@ -553,7 +553,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 .post-template .site-main,
 .page-template .site-main {
     padding-bottom: 4vw;
-    background: #fff;
+    background: #181a1b;
 }
 
 .post-full {
@@ -590,7 +590,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-title {
     margin: 0;
-    color: color(var(--darkgrey) l(-5%));
+    color: color(#d9d6d1 l(-5%));
 }
 
 .date-divider {
@@ -628,7 +628,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
     font-family: Georgia, serif;
     font-size: 2.2rem;
     line-height: 1.6em;
-    background: #fff;
+    background: #181a1b;
 }
 
 @media (max-width: 1170px) {
@@ -728,7 +728,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-content strong,
 .post-full-content em {
-    color: color(var(--darkgrey) l(-5%));
+    color: color(#d9d6d1 l(-5%));
 }
 
 .post-full-content small {
@@ -838,6 +838,7 @@ Usage (In Ghost editor):
     color: inherit;
 }
 
+
 .post-full-content .fluid-width-video-wrapper {
     margin: 1.5em 0 3em;
 }
@@ -866,7 +867,7 @@ Usage (In Ghost editor):
 .post-full-content h4,
 .post-full-content h5,
 .post-full-content h6 {
-    color: color(var(--darkgrey) l(-5%));
+    color: color(#d9d6d1 l(-5%));
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -1028,7 +1029,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content table th {
-    color: var(--darkgrey);
+    color: #d9d6d1;
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.2px;
@@ -1059,7 +1060,7 @@ Usage (In Ghost editor):
 .subscribe-form-title {
     margin: 0 0 3px 0;
     padding: 0;
-    color: var(--darkgrey);
+    color: #d9d6d1;
     font-size: 3.5rem;
     line-height: 1;
     font-weight: 700;
@@ -1188,7 +1189,7 @@ Usage (In Ghost editor):
 }
 
 .author-card-name a {
-    color: var(--darkgrey);
+    color: #d9d6d1;
     font-weight: 700;
 }
 
@@ -1416,7 +1417,7 @@ Usage (In Ghost editor):
 .floating-header-logo a {
     display: flex;
     align-items: center;
-    color: var(--darkgrey);
+    color: #d9d6d1;
     line-height: 1.1em;
     font-weight: 700;
 }
