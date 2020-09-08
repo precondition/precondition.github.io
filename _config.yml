@@ -61,13 +61,13 @@ feed:
 # or "master" otherwise
 safe: False
 lsi: False
-username: jekyller
-repo: jasper2
+username: precondition
+repo: precondition.github.io
 branch: master
 relative_source: ../jasper2/
 destination: ../jasper2-pages/
-production_url:  https://jekyller.github.io/jasper2/
-source_url:  https://github.com/jekyller/jasper2/
+production_url:  https://precondition.github.io
+source_url:  https://precondition.github.io
 
 exclude:
   - assets/css
