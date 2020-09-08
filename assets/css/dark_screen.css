@@ -105,6 +105,37 @@ body {
     }
 }
 
+.gallery-column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+.gallery-column3 {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+/* Responsive layout - makes the three gallery-columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+  .gallery-column {
+    width: 50%;
+  }
+	.gallery-column3 {
+    width: 100%
+	}
+}
+
+/* Responsive layout - makes the three gallery-columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 300px) {
+  .gallery-column {
+    width: 100%;
+  }
+	.gallery-column3 {
+    width: 100%
+	}
+}
 
 /* 4. Site Header
 /* ---------------------------------------------------------- */
@@ -669,7 +700,8 @@ body {
  min-width: 100%; }
 
 .post-full-content li {
- word-break: break-word; }
+    word-break: break-word; 
+}
 
 .post-full-content li p {
  margin: 0px; }
@@ -689,6 +721,10 @@ body {
  text-decoration: none;
  }
 
+.post-full-content figcaption a {
+    color: color(var(--caption));
+}
+
 .post-full-content em, .post-full-content strong {
  color: rgb(191, 191, 191); }
 
@@ -703,7 +739,7 @@ body {
 .post-full-content img, .post-full-content video {
  display: block;
  margin: 1.5em auto;
- max-width: 1040px;
+ max-width: 900px;
  }
 
 @media (max-width: 1040px) {
@@ -756,6 +792,14 @@ Usage (In Ghost editor):
  font-size: inherit;
  line-height: inherit;
  font-style: italic;
+}
+
+.post-full-content blockquote em {
+    font-style: normal;
+}
+
+.post-full-content blockquote li {
+    font-style: italic;
 }
 
 .post-full-content blockquote p:last-child {

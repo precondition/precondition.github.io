@@ -1,3 +1,11 @@
+/* Variables
+/* ------------------------------------------------------------ */
+
+:root {
+    /* Colours */
+    --caption: #919191;
+}
+
 a { color: rgb(140, 140, 250);
  }::-webkit-scrollbar-track-piece { background-color: rgba(255, 255, 255, 0.2) !important;
  }::-webkit-scrollbar-track { background-color: rgba(255, 255, 255, 0.3) !important;
@@ -104,6 +112,7 @@ video {
  font-size: 100%;
  vertical-align: baseline;
 }
+
 body {
  line-height: 1;
 
@@ -125,10 +134,18 @@ q::before {
  content: none;
 
 }
+
 img {
  max-width: 100%;
-
 }
+
+figcaption {
+    font-size: 1.6rem;
+    margin-top: -1.5em;
+    margin-bottom: 1em;
+    color: color(var(--caption));
+}
+
 html {
  box-sizing: border-box;
  font-family: sans-serif;
@@ -198,7 +215,8 @@ svg:not(:root) {
 
 }
 mark {
- background-color: rgb(95, 98, 24);
+    background-color: #d8dd6e;
+    color: #1c1c21;
 }
 
 code,
@@ -549,18 +567,7 @@ h5, h6 {
     }
 }
 
-a, abbr, acronym, address, applet, article, aside, audio, big, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, iframe, img, ins, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, ul, var, video { margin: 0px;
- padding: 0px;
- border: 0px;
- font-style: inherit;
- font-variant: inherit;
- font-weight: inherit;
- font-stretch: inherit;
- line-height: inherit;
- font-family: inherit;
- font-size: 100%;
- vertical-align: baseline;
- }body { line-height: 1;
+ body { line-height: 1;
  }ol, ul { list-style: none;
  }blockquote, q { quotes: none;
  }blockquote::after, blockquote::before, q::after, q::before { content: none;
@@ -612,9 +619,6 @@ img { border: 0px;
 svg:not(:root) { overflow: hidden;
 }
 
-mark { background-color: rgb(95, 98, 24);
-}
-
 code, kbd, pre, samp { font-family: monospace, monospace;
  font-size: 1em;
 }
@@ -628,7 +632,7 @@ kbd {
     border: rgb(62, 68, 70) 1px solid;
     border-color: rgb(62, 68, 70);
     border-radius: 6px;
-    color: rgb(168, 160, 149);
+    color: #bfbfbf;
     font-size: 0.9em;
     font-weight: 500;
     line-height: 20px;
