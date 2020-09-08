@@ -10,7 +10,7 @@ baseurl: /
 
 # Website info
 title: precondition
-description: A personal blog mostly focused on keyboards
+description: Typing about what I type on
 cover: assets/images/blog-cover.jpg
 logo: assets/images/blog-icon.png
 logo_dark: assets/images/favicon.png
@@ -24,6 +24,7 @@ subscribers: False # you need to connect an external service for this to work,
 # by editing `_includes/subscribe-form.html`
 twitter: # replace by your username
 facebook: # replace by your username
+github: precondition
 
 # Permalinks
 permalink: /:title

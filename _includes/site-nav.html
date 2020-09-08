@@ -19,6 +19,9 @@
             {% if site.twitter %}
                 <a class="social-link social-link-tw" href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener">{% include twitter.html %}</a>
             {% endif %}
+            {% if site.github %}
+                <a class="social-link social-link-tw" href="https://github.com/{{ site.github }}" target="_blank" rel="noopener">{% include github.html %}</a>
+            {% endif %}
         </div>
         {% if site.subscribers %}
             <a class="subscribe-button" href="#subscribe">Subscribe</a>
