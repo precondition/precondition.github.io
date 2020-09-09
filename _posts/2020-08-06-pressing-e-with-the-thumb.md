@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/Sergi\'s\ righthand\ Kyria\ with\ TRIA\ layout.jpg
+cover: assets/images/Sergi-s-righthand-Kyria-with-TRIA-v2-layout.jpg
 navigation: True
 title: Pressing E with the thumb‽
 date: 2020-08-06
