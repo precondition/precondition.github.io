@@ -64,8 +64,8 @@ lsi: False
 username: precondition
 repo: precondition.github.io
 branch: master
-relative_source: ../jasper2/
-destination: ../jasper2-pages/
+relative_source: ../precondition.github.io/
+destination: ../gh-pages/
 production_url:  https://precondition.github.io
 source_url:  https://precondition.github.io
 
