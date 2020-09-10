@@ -88,7 +88,7 @@ Logical layouts/keymaps which add <kbd>E</kbd> on the thumb:
 * [ANISHTRO](https://github.com/lydell/anishtro)
 ![KLE diagram of the ANISHTRO v1 layout on minimal Kyria](/assets/images/ANISHTRO-KLE.png)
 * [TRIA](https://github.com/zigotica/kyria)
-![QMK configurator diagram of the TRIA layout on a Kyria](https://media.discordapp.net/attachments/663573863480950808/744188642490187786/Screenshot_2020-08-15_at_15.30.51.png)
+![QMK configurator diagram of the TRIA layout on a Kyria](https://media.discordapp.net/attachments/745301752588271648/753602020962992138/Screenshot_2020-09-10_at_15.04.09.png)
 
 Logical layouts/keymaps which add another letter (circled) on the thumb:
 * [BEAKL Zi](http://thedarnedestthing.com/corne) <kbd>I</kbd>
