@@ -23,7 +23,9 @@
                     <h2 class="post-card-title">{{ post.title }}</h2>
                 </header>
                 <section class="post-card-excerpt">
-                    {% if post.excerpt %}
+                    {% if post.description %}
+                        <p>{{ post.description }}</p>
+                    {% elsif post.excerpt %}
                         <p>{{ post.excerpt | strip_html | truncatewords: 33, "" }}</p>
                     {% else %}
                         <p>{{ post.content | strip_html | truncatewords: 33, "" }}</p>

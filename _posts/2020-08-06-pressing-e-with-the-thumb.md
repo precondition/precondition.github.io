@@ -9,11 +9,9 @@ tags: [Keyboards, Keymap]
 class: post-template
 subclass: 'post'
 author: precondition
+description: Exploring the history and reasoning behind a radical ergonomic keyboard layout and trying it out for myself.
 ---
 
-Exploring the history and reasoning behind a radical ergonomic keyboard layout and trying it out for myself.
-
---------------------
 
 Did you know that the letter “E” is the most common letter of the English language by a fair margin? It's second only to space. Such an observation can also be made for the majority of European languages.
 
