@@ -53,17 +53,19 @@ However, there are, in fact, plenty of keyboards featuring <kbd>E</kbd> on their
 
 The [stenotype machines pictured below](https://www.stenograph.com/history-writers) were all made between 1889 and 1963, much earlier than the Maltron.
 
-<div class="row">
-  <div class="gallery-column">
-    <img src="https://www.stenograph.com/content/files/images/MachineHistory/02anderson.jpg" alt="1889 Anderson Shorthand Typewriter" title="1889 Anderson Shorthand Typewriter" style="width:100%">
-  </div>
-  <div class="gallery-column">
-    <img src="https://www.stenograph.com/content/files/images/MachineHistory/03ireland.jpg" alt="1911 Ireland Stenotype Shorthand Machine" title="1911 Ireland Stenotype Shorthand Machine" style="width:100%">
-  </div>
-  <div class="gallery-column3">
-    <img src="https://www.stenograph.com/content/files/images/MachineHistory/07stenograph.jpg" alt="1963 Stenograph Data Writer" title="1963 Stenograph Data Writer" style="width:100%">
-  </div>
-</div>
+<figure class="wp-block-gallery columns-3 is-cropped">
+<ul class="blocks-gallery-grid">
+  <li class="blocks-gallery-item">
+   <figure><img src="https://www.stenograph.com/content/files/images/MachineHistory/02anderson.jpg" alt="1889 Anderson Shorthand Typewriter" title="1889 Anderson Shorthand Typewriter" class="wp-image-18"> </figure> 
+  </li>
+  <li class="blocks-gallery-item">
+   <figure><img src="https://www.stenograph.com/content/files/images/MachineHistory/03ireland.jpg" alt="1911 Ireland Stenotype Shorthand Machine" title="1911 Ireland Stenotype Shorthand Machine" class="wp-image-19"></figure>
+  </li>
+  <li class="blocks-gallery-item">
+   <figure><img src="https://www.stenograph.com/content/files/images/MachineHistory/07stenograph.jpg" alt="1963 Stenograph Data Writer" title="1963 Stenograph Data Writer" class="wp-image-20"></figure>
+  </li>
+</ul>
+</figure>
 
 Outside of steno though, the adoption of letter thumb keys is nearly null. That can mostly be explained by path dependence and hardware limitations.
 
