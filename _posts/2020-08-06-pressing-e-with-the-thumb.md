@@ -83,8 +83,8 @@ Logical layouts/keymaps which add <kbd>E</kbd> on the thumb:
 ![KLE keyboard-design.com diagram of Opuiany](https://keyboard-design.com/klalayouts/opuiany.en.ergodox.jpg)
 * [FR-Godox](https://forum.bepo.fr/viewtopic.php?id=1696) (link in French)
 ![KLE diagram of the FR-Godox on an Ergodox keyboard](https://i.imgur.com/f2NDm7l.png)
-* [STRENIA](idk)
-![KLE diagram of the STRENIA layout on a Kyria](https://media.discordapp.net/attachments/663573863480950808/743938599967522996/image0.png)
+* [ANISHTRO](https://github.com/lydell/anishtro)
+![KLE diagram of the ANISHTRO v1 layout on minimal Kyria](/assets/images/ANISHTRO-KLE.png)
 * [TRIA](https://github.com/zigotica/kyria)
 ![QMK configurator diagram of the TRIA layout on a Kyria](https://media.discordapp.net/attachments/663573863480950808/744188642490187786/Screenshot_2020-08-15_at_15.30.51.png)
 
@@ -215,6 +215,9 @@ Have you ever used such layouts? Would you be willing to try it out, or is that 
 * Added a testimonial from an anonymous RSTHD user
 * Added a paragraph on the benefits of <kbd>E</kbd> on the thumb
 * Developed a little bit on why I gave up on <kbd>E</kbd> thumb
+
+10 September Update :
+* Added ANISHTRO to the list of Malt-like layouts
 
 <!-- https://community.keyboard.io/t/maltron-layouts/98 -->
 <!-- https://mathematicalmulticore.wordpress.com/category/keyboards/ -->
