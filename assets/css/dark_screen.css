@@ -736,6 +736,7 @@ body {
 .post-full-content img, .post-full-content video {
  display: block;
  margin: 1.5em auto;
+ height: auto;
  }
 
 @media (max-width: 1040px) {
@@ -771,8 +772,8 @@ Usage (In Ghost editor):
  display: block;
  margin-top: -3em;
  margin-bottom: 1.5em;
- 
 }
+
 .post-full-content iframe {
  margin: 0px auto; 
 }
