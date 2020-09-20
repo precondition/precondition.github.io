@@ -95,6 +95,8 @@ Logical layouts/keymaps which add another letter (circled) on the thumb:
 ![KLE diagram of the BEAKL Zi layout on a Corne](http://thedarnedestthing.com/images/chimera-beakl-si.jpg)
 * [BEAKL P_RN](https://deskthority.net/wiki/BEAKL#P_RN) <kbd>P</kbd> <kbd>R</kbd> <kbd>N</kbd>
 ![Color coded KLE Diagram of the BEAKL_P_RN layout on a Preonic-style keyboard](assets/images/BEAKL_P_RN-KLE.png)
+* [BEAKL QIEA](http://thedarnedestthing.com/thumb%20h) <kbd>H</kbd>
+![Colored KLE diagram of the QIEA layout with H on thumb](http://thedarnedestthing.com/images/keyboard-layout-splitography-thumb-h.jpg)
 * [X6.2h](https://keyboard-design.com/letterlayout.html?layout=x6-2h.en.ergolinear) <kbd>H</kbd> (and all the other funky layouts made by Ian Douglas of the ergolinear X family)
 ![KLE keyboard-design.com diagram of X6.2h](https://keyboard-design.com/klalayouts/x6-2h.en.ergolinear.jpg)
 * [BEAKRAK](https://qiita.com/ZeptByteS/items/6e6a3e46552dcb105948#1-beakrak-2017) <kbd>T</kbd> (link in Japanese)
@@ -221,6 +223,9 @@ Have you ever used such layouts? Would you be willing to try it out, or is that 
 10 September Update :
 * Added ANISHTRO to the list of Malt-like layouts
 * Added a mention of the “thorn” (Þ, þ) letter
+
+20 September Update :
+* Added BEAKL QIEA to the list of Malt-like layouts
 
 <!-- https://community.keyboard.io/t/maltron-layouts/98 -->
 <!-- https://mathematicalmulticore.wordpress.com/category/keyboards/ -->
