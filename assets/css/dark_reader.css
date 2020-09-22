@@ -214,8 +214,12 @@ img {
 }
 svg:not(:root) {
  overflow: hidden;
-
 }
+
+abbr {
+    cursor: help;
+}
+
 mark {
     background-color: #d8dd6e;
     color: #1c1c21;
