@@ -202,30 +202,35 @@ Have you ever used such layouts? Would you be willing to try it out, or is that 
 
 --------------------
  
-09 August Update :
+<details>
+    <summary>Updates Log</summary>
+
+09 August 2020:
 * Added FR-Godox to the list of Malt-like layouts
 
-03 September Update :
+03 September 2020:
 * Added STRENIA and TRIA to the list of Malt-like layouts
 * ported the blog post from WordPress.com to this Jekyll site
 * Changed the cover picture to @Sergi's Kyria sporting his TRIA layout
 * Moved the old cover picture to the end of the article in addition of making it transparent.
 
-04 September Update :
+04 September 2020:
 * Added BEAKL P_RN to the list of Malt-like layouts
 * renamed ADNW to Malt++ (ADNW is the name of the layout optimizer algorithm used to generate the layout, not the name of the layout itself)
  
-09 September Update :
+09 September 2020:
 * Added a testimonial from an anonymous RSTHD user
 * Added a paragraph on the benefits of <kbd>E</kbd> on the thumb
 * Developed a little bit on why I gave up on <kbd>E</kbd> thumb
 
-10 September Update :
+10 September 2020:
 * Added ANISHTRO to the list of Malt-like layouts
 * Added a mention of the “thorn” (Þ, þ) letter
 
-20 September Update :
+20 September 2020:
 * Added BEAKL QIEA to the list of Malt-like layouts
+
+</details>
 
 <!-- https://community.keyboard.io/t/maltron-layouts/98 -->
 <!-- https://mathematicalmulticore.wordpress.com/category/keyboards/ -->

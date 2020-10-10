@@ -648,6 +648,15 @@ kbd {
     box-shadow: 0 -1px 0 rgba(0,0,0,.2),inset 0 -2px 0 0 rgba(145, 145, 145, 0.2)
 }
 
+details {
+    width: 100%;
+}
+
+summary {
+    cursor: pointer;
+    padding-bottom: 1em;
+}
+
 button, input, optgroup, select, textarea { margin: 0px;
  color: inherit;
  font: inherit;
