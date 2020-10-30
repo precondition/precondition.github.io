@@ -203,7 +203,7 @@ Have you ever used such layouts? Would you be willing to try it out, or is that 
 --------------------
  
 <details>
-    <summary>Updates Log</summary>
+<summary markdown="span">Updates Log</summary>
 
 09 August 2020:
 * Added FR-Godox to the list of Malt-like layouts

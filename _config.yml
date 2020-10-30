@@ -1,5 +1,5 @@
 # Jekyll configuration
-markdown: CommonMark
+markdown: kramdown
 highlighter: rouge
 paginate: 100 # it will paginate after this number
 language: 'en-uk'
@@ -86,6 +86,9 @@ exclude:
   - changelog.md
   - "*.Rmd"
   - .git*
+
+kramdown:
+    parse_block_html: true
 
 commonmark:
   options: ["SMART", "FOOTNOTES"]

@@ -881,3 +881,34 @@ body {
 
 
 .hljs { background: none; }
+
+
+/*#markdown-toc::before {*/
+  /*content: "Contents";*/
+  /*margin-left: -$spacing-unit;*/
+  /*line-height: 200%;*/
+  /*font-weight: bold;*/
+  /*@include relative-font-size(1.25);*/
+  /*@include media-query($on-laptop) {*/
+    /*@include relative-font-size(1.125);*/
+  /*}*/
+/*}*/
+
+#markdown-toc::before {
+    content: "<em>Contents</em>";
+    font-weight: bold;
+}
+
+
+// Using numbers instead of bullets for listing
+#markdown-toc ul {
+    list-style: decimal;
+}
+
+#markdown-toc {
+    border: 1px solid #aaa;
+    padding: 1.5em;
+    padding-top: 0.8em;
+    list-style: decimal;
+    display: inline-block;
+}
