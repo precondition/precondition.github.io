@@ -417,7 +417,7 @@ body {
  overflow: hidden;
  margin: 0px 20px 40px;
  min-height: 300px;
- background: 50% center / cover rgb(28, 28, 33);
+ background: 50% center / cover rgb(23, 23, 28);
  border-radius: 5px;
  box-shadow: rgba(43, 43, 43, 0.06) 8px 14px 38px, rgba(43, 43, 43, 0.03) 1px 3px 8px;
  transition: all 0.5s ease 0s;

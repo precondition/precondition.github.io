@@ -18,7 +18,6 @@ into the {body} of the default.hbs template -->
 
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
-
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
@@ -192,5 +191,13 @@ into the {body} of the default.hbs template -->
 {% include floating-header.html %}
 
 <!-- /post -->
+
+
+<!-- Load custom JS scripts -->
+{% for js in page.custom-js %}
+    <script type="text/javascript">
+    {% include {{ js }} %}
+    </script>
+{% endfor %}
 
 <!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
