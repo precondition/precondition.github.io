@@ -395,6 +395,8 @@ If your layout isn't present in the list, check "Other" and fill in all the ten 
 
 The order options uses the notation used in the section on [home row mods orders](#home-row-mods-order). The leftmost modifier is the one on the pinky and the rightmost modifier is the one on the index finger (not the inner index column). If you wish to use another home row mods order, check "Other" and specify your desired order in the same notation.
 
+<sub><sup>The interface is ugly, I know, but it works</sup></sub>
+
 <!-- Show/Hide a text block with a radio button 
 https://jsfiddle.net/QAaHP/16/ -->
 
@@ -464,6 +466,8 @@ To explain the various mod-taps/multi-use buttons in KMonad, let's compare them 
 <!-- add all the other ones -->
 
 ### Home row mods code generator [WIP] {#kmonad-home-row-mods-code-generator}
+
+<sub><sup>The interface is ugly, I know, but it works</sup></sub>
 
 <form>
 <p>Select your layout</p>
