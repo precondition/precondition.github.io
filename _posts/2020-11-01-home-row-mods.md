@@ -4,7 +4,7 @@ current: post
 cover: assets/images/home-row-mods/light-QWERTY-home-row-mods___cover.jpeg
 navigation: True
 title: A guide to home row mods
-date: 2020-09-20
+date: 2020-11-01
 category: Keyboards
 tags: [Keymap, QMK]
 class: post-template
