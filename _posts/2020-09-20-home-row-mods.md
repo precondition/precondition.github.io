@@ -397,6 +397,7 @@ The order options uses the notation used in the section on [home row mods orders
 
 <!-- Show/Hide a text block with a radio button 
 https://jsfiddle.net/QAaHP/16/ -->
+
 <form>
 <p>Select your layout</p>
 <input type="radio" name="layouts" value="ASDFGHJKL;" id="QWERTY" checked onclick="showTextField('QMKLayout')"> 
@@ -411,6 +412,10 @@ https://jsfiddle.net/QAaHP/16/ -->
 <input type="radio" name="layouts" value="YIEA.DSTNB" onclick="showTextField('QMKLayout')"> BEAKL15
 <input type="radio" name="layouts" value="OTHER" id="otherQMKLayout" onclick="showTextField('QMKLayout')"> Other 
 <input type="text" maxlength="10" id="customQMKLayout" pattern="[A-Za-z-.,;\/']{10}"  title="Accepted characters: alphabet letters, numbers, and a limited set of basic punctuation: -.,;/" style="display:none">
+
+
+<p>Enter your desired tapping term (in ms)</p>
+<input type="number" name="QMKTappingTerm" min="1" value="200">
 
 <p>Select your home row mods order</p>
 <input type="radio" name="homeRowModsOrders" value="GASC" checked onclick="showTextField('QMKOrder')"> GASC
@@ -448,7 +453,7 @@ If you want to tweak the mod-tap functionality, which by the way is called a "mu
 
 ### Multi-use buttons [WIP]
 
-To explain the various mod-taps/multi-use buttons in KMonad , let's compare them with the now familiar QMK tap hold configuration options.
+To explain the various mod-taps/multi-use buttons in KMonad, let's compare them with the now familiar QMK tap hold configuration options.
 
 
 | Multi-use button name | `IGNORE_MOD_TAP_INTERRUPT` | `TAPPING_FORCE_HOLD` | `PERMISSIVE_HOLD` | `RETRO_TAPPING` |
@@ -475,11 +480,13 @@ To explain the various mod-taps/multi-use buttons in KMonad , let's compare them
 <input type="radio" name="layouts" value="OTHER" id="otherKMonadLayout" onclick="showTextField('KMonadLayout')"> Other 
 <input type="text" maxlength="10" id="customKMonadLayout" pattern="[A-Za-z-.,;\/']{10}"  title="Accepted characters: alphabet letters, numbers, and a limited set of basic punctuation: -.,;/" style="display:none">
 
-<p>Select your tapping term</p>
+
+<p>Enter your desired tapping term (in ms)</p>
+<input type="number" name="KMonadTappingTerm" min="1" value="200">
 
 <p>Select your home row mods order</p>
-<input type="radio" name="homeRowModsOrders" value="GASC" checked onclick="showTextField('KMonadOrder')"> GASC
-<input type="radio" name="homeRowModsOrders" value="GACS" onclick="showTextField('KMonadOrder')"> GACS
+<input type="radio" name="homeRowModsOrders" value="GASC" onclick="showTextField('KMonadOrder')"> GASC
+<input type="radio" name="homeRowModsOrders" value="GACS" checked onclick="showTextField('KMonadOrder')"> GACS
 <input type="radio" name="homeRowModsOrders" value="SCGA" onclick="showTextField('KMonadOrder')"> SCGA
 <input type="radio" name="homeRowModsOrders" value="CAGS" onclick="showTextField('KMonadOrder')"> CAGS
 <input type="radio" name="homeRowModsOrders" value="OTHER" id="otherKMonadOrder" onclick="showTextField('KMonadOrder')"> Other 
@@ -489,13 +496,18 @@ To explain the various mod-taps/multi-use buttons in KMonad , let's compare them
 <input type="radio" name="handedness" value="LLL"> All left modifiers
 <input type="radio" name="handedness" value="LRR"> Left and right hand modifiers with AltGr
 <input type="radio" name="handedness" value="LLR" checked> Left and right hand modifiers without AltGr
-  <p>Select your desired alias style</p>
-<input type="radio" name="aliasStyle" value="HOME" checked> HOME
-<input type="radio" name="aliasStyle" value="MOD"> MOD
-    
 
-  <input type="button" onclick="generateKMonadCode(form.elements)" name="submit" value="Generate">
+<p>Select your desired alias style</p>
+<input type="radio" name="aliasStyle" value="HOME"> HOME
+<input type="radio" name="aliasStyle" value="MOD" checked> MOD
+
+
+<input type="button" onclick="generateKMonadCode(form.elements)" name="submit" value="Generate">
 </form>
+
+  <div id="KMonadGeneratorErrors" style="display:none"></div>
+  <div id="generatedKMonadAliases" style="display:none"></div>
+  <div id="generatedKMonadHomeRow" style="display:none"></div>
 
 # Tips & Tricks {#tips-and-tricks}
 

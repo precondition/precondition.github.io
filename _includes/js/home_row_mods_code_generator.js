@@ -18,7 +18,7 @@ fullModName = {
 validHomeRow    = RegExp(/^[\w-\.,;\/\']{10}$/);
 validModsOrder  = RegExp(/^[GASC]{4}_$/);
 validHandedness = RegExp(/^[LR]{3}$/);
-validAliasStyle = ["HOME", "MOD"];
+validTappingTerm= RegExp(/^\d+$/);
 
 function translate(table) {
     /* Return a copy of the string in which each character has been mapped through the given translation table. 
@@ -35,7 +35,7 @@ function translate(table) {
 }
 String.prototype.translate = translate;
 
-function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle) {
+function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle, tappingTerm=1) {
     // Standardizing the input
     lettersLayout = lettersLayout.trim().toUpperCase();
     modsOrder     = modsOrder.trim().toUpperCase() + "_";
@@ -55,8 +55,14 @@ function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle) {
         throw "Incorrectly formatted handedness";
     }
 
-    if (aliasStyle in validAliasStyle) {
-        throw "Incorrect alias style, choose either \"MOD\" or \"HOME\"";
+    if (!validTappingTerm.test(tappingTerm)) {
+        if (tappingTerm === "") {
+            throw "Tapping term is incorrectly formated. Make sure that it's a positive integer with only digit characters in the field";
+        } else if (tappingTerm.includes(".") || tappingTerm.includes(",")) {
+            throw "Tapping term must be a positive <em>integer</em>. Decimal numbers are not permitted.";
+        } else {
+            throw "Tapping term is too low. Choose a value ≥1";
+        }
     }
 
     // Assignment to object fields
@@ -67,6 +73,7 @@ function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle) {
     for (i = 0; i < modsOrder.length; i++) {
        this.modsOrder.push(fullModName[modsOrder[i]]) 
     }
+    this.tappingTerm = tappingTerm;
 
     this.getHandedness = function(index, mod, config) {
         /* Returns the appropriate modifier handedness for that modtap
@@ -105,7 +112,7 @@ function showTextField(name) {
 }
 
 function surroundInCodeBlock(code, language="c") {
-    return "<pre>\n<code class='language-' + language>" + code + "\n</pre>";
+    return "<pre>\n<code class='language-" + language + "'>" + code + "\n</pre>";
 }
 
 function buildUserChoices(formElements, program="QMK") {
@@ -115,23 +122,23 @@ function buildUserChoices(formElements, program="QMK") {
      */
 
     if (formElements.homeRowModsOrders.value == "OTHER") { 
-        chosenHomeRowModsOrder = formElements[`custom{program}Order`].value.toUpperCase();
+        chosenHomeRowModsOrder = formElements["custom" + program + "Order"].value.toUpperCase();
     } else {
         chosenHomeRowModsOrder = formElements.homeRowModsOrders.value; 
     }
 
     if (formElements.layouts.value == "OTHER") {
-        chosenLettersLayout = formElements[`custom{program}Layout`].value.toUpperCase();
+        chosenLettersLayout = formElements["custom" + program + "Layout"].value.toUpperCase();
     } else {
         chosenLettersLayout = formElements.layouts.value; 
     }
 
     try {
-        return new UserHomeRowMods(chosenLettersLayout, chosenHomeRowModsOrder, formElements.handedness.value, formElements.aliasStyle.value);
+        return new UserHomeRowMods(chosenLettersLayout, chosenHomeRowModsOrder, formElements.handedness.value, formElements.aliasStyle.value, formElements[program + "TappingTerm"].value);
     } catch (e) {
-        editDivBlock(id=`{program}GeneratorErrors`, displayStyle="block", html=e)
-        editDivBlock(`generated{program}Aliases`, displayStyle="none")
-        editDivBlock(`generated{program}HomeRow`, displayStyle="none")
+        editDivBlock(id=program + "GeneratorErrors", displayStyle="block", html=e)
+        editDivBlock("generated" + program + "Aliases", displayStyle="none")
+        editDivBlock("generated" + program + "HomeRow", displayStyle="none")
         throw new Error("Correct input errors before continuing");
     }
 }
@@ -140,7 +147,8 @@ function generateQMKCode(formElements) {
     user = buildUserChoices(formElements);
     editDivBlock("QMKGeneratorErrors", displayStyle="none")
 
-    definedAliases = "// Left-hand home row mods\n";
+    definedAliases = "#define TAPPING_TERM " + user.tappingTerm + "\n\n";
+    definedAliases += "// Left-hand home row mods\n";
     generatedHomeRow = "";
     for (i = 0; i < user.homeRowKeys.length; i++) {
         if (i == 5) {
@@ -173,7 +181,47 @@ function generateQMKCode(formElements) {
     editDivBlock("generatedQMKHomeRow", displayStyle="block", surroundInCodeBlock(generatedHomeRow));
 }
 
-
 function generateKMonadCode(formElements) {
-    //TODO
+    user = buildUserChoices(formElements, program="KMonad");
+    editDivBlock("KMonadGeneratorErrors", displayStyle="none");
+
+    tappingTerm = user.tappingTerm;
+
+    definedAliases = "(defalias\n";
+    generatedHomeRow = "";
+    for (i = 0; i < user.homeRowKeys.length; i++) {
+        if (i == 5) {
+            definedAliases += "\n";
+            user.modsOrder.reverse();
+        }
+        letter = user.homeRowKeys[i];
+        mod = user.modsOrder[i % 5];
+        keyName = "_" + letter;
+
+        if (mod) {
+            keyName = (user.aliasStyle == "HOME" ? "HOME" : mod) + keyName;
+
+            definedAliases += "    " +
+                keyName +
+                " (tap-hold-next-release " +
+                tappingTerm +
+                " " +
+                letter +
+                " " +
+                user.getHandedness(i, mod, user.handedness) +
+                mod +
+                ")\n";
+
+            keyName = "@" + keyName;
+        } else {
+            keyName = letter;
+        }
+
+        generatedHomeRow += keyName + "   ";
+    }
+    definedAliases = definedAliases.toLowerCase() +  ")";
+    generatedHomeRow = generatedHomeRow.toLowerCase();
+
+    editDivBlock("generatedKMonadAliases", displayStyle="block", surroundInCodeBlock(definedAliases));
+    editDivBlock("generatedKMonadHomeRow", displayStyle="block", surroundInCodeBlock(generatedHomeRow));
 }
