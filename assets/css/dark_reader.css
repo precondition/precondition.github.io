@@ -895,7 +895,7 @@ body {
 /*}*/
 
 #markdown-toc::before {
-    content: "<em>Contents</em>";
+    content: "Contents";
     font-weight: bold;
 }
 
@@ -911,4 +911,12 @@ body {
     padding-top: 0.8em;
     list-style: decimal;
     display: inline-block;
+}
+
+heading-anchor {
+    opacity: 0;
+}
+
+h1:hover heading-anchor {
+    opacity: 1;
 }

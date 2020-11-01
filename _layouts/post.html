@@ -47,7 +47,7 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    {{ content }}
+                    {% include anchor_headings.html html=content anchorBody="¶" anchorClass="heading-anchor" %}
                 </div>
             </section>
 
