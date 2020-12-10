@@ -4,7 +4,8 @@ basePunctuationNames = {
     ";":"SCLN",
     "/":"SLSH",
     "'":"QUOTE",
-    "-":"MIN"
+    "-":"MIN",
+    "\\":"BSLS"
 }
 
 fullModName = {
@@ -15,8 +16,8 @@ fullModName = {
     "_": null
 }
 
-validHomeRow    = RegExp(/^[\w-\.,;\/\']{10}$/);
-validModsOrder  = RegExp(/^[GASC]{4}_$/);
+validHomeRow    = RegExp(/^[\w-\.,;\/\'\\]{10}$/);
+validModsOrder  = RegExp(/^[_GASC]{4}_$/);
 validHandedness = RegExp(/^[LR]{3}$/);
 validTappingTerm= RegExp(/^\d+$/);
 
@@ -48,7 +49,7 @@ function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle, tappi
     }
 
     if (!validModsOrder.test(modsOrder)) {
-        throw "Incorrectly formatted mods order (" + modsOrder + ")";
+        throw "Incorrectly formatted mods order";
     }
 
     if (!validHandedness.test(handedness)) {
@@ -95,7 +96,7 @@ function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle, tappi
 
 };
 
-function editDivBlock(id, displayStyle="block", html="") {
+function editDivBlock(id, displayStyle="contents", html="") {
     if (html.length > 0) {
         document.getElementById(id).innerHTML = html;
     }
@@ -103,7 +104,9 @@ function editDivBlock(id, displayStyle="block", html="") {
 }
 
 function showTextField(name) {
-    if (document.getElementById("other" + name).checked) {
+    console.log(name);
+    console.log(document.getElementById("other" + name));
+    if (document.getElementById("other" + name).selected) {
         editDivBlock(id="custom" + name, displayStyle="block");
     }
     else {
@@ -112,7 +115,7 @@ function showTextField(name) {
 }
 
 function surroundInCodeBlock(code, language="c") {
-    return "<pre>\n<code class='language-" + language + "'>" + code + "\n</pre>";
+    return "<pre><code>" + hljs.highlight(language, code).value + "</code></pre>";
 }
 
 function buildUserChoices(formElements, program="QMK") {
@@ -122,13 +125,13 @@ function buildUserChoices(formElements, program="QMK") {
      */
 
     if (formElements.homeRowModsOrders.value == "OTHER") { 
-        chosenHomeRowModsOrder = formElements["custom" + program + "Order"].value.toUpperCase();
+        chosenHomeRowModsOrder = formElements["custom" + program + "OrderInput"].value.toUpperCase();
     } else {
         chosenHomeRowModsOrder = formElements.homeRowModsOrders.value; 
     }
 
     if (formElements.layouts.value == "OTHER") {
-        chosenLettersLayout = formElements["custom" + program + "Layout"].value.toUpperCase();
+        chosenLettersLayout = formElements["custom" + program + "LayoutInput"].value.toUpperCase();
     } else {
         chosenLettersLayout = formElements.layouts.value; 
     }
@@ -137,6 +140,9 @@ function buildUserChoices(formElements, program="QMK") {
         return new UserHomeRowMods(chosenLettersLayout, chosenHomeRowModsOrder, formElements.handedness.value, formElements.aliasStyle.value, formElements[program + "TappingTerm"].value);
     } catch (e) {
         editDivBlock(id=program + "GeneratorErrors", displayStyle="block", html=e)
+        if (program === "QMK") {
+            editDivBlock("generated" + program + "TappingTerm", displayStyle="none")
+        }
         editDivBlock("generated" + program + "Aliases", displayStyle="none")
         editDivBlock("generated" + program + "HomeRow", displayStyle="none")
         throw new Error("Correct input errors before continuing");
@@ -147,8 +153,8 @@ function generateQMKCode(formElements) {
     user = buildUserChoices(formElements);
     editDivBlock("QMKGeneratorErrors", displayStyle="none")
 
-    definedAliases = "#define TAPPING_TERM " + user.tappingTerm + "\n\n";
-    definedAliases += "// Left-hand home row mods\n";
+    definedTappingTerm = "#define TAPPING_TERM " + user.tappingTerm;
+    definedAliases = "// Left-hand home row mods\n";
     generatedHomeRow = "";
     for (i = 0; i < user.homeRowKeys.length; i++) {
         if (i == 5) {
@@ -177,8 +183,26 @@ function generateQMKCode(formElements) {
         generatedHomeRow += keyName + ", ";
     }
 
-    editDivBlock("generatedQMKAliases", displayStyle="block", surroundInCodeBlock(definedAliases));
-    editDivBlock("generatedQMKHomeRow", displayStyle="block", surroundInCodeBlock(generatedHomeRow));
+    tappingTermExplanation = '<hr>\n\n<p style="margin-bottom: 0em;">Paste this anywhere in your <code>config.h</code> file.</p>'
+    editDivBlock(
+        "generatedQMKTappingTerm",
+        displayStyle="contents",
+        tappingTermExplanation + surroundInCodeBlock(definedTappingTerm)
+    );
+
+    aliasesExplanation = '<p style="margin-bottom: 0em;">Paste this in <code>keymap.c</code>, above your layout.</p>'
+    editDivBlock(
+        "generatedQMKAliases",
+        displayStyle="contents",
+        aliasesExplanation + surroundInCodeBlock(definedAliases)
+    );
+
+    homeRowExplanation = '<p style="margin-bottom: 0em;">Replace the ten keys of your home row in the <code>LAYOUT</code> block of your <code>keymap.c</code> with this.</p>'
+    editDivBlock(
+        "generatedQMKHomeRow",
+        displayStyle="contents",
+        homeRowExplanation + surroundInCodeBlock(generatedHomeRow)
+    );
 }
 
 function generateKMonadCode(formElements) {
@@ -222,6 +246,6 @@ function generateKMonadCode(formElements) {
     definedAliases = definedAliases.toLowerCase() +  ")";
     generatedHomeRow = generatedHomeRow.toLowerCase();
 
-    editDivBlock("generatedKMonadAliases", displayStyle="block", surroundInCodeBlock(definedAliases));
-    editDivBlock("generatedKMonadHomeRow", displayStyle="block", surroundInCodeBlock(generatedHomeRow));
+    editDivBlock("generatedKMonadAliases", displayStyle="contents", surroundInCodeBlock(definedAliases));
+    editDivBlock("generatedKMonadHomeRow", displayStyle="contents", surroundInCodeBlock(generatedHomeRow));
 }

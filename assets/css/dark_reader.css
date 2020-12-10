@@ -141,7 +141,7 @@ img {
  max-width: 100%;
 }
 
-figcaption {
+.image-caption, figcaption {
     font-size: 1.6rem;
     margin-top: -1.5em;
     margin-bottom: 1em;
@@ -625,8 +625,9 @@ img { border: 0px;
 svg:not(:root) { overflow: hidden;
 }
 
-code, kbd, pre, samp { font-family: monospace, monospace;
- font-size: 1em;
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
 }
 
 /* Darkening the kbd element */
@@ -654,7 +655,8 @@ details {
 
 summary {
     cursor: pointer;
-    padding-bottom: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
 }
 
 button, input, optgroup, select, textarea { margin: 0px;
@@ -915,8 +917,47 @@ body {
 
 .heading-anchor {
     opacity: 0;
-  }
+}
 
-  :is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
+:is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
     opacity: 1;
-  }
+}
+
+h2::before { 
+  display: block; 
+  content: " "; 
+  margin-top: -285px; 
+  height: 285px; 
+  visibility: hidden; 
+  pointer-events: none;
+}
+
+.anchor {
+    padding-top: 100px;
+    margin-top: -100px; 
+    visibility: hidden;
+}
+
+.img-to-hover {
+    position: relative;
+    display: inline-block;
+}
+.img-to-hover .img-shift {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+.img-to-hover:hover .img-shift {
+    display: inline;
+}
+@media (any-hover: none) {
+    .img-to-hover .img-shift {
+        display: inline;
+    }
+}
+
+form {
+    min-width: 100%;
+}

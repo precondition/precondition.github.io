@@ -823,6 +823,7 @@ Usage (In Ghost editor):
  line-height: 1.5em;
  background: rgb(15, 15, 15);
  border-radius: 5px;
+ white-space: pre-wrap;
 }
 
 .post-full-content pre code {
