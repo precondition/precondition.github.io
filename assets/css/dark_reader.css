@@ -241,9 +241,12 @@ textarea {
  margin: 0px;
  color: inherit;
  font: inherit;
-
-
+ overflow: auto;
+ resize: both;
+ max-width: 100%;
+ width: 100%
 }
+
 button {
  overflow: visible;
  border: none;
@@ -392,10 +395,6 @@ fieldset {
  padding: 0px;
  border: 0px;
 
-
-}
-textarea {
- resize: vertical;
 
 }
 blockquote,
@@ -702,8 +701,6 @@ legend { padding: 0px;
  border: 0px;
 }
 
-textarea { overflow: auto;
-}
 
 table { border-spacing: 0px;
  border-collapse: collapse;
@@ -755,7 +752,6 @@ body {
  }fieldset { margin: 0px;
  padding: 0px;
  border: 0px;
- }textarea { resize: vertical;
  }blockquote, dl, ol, p, ul { margin: 0px 0px 1.5em;
  }ol, ul { padding-left: 1.3em;
  padding-right: 1.5em;
@@ -960,4 +956,68 @@ h2::before {
 
 form {
     min-width: 100%;
+}
+
+.typingScenario {
+  display: inline-block;
+  vertical-align: middle; /* no effect ? */
+}
+
+.typingScenario p {
+    display: inline;
+}
+
+.typingScenario img {
+    display: inline-block;
+    width: auto;
+    margin-top: -0.125em;
+}
+
+@media (min-width: 1000px) {
+    .typingScenario img {
+        margin-left: 10em;
+    }
+}
+
+
+.modifiersRow {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.modifierKey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2f312e;
+    border-radius: 6px;
+    font-family: Montserrat, sans-serif;
+    line-height: 100%;
+    box-shadow: inset 0 -1px 0 3px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.3);
+    border-left: 1px solid rgba(0,0,0,.1);
+    border-right: 1px solid rgba(0,0,0,.1);
+    height: 50px;
+    width: 70px;
+    text-align: center;
+    white-space: pre-line;
+    cursor: default;
+    padding: 1px;
+    padding-bottom: 3px;
+    font-size: smaller;
+    margin: 3px;
+}
+
+@media (min-width: 1000px) {
+    .modifiersRowSeparator {
+        margin-left: 3vh;
+    }
 }

@@ -137,7 +137,15 @@ function buildUserChoices(formElements, program="QMK") {
     }
 
     try {
-        return new UserHomeRowMods(chosenLettersLayout, chosenHomeRowModsOrder, formElements.handedness.value, formElements.aliasStyle.value, formElements[program + "TappingTerm"].value);
+        // The `handedness` argument to `UserHomeRowMods` used to be
+        // `formElements.handedness.value` but it got replaced by 
+        // the constant "LLR" i.e. "Left & Right without AltGr" 
+        // because there is little use to other available configuration 
+        // settings (namely "Only left", and "Left & Right with AltGr") 
+        // and only serve to confuse the user.
+        //
+        // TODO: Refactor and simplify the handedness code
+        return new UserHomeRowMods(chosenLettersLayout, chosenHomeRowModsOrder, "LLR", formElements.aliasStyle.value, formElements[program + "TappingTerm"].value);
     } catch (e) {
         editDivBlock(id=program + "GeneratorErrors", displayStyle="block", html=e)
         if (program === "QMK") {
@@ -246,6 +254,16 @@ function generateKMonadCode(formElements) {
     definedAliases = definedAliases.toLowerCase() +  ")";
     generatedHomeRow = generatedHomeRow.toLowerCase();
 
-    editDivBlock("generatedKMonadAliases", displayStyle="contents", surroundInCodeBlock(definedAliases));
-    editDivBlock("generatedKMonadHomeRow", displayStyle="contents", surroundInCodeBlock(generatedHomeRow));
+    aliasesExplanation = '<hr>\n\n<p style="margin-bottom: 0em;">Paste this block after the <code>defcfg</code> and <code>defsrc</code> blocks in your <code>.kbd</code> KMonad configuration file.</p>'
+    editDivBlock(
+        "generatedKMonadAliases",
+        displayStyle="contents",
+        aliasesExplanation + surroundInCodeBlock(definedAliases)
+    );
+    homeRowExplanation = '<p style="margin-bottom: 0em;">Replace the ten keys of your home row in the <code>deflayer</code> block of your <code>.kbd</code> KMonad configuration file with this.</p>'
+    editDivBlock(
+        "generatedKMonadHomeRow",
+        displayStyle="contents",
+        homeRowExplanation + surroundInCodeBlock(generatedHomeRow)
+    );
 }

@@ -1000,17 +1000,12 @@ Usage (In Ghost editor):
 
 .post-full-content table {
     -webkit-overflow-scrolling: touch;
-    background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
     background-attachment: scroll, scroll;
     background-size: 10px 100%, 10px 100%;
     background-repeat: no-repeat;
 }
 
-.post-full-content table td:first-child { background-image: linear-gradient(90deg, rgb(28, 28, 33) 50%, rgba(28, 28, 33, 0));
- background-size: 20px 100%;
- background-repeat: no-repeat;
- }.post-full-content table td:last-child { background-image: linear-gradient(270deg, rgb(28, 28, 33) 50%, rgba(28, 28, 33, 0));
- background-position: 100% 0px;
+.post-full-content table td:first-child {
  background-size: 20px 100%;
  background-repeat: no-repeat;
  }.post-full-content table th { color: rgb(191, 191, 191);
@@ -1440,7 +1435,9 @@ Usage (In Ghost editor):
  -webkit-appearance: none;
  }.subscribe-email:focus { outline: 0px;
  border-color: rgb(62, 84, 96);
- }.subscribe-overlay button { display: inline-block;
+ }
+ 
+ .subscribe-overlay button { display: inline-block;
  margin: 0px 0px 0px 15px;
  padding: 0px 25px;
  height: 52px;
