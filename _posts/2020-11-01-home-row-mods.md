@@ -317,6 +317,16 @@ Consider the following case:
 | `RCTL_T(N)`  | Up/Release
 
 ![Doing Ctrl+O, permissive hold style, on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps](assets/images/home-row-mods/DarkPermissiveHoldNO.gif)
+<!--
+TODO: Add a caption to the Squiggle animation(s)
+{percent
+    include figure.html
+    src="assets/images/home-row-mods/DarkPermissiveHoldNO.gif"
+    caption="Right half of a Squiggle keyboard with Colemak-DH"
+    alt="Doing Ctrl+O, permissive hold style, on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps"
+percent}
+-->
+
 </div>
 
 In English, this is a situation where you're tapping <kbd>O</kbd> while holding down <kbd>N</kbd>. It can also be called a "nested keypress". If all of this happens before the end of the tapping term, the output, assuming mod-tap interrupts are ignored, would be "no". Contrast this to the scenario when permissive hold is enabled where the output would instead be <kbd>Ctrl</kbd>+<kbd>O</kbd>.
@@ -359,7 +369,7 @@ Retro Shift lets you get the shifted state of a mod-tap by releasing the mod-tap
 
 With Auto Shift and Retro Shift, you can confidently eradicate all Shift keys from your keymap.[^8]
 
-In case you're worried for the flaws that plague Retro Tap to be present in Retro Shift too, don't be. As the [docs](https://github.com/manna-harbour/qmk_firmware/blob/retro-shift/docs/tap_hold.md#retro-shift) say "If `RETRO_SHIFT` is defined to a value, hold times greater than that value will not produce a tap on release. This enables modifiers to be held for combining with mouse clicks without generating taps on release."
+In case you're worried for the flaws that plague Retro Tap to be present in Retro Shift too, don't be. As the [docs](https://github.com/manna-harbour/qmk_firmware/blob/retro-shift/docs/tap_hold.md#retro-shift) say, "if `RETRO_SHIFT` is defined to a value, hold times greater than that value will not produce a tap on release. This enables modifiers to be held for combining with mouse clicks without generating taps on release."
 
 -----
 
@@ -385,20 +395,20 @@ Let's start with tap hold configuration settings. Copy and paste those lines in 
 #define PERMISSIVE_HOLD
 {% endhighlight %}
 
-Once that's done, open up `keymap.c`, and convert all the home row keys into mod-tap keys. You have multiple options for doing so. In any case, it is best to use aliases as the convention is to keep all keycode names strictly under 8 characters long in order to keep a tidy, aligned and readable layout in the `keymap.c` file. This is not possible if you use something like `MT(mod, kc)` or `LMOD_T(kc)`. For example, potential aliases for Colemak with GACS/◆⎇⎈⇧ order could be:
+Once that's done, open up `keymap.c`, and convert all the home row keys into mod-tap keys. You have multiple options for doing so. In any case, it is best to use aliases as the convention is to keep all keycode names strictly under 8 characters long in order to keep a tidy, aligned and readable layout in the `keymap.c` file. This is not possible if you use something like `MT(mod, kc)` or `LMOD_T(kc)`. For example, potential aliases for US QWERTY with GASC/◆⎇⇧⎈ order could be:
 
 {% highlight js %}
 // Left-hand home row mods
 #define HOME_A LGUI_T(KC_A)
-#define HOME_R LALT_T(KC_R)
-#define HOME_S LCTL_T(KC_S)
-#define HOME_T LSFT_T(KC_T)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D LSFT_T(KC_D)
+#define HOME_F LCTL_T(KC_F)
 
 // Right-hand home row mods
-#define HOME_O RGUI_T(KC_O)
-#define HOME_I LALT_T(KC_I)
-#define HOME_E RCTL_T(KC_E)
-#define HOME_N RSFT_T(KC_N)
+#define HOME_J RCTL_T(KC_J)
+#define HOME_K RSFT_T(KC_K)
+#define HOME_L LALT_T(KC_L)
+#define HOME_SCLN RGUI_T(KC_SCLN)
 {% endhighlight %}
 
 If you feel like `HOME_letter` is too vague, nothing prevents you from doing something like this:
@@ -406,15 +416,15 @@ If you feel like `HOME_letter` is too vague, nothing prevents you from doing som
 {% highlight js %}
 // Left-hand home row mods
 #define GUI_A LGUI_T(KC_A)
-#define ALT_R LALT_T(KC_R)
-#define SFT_S LCTL_T(KC_S)
-#define CTL_T LSFT_T(KC_T)
+#define ALT_S LALT_T(KC_S)
+#define SFT_D LSFT_T(KC_D)
+#define CTL_F LCTL_T(KC_F)
 
 // Right-hand home row mods
-#define GUI_O RGUI_T(KC_O)
-#define ALT_I LALT_T(KC_I)
-#define SFT_E RCTL_T(KC_E)
-#define CTL_N RSFT_T(KC_N)
+#define CTL_J RCTL_T(KC_J)
+#define SFT_K RSFT_T(KC_K)
+#define ALT_L LALT_T(KC_L)
+#define GUI_SCLN RGUI_T(KC_SCLN)
 {% endhighlight %}
 
 Afterwards, it's just a matter of replacing all the basic `KC_letter` situated on the home row in the `LAYOUT` of your `keymap.c` with the mod-taps aliases you've defined.
@@ -588,8 +598,8 @@ This is where you specify the physical keys on which you want KMonad to apply. I
 It doesn't matter whether you're a French speaker whose home row spells out
 <kbd>Q</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd><kbd>G</kbd><kbd>H</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd><kbd>M</kbd>
 or a Russian speaker whose home row spells out
-<kbd>Ф</kbd><kbd>Ы</kbd><kbd>В</kbd><kbd>А</kbd><kbd>П</kbd><kbd>Р</kbd><kbd>О</kbd><kbd>Л</kbd><kbd>Д</kbd><kbd>Ж</kbd>
-, the above code still applies since KMonad operates at a low-level and deals with keycodes as opposed to keysyms. The `a` and `;` button names are simply labels based on US QWERTY to make configuration easier. Don't read them as the "keys that produce, respectively, the symbols 'a' and ';' on the screen when pressed" but rather the "home row pinky keys".
+<kbd>Ф</kbd><kbd>Ы</kbd><kbd>В</kbd><kbd>А</kbd><kbd>П</kbd><kbd>Р</kbd><kbd>О</kbd><kbd>Л</kbd><kbd>Д</kbd><kbd>Ж</kbd>,
+ the above code still applies since KMonad operates at a low-level and deals with keycodes as opposed to keysyms. The `a` and `;` button names are simply labels based on US QWERTY to make configuration easier. Don't read them as the "keys that produce, respectively, the symbols 'a' and ';' on the screen when pressed" but rather the "home row pinky keys".
 
 #### 3. defalias
 
@@ -771,9 +781,24 @@ First of all, when starting out with home row mods, a better baseline is a tappi
 
 Once you're there, the goal is to progressively lower the tapping term in order to get closer to your optimal setting.
 
-A method you can use to gauge where you're at is to simply try to type a text excerpt entirely in lowercase in the text area found at the end of this tip. It will alert you any time you activate a modifier. If you find that you get capital or missing letters all over the board, try to be more careful about the way you tap the keys (see [quick swift taps](#quick-swift-taps)). If adapting your typing style does not help, then increase the tapping term. In case you find a particular mod-tap key to be particularly problematic, consider enabling tapping term per key and increase the tapping term for that key.
+A method you can use to gauge where you're at is to simply try to type a text excerpt entirely in lowercase in the [text area found at the end of this tip](#tapping-term-test-area). It will alert you any time you activate a modifier. If you find that you get capital or missing letters all over the board, try to be more careful about the way you tap the keys (see [quick swift taps](#quick-swift-taps)). If adapting your typing style does not help, then increase the tapping term. In case you find a particular mod-tap key to be particularly problematic, consider enabling tapping term per key and increase the tapping term for that key.
 
-For per key settings, it is recommended to define them relative to the global tapping term. Namely, prefer `return TAPPING_TERM ± offset` over `return SOME_ABSOLUTE_VALUE`. The reason being that, in the case of special per key terms, what matters isn't so much the absolute value but its relation to the more widespread global setting. As you grow more comfortable with home row mods, you may find yourself able to lower the tapping term further and if you do, you'll want to have the per-key settings move along at the risk of making them feel overly long (or short).
+For [per key settings](https://docs.qmk.fm/#/tap_hold?id=tapping-term), it is recommended to define them relative to the global tapping term. Namely, prefer `return TAPPING_TERM ± offset` over `return SOME_ABSOLUTE_VALUE`. The reason being that, in the case of special per key terms, what matters isn't so much the absolute value but its relation to the more widespread global setting. As you grow more comfortable with home row mods, you may find yourself able to lower the tapping term further and if you do, you'll want to have the per-key settings move along at the risk of making them feel overly long (or short).
+
+```c
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LALT_T(KC_S):
+        // Not recommended
+            return 130;
+        case SFT_T(KC_F):
+        // Recommended
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+```
 
 That being said, it won't take you long to get annoyed from having to edit `config.h`, recompile the firmware and flash it onto your board anytime you want to tweak the tapping term, even just slightly, during this exercise. For this exact reason, a fantastic person going by the nickname of "precondition" has created three new quantum keys that let you tweak the tapping term on the fly.
 
@@ -791,8 +816,13 @@ If you get accidental superfluous characters when trying to capitalize, decrease
 
 Rinse and repeat until you're satisfied.
 
-<textarea id="tappingTermTestArea" rows="5" onkeydown="processModifierPress(event)"  onkeyup="processModifierRelease(event)" onfocusout="clearModifiers(event)">once upon a time... </textarea>
+### Tapping term test area
 
+Write a short story all in lowercase with home row mods. In case you accidentally trigger any of the modifiers, the corresponding modifier keys under the text area will light up in red and a short beep will be emitted to alert you.
+
+<textarea id="tappingTermTestArea" rows="5" onkeydown="processModifierPress(event)"  onkeyup="processModifierRelease(event)" onfocusout="clearModifiers(event)" placeholder="once upon a time..."></textarea>
+
+<!-- Improve the responsiveness of the modifiers row -->
 {::options parse_block_html="false" /}
 <div class="modifiersRow">
     <div class="leftModifiers" style="display: flex;">
@@ -826,8 +856,8 @@ If this odd case bothers you, you can either use American layout(s) which make(s
 First of all, it allows to hop from one modifier to its counterpart fluidly. What do I mean? Let's say you want to produce, using the home row mods setup illustrated below, capital "Q" which we'll assume is situated on the left hand of your keyboard. To do that, imagine you first hold `MT(MOD_LSFT, KC_F)` to activate Shift but then you realize that this is the wrong Shift (proper touch typing technique advocates for the use of the opposite hand when Shifting letters).
 
 {%
-    include figure.html 
-    src="assets/images/home-row-mods/RealisticHRM-Dark-Miryoku.png" 
+    include figure.html
+    src="assets/images/home-row-mods/RealisticHRM-Dark-Miryoku.png"
     caption="GACS/◆⎇⎈⇧ home row mods on US QWERTY"
     alt="KLE render of dark blue QWERTY home row keycaps with mod icons in the center and mod name on the side of the keycaps"
 %}
@@ -839,7 +869,7 @@ If, instead, your <kbd>J</kbd> key was `MT(MOD_LSFT, KC_J)`, you wouldn't be abl
 
 <!-- insert KLE gif -->
 
-The only way to properly hop modifiers when both of them are programmed to send the exact same modifier, is to fully release the wrong mod-tap you've first pressed before pressing and holding the correct one, on the opposite hand. 
+The only way to properly hop modifiers when both of them are programmed to send the exact same modifier, is to fully release the wrong mod-tap you've first pressed before pressing and holding the correct one, on the opposite hand.
 
 There is a catch though. If you realize early on that this is the incorrect hand to use the modifier with, you will instinctively fully release the incorrect mod-tap in order to hop to the correct one. If you release the incorrect mod before the tapping term, which is very likely to happen unless you're slow at catching yourself using the wrong hand for the modifier, that will be considered as a tap by the firmware and will thus send the tap keycode, "f" in our case. Doing so thus puts you at risk of accidental alphas when hopping modifiers.
 
@@ -848,7 +878,7 @@ To recap, the problem with using the same version of Shift for both hands:
 - Hold right hand home row Shift
 - Let go of left hand home row Shift
 - While holding right hand home row Shift, press random letters with left hand
-- The letters are not capitalized 
+- The letters are not capitalized
 
 Secondly, distinguishing between home row mods of the left hand from home row mods of the right hand can be useful if you want to detect typing rolls. For more info, refer to the "[rolled modifiers cancellation](#rolled-modifiers-cancellation)" trick.
 
@@ -918,7 +948,7 @@ Nonetheless, it still doesn't deserve to be placed in the outer home row positio
 
 ## Mechanical switch type
 
-Light tactile switches or clicky switches help with making short, light, snappy taps, and the feedback masks the lag of tap on release. 
+Light tactile switches or clicky switches help with making short, light, snappy taps, and the feedback masks the lag of tap on release.
 
 <!-- Tricks -->
 
@@ -994,8 +1024,8 @@ As illustrated here on this 60% ANSI keyboard sporting the [GACS/◆⎇⎈⇧](#
 Let's look into the situation where one uses home row mods on a keyboard layout that favors rolls. The most famous rolls-focused keyboard layout is Colemak, so we'll use the following home row mods setup as a case study.
 
 {%
-    include figure.html 
-    src="assets/images/home-row-mods/RealisticHRM-Dark-SideLegends-Colemak-GASC.png" 
+    include figure.html
+    src="assets/images/home-row-mods/RealisticHRM-Dark-SideLegends-Colemak-GASC.png"
     caption="GASC/◆⎇⇧⎈ home row mods on Colemak"
     alt="KLE render of dark blue Colemak home row keycaps with mod icons in the center and mod name on the side of the keycaps"
 %}
@@ -1033,7 +1063,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 // temporarily disable right Shift
                 // so that we can send KC_E and KC_N
                 // without Shift on.
-                del_mods(MOD_BIT(KC_RSHIFT));
+                unregister_mods(MOD_BIT(KC_RSHIFT));
                 tap_code(KC_E);
                 tap_code(KC_N);
                 // restore the mod state
@@ -1057,7 +1087,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         if (record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-                del_mods(MOD_BIT(KC_LSHIFT));
+                unregister_mods(MOD_BIT(KC_LSHIFT));
                 tap_code(KC_S);
                 tap_code(KC_T);
                 add_mods(MOD_BIT(KC_LSHIFT));
@@ -1083,7 +1113,7 @@ and vice versa for the right hand;
     case RMOD_T(r_letter):
         if (record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_RSHIFT)) {
-                del_mods(MOD_BIT(KC_RSHIFT));
+                unregister_mods(MOD_BIT(KC_RSHIFT));
                 tap_code(r_s_letter);
                 tap_code(r_letter);
                 add_mods(MOD_BIT(KC_RSHIFT));
@@ -1095,7 +1125,7 @@ and vice versa for the right hand;
     case LMOD_T(l_letter):
         if (record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-                del_mods(MOD_BIT(KC_LSHIFT));
+                unregister_mods(MOD_BIT(KC_LSHIFT));
                 tap_code(l_s_letter);
                 tap_code(l_letter);
                 add_mods(MOD_BIT(KC_LSHIFT));
@@ -1314,7 +1344,7 @@ The arguably simpler and more flexible method is to use the designated thumb key
 
 This alternative also involves combos like in [home row mod-combos](#home-row-mod-combos) but this one is much closer to the way classic home row mods work.
 
-For one, the way the mods are laid out ([order](#home-row-mods-orders), [layout](#alternative-home-row-mods-layout)) is essentially the same as in classic home row mods. The only big difference is that the thumb gets involved to tell when a home row key should act like a modifier and when it should act like a normal letter/number/punctuation key.
+For one, the way the mods are laid out ([order](#home-row-mods-order), [layout](#alternative-home-row-mods-layout)) is essentially the same as in classic home row mods. The only big difference is that the thumb gets involved to tell when a home row key should act like a modifier and when it should act like a normal letter/number/punctuation key.
 
 The usage of this implementation is less convoluted than that of the layers implementation. If you want a modifier, simply press the appropriate home row key and the designated thumb key together within combo term. Since chording with thumb keys is what informs the firmware of your desire to initiate a keyboard shortcut, the hold time is irrelevant. As soon as the firmware detects a combo, the modifier(s) get activated.
 
