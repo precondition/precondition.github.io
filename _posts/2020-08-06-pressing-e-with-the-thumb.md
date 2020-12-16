@@ -117,7 +117,7 @@ Thus, I went ahead and replaced the classic <kbd>E</kbd> position with merely sh
 Finally, I let go of my attachment to backspace's position and let <kbd>E</kbd> take its place, pushing backspace to the left key, the previous position of delete.
 At this point, the right thumb cluster looked like this:
 
-![KLE diagram of right thumb cluster with Colemak-dhm-e](https://i.ibb.co/j814TZs/e-thumb-cluster.png)
+<img src="https://i.ibb.co/j814TZs/e-thumb-cluster.png" alt="KLE diagram of right thumb cluster with Colemak-dhm-e" style="width: 50%;">
 
 Now, it was time to figure out how long it would take me to get back to ~80WPM using only the thumb for “E”.
 
