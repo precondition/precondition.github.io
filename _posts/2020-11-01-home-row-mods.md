@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/home-row-mods/RealisticHRM-Light-Cover-GASC.jpeg
+cover: assets/images/home-row-mods/RealisticHRM-Light-Cover-Half-GASC.jpeg
 navigation: True
 title: A guide to home row mods
 date: 2020-12-12
