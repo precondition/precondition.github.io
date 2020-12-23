@@ -185,7 +185,15 @@ function generateQMKCode(formElements) {
         keyName = "_" + letter.translate(basePunctuationNames);
 
         if (mod) {
-            keyName = (user.aliasStyle == "HOME" ? "HOME" : mod) + keyName;
+            if (user.aliasStyle == "HOME") {
+                keyName = "HOME" + keyName
+            } else if (user.aliasStyle == "MOD") {
+                if (mod !== "SFT" || keyName !== "_T") {
+                    keyName = mod + keyName
+                } else { // Situation where the alias is `SFT_T` which conflicts with QMK macro of the same name
+                    keyName = "SHFT_T"
+                }
+            }
 
             definedAliases += "" +
                 "#define " +
