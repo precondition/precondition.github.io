@@ -143,6 +143,10 @@ function buildUserChoices(formElements, program="QMK") {
         chosenHomeRowModsOrder = chosenHomeRowModsOrder.replace("G", "M");
     }
 
+    else if (program == "QMK") {
+        chosenHomeRowModsOrder = chosenHomeRowModsOrder.replace("M", "G");
+    }
+
     try {
         // The `handedness` argument to `UserHomeRowMods` used to be
         // `formElements.handedness.value` but it got replaced by 
