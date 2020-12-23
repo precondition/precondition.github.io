@@ -10,6 +10,7 @@ basePunctuationNames = {
 
 fullModName = {
     "G":"GUI",
+    "M":"MET", /* KMonad calls GUI "Meta" */
     "A":"ALT",
     "S":"SFT",
     "C":"CTL",
@@ -17,7 +18,7 @@ fullModName = {
 }
 
 validHomeRow    = RegExp(/^[\w-\.,;\/\'\\]{10}$/);
-validModsOrder  = RegExp(/^[_GASC]{4}_$/);
+validModsOrder  = RegExp(/^[_MGASC]{4}_$/);
 validHandedness = RegExp(/^[LR]{3}$/);
 validTappingTerm= RegExp(/^\d+$/);
 
@@ -36,6 +37,8 @@ function translate(table) {
 }
 String.prototype.translate = translate;
 
+// TODO
+// Consider actually using a js `class` over imitating one with a function.
 function UserHomeRowMods(lettersLayout, modsOrder, handedness, aliasStyle, tappingTerm=1) {
     // Standardizing the input
     lettersLayout = lettersLayout.trim().toUpperCase();
@@ -134,6 +137,10 @@ function buildUserChoices(formElements, program="QMK") {
         chosenLettersLayout = formElements["custom" + program + "LayoutInput"].value.toUpperCase();
     } else {
         chosenLettersLayout = formElements.layouts.value; 
+    }
+
+    if (program == "KMonad") {
+        chosenHomeRowModsOrder = chosenHomeRowModsOrder.replace("G", "M");
     }
 
     try {

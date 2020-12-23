@@ -209,6 +209,7 @@ keyboard shortcut. This is where mirroring all the modifiers on the other hand c
 In case you're curious why `LALT` is used in place of `RALT` for the modifier of the <kbd>L</kbd> mod-tap key in this example, click [here](#use-left-and-right-modifiers-but-beware-of-altgr) to jump down to the section on modifier handedness and possible gotchas with the Right Alt mod.
 
 ### Tap Hold configuration settings
+<!-- idea: add interactive text fields in each tap hold config settings sections to invite readers to get a real feel for what typing scenarios does each setting apply for. Use something along the lines of QMK configurator test's KEYUP KEYDOWN events log box -->
 
 Configuring tap hold options is a mandatory step for using home row mods without pulling your hair. As such, a local QMK development environment is required since the [online configurator] currently does not support configuration settings. If you haven't set up a QMK build environment yet, follow the steps outlined in [this guide].
 
@@ -613,7 +614,7 @@ For illustrative purposes, here's the `defalias` block of a standard keymap usin
 
 {% highlight clojure %}
 (defalias
-    gui_a (tap-hold-next-release 200 a lgui)
+    met_a (tap-hold-next-release 200 a lmet)
     alt_s (tap-hold-next-release 200 s lalt)
     ctl_d (tap-hold-next-release 200 d lctl)
     sft_f (tap-hold-next-release 200 f lsft)
@@ -621,9 +622,11 @@ For illustrative purposes, here's the `defalias` block of a standard keymap usin
     sft_j (tap-hold-next-release 200 j rsft)
     ctl_k (tap-hold-next-release 200 k rctl)
     alt_l (tap-hold-next-release 200 l lalt)
-    gui_; (tap-hold-next-release 200 ; rgui)
+    met_; (tap-hold-next-release 200 ; rmet)
 )
 {% endhighlight %}
+
+Note: KMonad calls the GUI modifier "Meta", abbreviated as `lmet` and `rmet`.
 
 #### 4. deflayer
 
@@ -635,7 +638,7 @@ Continuing with the example we've been working with, what you would need to writ
 
 {% highlight clojure %}
 (deflayer homerowmods
-    @gui_a   @alt_s   @ctl_d   @sft_f   g   h   @sft_j   @ctl_k   @alt_l   @gui_;
+    @met_a   @alt_s   @ctl_d   @sft_f   g   h   @sft_j   @ctl_k   @alt_l   @met_;
 )
 {% endhighlight %}
 
@@ -660,7 +663,7 @@ If we fuse together the four different blocks that we have developed in the last
 )
 
 (defalias
-    gui_a (tap-hold-next-release 200 a lgui)
+    met_a (tap-hold-next-release 200 a lmet)
     alt_s (tap-hold-next-release 200 s lalt)
     ctl_d (tap-hold-next-release 200 d lctl)
     sft_f (tap-hold-next-release 200 f lsft)
@@ -668,11 +671,11 @@ If we fuse together the four different blocks that we have developed in the last
     sft_j (tap-hold-next-release 200 j rsft)
     ctl_k (tap-hold-next-release 200 k rctl)
     alt_l (tap-hold-next-release 200 l lalt)
-    gui_; (tap-hold-next-release 200 ; rgui)
+    met_; (tap-hold-next-release 200 ; rmet)
 )
 
 (deflayer homerowmods
-    @gui_a   @alt_s   @ctl_d   @sft_f   g   h   @sft_j   @ctl_k   @alt_l   @gui_;
+    @met_a   @alt_s   @ctl_d   @sft_f   g   h   @sft_j   @ctl_k   @alt_l   @met_;
 )
 {% endhighlight %}
 
