@@ -230,6 +230,8 @@ Once you're done reading through these links, come back here for a more detailed
 
 #### Ignore Mod-Tap Interrupt
 
+<!-- Mention that this is the default behaviour for layer-taps and that to imitate the hold_on_other_key_press behaviour that is default for mod-taps, you need to merge sigprof's branch -->
+
 Suffice to say that `IGNORE_MOD_TAP_INTERRUPT` is *the* most important tap hold configuration settings that's absolutely necessary for a good home row mods experience.
 
 Why is it so important and relevant to home row mods? To understand, let's look at the default behaviour for mod-taps. The underlying logic of basic mod-taps is quite simple. Did another key get pressed while the user was holding down the mod-tap key? If that's the case, this is a keyboard shortcut; apply the modifier on that pressed key. What if, instead, no key got pressed while the user was holding down the mod-tap? Well, if the user presses and releases a key by itself, without pressing any other key in between, it must mean the user wanted the tapping function of the mod-tap since there is no use to tapping a modifier key all by itself.[^5] Simple enough right? If you want to activate the holding function, just press on another key while holding the mod-tap key.
@@ -562,6 +564,7 @@ The KMonad configuration file can be broken up in four main blocks:
 4. `deflayer`
 
 #### 1. defcfg
+<!-- Add mention and explanations of `cmp-seq` -->
 
 In a nutshell, this is where you tell KMonad what keyboard you want it to affect and where and how to find it in your system. Naturally, the process will look a bit different based on the OS you use. Click on the name of your operating system to be directed to the relevant instructions: [Linux](https://github.com/david-janssen/kmonad/blob/2f20899630d95deed66cd8b2f0dcc3387a3e63d7/keymap/tutorial.kbd#L80...L95), [Windows](https://github.com/david-janssen/kmonad/blob/2f20899630d95deed66cd8b2f0dcc3387a3e63d7/keymap/tutorial.kbd#L98...L112), [MacOS](https://github.com/david-janssen/kmonad/blob/2f20899630d95deed66cd8b2f0dcc3387a3e63d7/keymap/tutorial.kbd#L115...L128).
 
