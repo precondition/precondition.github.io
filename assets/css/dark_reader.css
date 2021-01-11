@@ -7,10 +7,6 @@
 }
 
 a { color: rgb(140, 140, 250);
- }::-webkit-scrollbar-track-piece { background-color: rgba(255, 255, 255, 0.2) !important;
- }::-webkit-scrollbar-track { background-color: rgba(255, 255, 255, 0.3) !important;
- }::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.5) !important;
- }embed[type="application/pdf"] { filter: invert(90%);
  }
 
 /* Reset
