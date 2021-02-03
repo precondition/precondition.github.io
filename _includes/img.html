@@ -1,0 +1,9 @@
+{::options parse_block_html="false" /}
+{% if include.href %}
+<a href="{{ include.href }}">
+{% endif %}
+<img src="{{ include.src }}" alt="{{ include.alt }}" {% if include.title %} title="{{ include.title }}"{% endif %}>
+{% if include.href %}
+</a>
+{% endif %}
+{::options parse_block_html="true" /}

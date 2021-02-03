@@ -248,7 +248,13 @@ Here comes the problem with that approach if one were to use home row mods. We l
 | <kbd>N</kbd> | Up/Release
 | <kbd>O</kbd> | Up/Release
 
-![Typing "no" on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps](assets/images/home-row-mods/DarkRollingNO.gif)
+{%
+    include img.html
+    src="assets/images/home-row-mods/DarkRollingNO.gif"
+    title="Right half of a Squiggle keyboard with Colemak-DH"
+    alt="Typing &quot;no&quot; on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps"
+%}
+
 </div>
 
 Now imagine if <kbd>N</kbd> and <kbd>O</kbd> were both mod-taps — it would be the case if you use home row mods on Colemak like in the animation above. With default tap hold settings, this is bad news. Indeed, typing involves a lot of such rolls, where you press the next letter before having fully released the previous one.
@@ -319,16 +325,12 @@ Consider the following case:
 | `RGUI_T(O)`  | Up/Release
 | `RCTL_T(N)`  | Up/Release
 
-![Doing Ctrl+O, permissive hold style, on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps](assets/images/home-row-mods/DarkPermissiveHoldNO.gif)
-<!--
-TODO: Add a caption to the Squiggle animation(s)
-{percent
-    include figure.html
+{%
+    include img.html
     src="assets/images/home-row-mods/DarkPermissiveHoldNO.gif"
-    caption="Right half of a Squiggle keyboard with Colemak-DH"
+    title="Right half of a Squiggle keyboard with Colemak-DH"
     alt="Doing Ctrl+O, permissive hold style, on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps"
-percent}
--->
+%}
 
 </div>
 
@@ -895,16 +897,13 @@ If you only have home row mods on the base layer and you desire to apply a modif
 
 For more freedom, you can consider turning the home row on your other layers into mod-taps too. Better yet, see if you can afford to use the normal modifier keycodes on the home row instead. For example, many people have a navigation layer momentarily activated with a thumb key with pure modifier keys on the home row of the left hand and arrow keys on the right hand.
 
-<figure>
-<a href="assets/images/home-row-mods/Squiggle-sample-nav-layer.png">
-        <img src="assets/images/home-row-mods/Squiggle-sample-nav-layer.png"
-        alt="Squiggle with dark MBK caps with legends of the navigation layer">
-</a>
-<figcaption>
-Example of a thumb-activated navigation layer with modifiers on the left-hand home row.<br>(The dotted keys indicate `KC_TRNS`)
-</figcaption>
-</figure>
-
+{%
+    include figure.html
+    href="assets/images/home-row-mods/Squiggle-sample-nav-layer.png"
+    src="assets/images/home-row-mods/Squiggle-sample-nav-layer.png"
+    alt="Squiggle with dark MBK caps with legends of the navigation layer"
+    caption="Example of a thumb-activated navigation layer with modifiers on the left-hand home row.<br>(The dotted keys indicate <code>KC_TRNS</code>)"
+%}
 
 When porting home row mods through your layers, take a minute to consider whether you really need home row mods on a certain layer. While it may be useful on a navigation or accents layer, it's probably not very useful to include in a symbol layer since you're unlikely to feel the need to do <kbd>Ctrl</kbd>+<kbd>!</kbd> or <kbd>Alt</kbd>+<kbd>"</kbd>.
 
@@ -1343,8 +1342,9 @@ The arguably simpler and more flexible method is to use the designated thumb key
 3. Deactivate the layer with home row mods (keep holding down keys pressed in step 2)
 4. Tap the basic keycode onto which you wish to apply the modifier(s)
 5. Release all modifiers
-
 <!-- Animation of the above steps -->
+
+If you don't like holding down keys, you can afford to use one-shot mods instead since the modifiers are on a layer. This approach has been popularized by [Callum Oakley's userspace](https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum).
 
 ### Combos
 
@@ -1377,7 +1377,7 @@ This is also one of the rare cases where you're better off without the [combo im
 Idem for the other hand. So we're looking at 30 combos total if we assume only one-handed combinations of modifiers.
 However, if we drop that constraint and wish to be very exhaustive and include the possibility to do something as insane as
 <kbd>LCtrl</kbd>+<kbd>LGUI</kbd>+<kbd>LAlt</kbd>+<kbd>RAlt</kbd>+<kbd>RCtrl</kbd>+<kbd>RShift</kbd>+<kbd>RGUI</kbd>,
-we would need about 255 combos.
+we would need 255 combos.
 
 <!-- ## Home row layers and modifiers on the thumb keys -->
 
@@ -1402,6 +1402,11 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 | How do I get started with home row mods on QMK or KMonad? | Go to the generator for the program you wish to use ([QMK](#qmk-home-row-mods-code-generator)) ([KMonad](#kmonad-home-row-mods-code-generator)), select your options and click on the button "Generate". Follow the instructions to figure out where to paste the generated output |
 | What's the most important tip for using home row mods? | Get into the habit of typing with quick, swift taps. |
 
+<details>
+<summary markdown="span">Updates Log</summary>
+03 Feb 2021:
+* Mentioned Callum style home row mods in Alternatives>Chording with thumb keys>Layers
+</details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
 

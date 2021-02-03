@@ -1,26 +1,14 @@
+{::options parse_block_html="false" /}
+<figure>
+    {% if include.href %}
+    <a href="{{ include.href }}">
+    {% endif %}
+    <img src="{{ include.src }}" alt="{{ include.alt }}" {% if include.title %} title="{{ include.title }}"{% endif %}>
+    {% if include.href %}
+    </a>
+    {% endif %}
 {% if include.caption %}
-{::options parse_block_html="false" /}
-<figure>
-    {% if include.href %}
-    <a href="{{ include.href }}">
-        <img src="{{ include.src }}" alt="{{ include.alt }}">
-    </a>
-    {% else %}
-    <img src="{{ include.src }}" alt="{{ include.alt }}">
-    {% endif %}
     <figcaption><span>{{ include.caption }}</span></figcaption>
-</figure>
-{::options parse_block_html="true" /}
-{% else %}
-{::options parse_block_html="false" /}
-<figure>
-    {% if include.href %}
-    <a href="{{ include.href }}">
-        <img src="{{ include.src }}" alt="{{ include.alt }}">
-    </a>
-    {% else %}
-    <img src="{{ include.src }}" alt="{{ include.alt }}">
-    {% endif %}
-</figure>
-{::options parse_block_html="true" /}
 {% endif %}
+</figure>
+{::options parse_block_html="true" /}
