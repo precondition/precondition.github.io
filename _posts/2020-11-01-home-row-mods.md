@@ -1344,7 +1344,7 @@ The arguably simpler and more flexible method is to use the designated thumb key
 5. Release all modifiers
 <!-- Animation of the above steps -->
 
-If you don't like holding down keys, you can afford to use one-shot mods instead since the modifiers are on a layer. This approach has been popularized by [Callum Oakley's userspace](https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum).
+If you don't like holding down keys, you can afford to use one-shot mods instead since the modifiers are on a layer. This approach has been popularized by [Callum Oakley's userspace](https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum). To make the most of this alternative approach, don't use layer-tap keys. Only "pure" layer switching keys like `MO(layer)` remove the involvement of the tapping term.
 
 ### Combos
 
