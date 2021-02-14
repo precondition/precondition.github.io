@@ -1180,10 +1180,10 @@ cd ~/qmk_firmware
 git checkout <personal_branch>
 # add sevanteri's fork as a remote repository
 git remote add sevanteri_early_combo https://github.com/sevanteri/qmk_firmware.git
-# create a new branch called "mod-tap-combos", based on sevanteri's fork
-git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
 # fetch refs and tags from sevanteri's fork
 git fetch sevanteri_early_combo
+# create a new branch called "mod-tap-combos", based on sevanteri's fork
+git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
 # pull commits from the "early_combo" branch of sevanteri's fork into your "mod-tap-combos"
 git pull sevanteri_early_combo early_combo
 # Update your GitHub fork with the new mod-tap-combos
@@ -1195,8 +1195,8 @@ Copy-pastable content without the comments (make sure to replace `<personal_bran
 cd ~/qmk_firmware
 git checkout <personal_branch>
 git remote add sevanteri_early_combo https://github.com/sevanteri/qmk_firmware.git
-git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
 git fetch sevanteri_early_combo
+git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
 git pull sevanteri_early_combo early_combo
 git push origin mod-tap-combos
 {% endhighlight %}
