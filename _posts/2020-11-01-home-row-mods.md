@@ -1001,10 +1001,13 @@ The next step is to write a case for our newly created special mod-tap in the sw
 case HOME_HASH:
   if (record->tap.count > 0) {
     if (record->event.pressed) {
-      // send advanced keycode, etc.
-      // the 16 bit version of the `tap_code` function is used here
+      // register advanced keycode, etc.
+      // the 16 bit version of the `register_code` function is used here
       // because KC_HASH is a non-basic keycode.
-      tap_code16(KC_HASH);
+      register_code16(KC_HASH);
+    } else {
+      // unregister advanced keycode on release
+      unregister_code16(KC_HASH);
     }
     // do not continue with default tap action
     // if the MT was pressed or released, but not held
