@@ -1,0 +1,226 @@
+/* Darkened syntax.css highlight.js
+/* ---------------------------------------------------------- */
+
+
+.highlight .hll, .highlight pre {
+  background: rgb(15, 15, 15);
+}
+
+.highlight .c {
+  color: rgb(198, 196, 184);
+}
+
+.highlight .err {
+  color: rgb(230, 153, 194);
+  background-color: rgb(24, 6, 16);
+}
+
+.highlight .k {
+  color: rgb(153, 217, 230);
+}
+
+.highlight .l {
+  color: rgb(180, 153, 230);
+}
+
+.highlight .n {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .o {
+  color: rgb(230, 153, 181);
+}
+
+.highlight .p {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs {
+  color: rgb(198, 196, 184);
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gs {
+  font-weight: 700;
+}
+
+.highlight .kc, .highlight .kd {
+  color: rgb(153, 217, 230);
+}
+
+.highlight .kn {
+  color: rgb(230, 153, 181);
+}
+
+.highlight .kp, .highlight .kr, .highlight .kt {
+  color: rgb(153, 217, 230);
+}
+
+.highlight .ld {
+  color: rgb(230, 222, 153);
+}
+
+.highlight .m {
+  color: rgb(180, 153, 230);
+}
+
+.highlight .s {
+  color: rgb(230, 222, 153);
+}
+
+.highlight .na {
+  color: rgb(204, 230, 153);
+}
+
+.highlight .nb {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .nc {
+  color: rgb(204, 230, 153);
+}
+
+.highlight .no {
+  color: rgb(153, 217, 230);
+}
+
+.highlight .nd {
+  color: rgb(204, 230, 153);
+}
+
+.highlight .ni {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .ne, .highlight .nf {
+  color: rgb(204, 230, 153);
+}
+
+.highlight .nl, .highlight .nn {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .nx {
+  color: rgb(204, 230, 153);
+}
+
+.highlight .py {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .nt {
+  color: rgb(230, 153, 181);
+}
+
+.highlight .nv {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .ow {
+  color: rgb(230, 153, 181);
+}
+
+.highlight .w {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo {
+  color: rgb(180, 153, 230);
+}
+
+.highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd {
+  color: rgb(230, 222, 153);
+}
+
+.highlight .se {
+  color: rgb(180, 153, 230);
+}
+
+.highlight .s1, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx {
+  color: rgb(230, 222, 153);
+}
+
+.highlight .bp, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: rgb(245, 245, 245);
+}
+
+.highlight .il {
+  color: rgb(180, 153, 230);
+}
+
+.highlight .gu {
+  color: rgb(198, 196, 184);
+}
+
+.highlight .gd {
+  color: rgb(230, 153, 181);
+}
+
+.highlight .gi {
+  color: rgb(204, 230, 153);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: rgb(41, 41, 41);
+}
+
+.hljs, .hljs-subst {
+  color: rgb(191, 191, 191);
+}
+
+.hljs-comment {
+  color: rgb(191, 191, 191);
+}
+
+.hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name {
+  font-weight: bold;
+}
+
+.hljs-type, .hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-quote, .hljs-template-tag, .hljs-deletion {
+  color: rgb(230, 153, 153);
+}
+
+.hljs-title, .hljs-section {
+  color: rgb(230, 153, 153);
+  font-weight: bold;
+}
+
+.hljs-regexp, .hljs-symbol, .hljs-variable, .hljs-template-variable, .hljs-link, .hljs-selector-attr, .hljs-selector-pseudo {
+  color: rgb(217, 165, 165);
+}
+
+.hljs-literal {
+  color: rgb(185, 210, 172);
+}
+
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {
+  color: rgb(191, 230, 153);
+}
+
+.hljs-meta {
+  color: rgb(153, 204, 230);
+}
+
+.hljs-meta-string {
+  color: rgb(161, 201, 221);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs {
+  background: none;
+}
+
+

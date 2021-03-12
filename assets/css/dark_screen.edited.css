@@ -1,3 +1,17 @@
+/* Table of Contents
+/* ------------------------------------------------------------
+
+This is a development CSS file which is built to a minified
+production stylesheet in assets/built/screen.css
+
+12. Pagination
+
+*/
+
+/* 12. Pagination - Tools to let you flick between pages
+/* ---------------------------------------------------------- */
+
+/* The main wrapper for our pagination links */
 .pagination {
   position: relative;
   width: 80%;
@@ -14,6 +28,7 @@
   transition: all 0.2s ease 0s;
 }
 
+/* Push the previous/next links out to the left/right */
 .newer-posts, .older-posts {
   position: absolute;
   display: inline-block;
@@ -67,20 +82,24 @@
   width: auto;
 }
 
+/* On page2+ make all the headers smaller */
 .paged .main-header {
   max-height: 30vh;
 }
 
+/* On page2+ show extra pagination controls at the top of post list */
 .paged .extra-pagination {
   display: block;
 }
 
+/* Every post, on every page, gets this style on its <article> tag */
 .pagination {
   padding-top: 4rem;
   border-top: 1px solid rgb(72, 85, 91);
   overflow-wrap: break-word;
 }
 
+/* Add a little circle in the middle of the border-bottom on our .post */
 .pagination::before {
   display: block;
   content: "";
@@ -119,10 +138,7 @@
 
 
 /* Image Gallery
-
-
-/* ------------------------------------------------------------ */
-
+/* ---------------------------------------------------------- */
 
 
 .blocks-gallery-grid,
@@ -130,11 +146,8 @@
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
-  padding: 0 3px 0.33em 0;
 /* Hand picked values that are just good enough for giving some space under the gallery */
-  <COMMENTFIX>
-
-
+  padding: 0 3px 0.33em 0;
  margin: 0;
 }
 

@@ -4,7 +4,7 @@
     "demo": "https://demo.ghost.io",
     "version": "2.1.9",
     "scripts": {
-	"gulp": "gulp"
+        "gulp": "gulp"
     },
     "engines": {
         "ghost": ">=1.2.0"
@@ -39,7 +39,7 @@
     "devDependencies": {
         "autoprefixer": "6.3.6",
         "cssnano": "3.7.1",
-        "gulp": "3.9.1",
+        "gulp": "^3.9.1",
         "gulp-livereload": "3.8.1",
         "gulp-postcss": "6.1.1",
         "gulp-sourcemaps": "1.6.0",
@@ -52,5 +52,8 @@
     },
     "config": {
         "posts_per_page": 25
+    },
+    "dependencies": {
+        "gulp-cli": "^2.3.0"
     }
 }
