@@ -1,6 +1,6 @@
 ---
-layout: post
-current: post
+layout: post_without_cover
+cover: assets/images/qmk-heatmap/precondition-dactyl-manuform-heatmap.png
 navigation: True
 title: QMK Heatmap Generator
 date: 2021-02-19
