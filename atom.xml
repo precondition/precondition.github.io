@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>Typing about what I type on</description>
+    <link>
+    </link>
+    
+      
+      <item>
+        <title>QMK Heatmap Generator</title>
+        
+          <description>&lt;div id=&quot;keyboard&quot;&gt;
+  &lt;canvas id=&quot;bgCanvas&quot; width=&quot;830&quot; height=&quot;290&quot;&gt;
+&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;div id=&quot;howToMatchMatrix&quot; style=&quot;display: none;min-width: 100%;text-align: center;&quot;&gt;&lt;/div&gt;
+
+</description>
+        
+        <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+        <link>
+        /qmk-heatmap</link>
+        <guid isPermaLink="true">/qmk-heatmap</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>A guide to home row mods</title>
+        
+          <description>&lt;p&gt;If you’ve been browsing mechanical keyboard communities, and especially the niche that is ergonomic mechanical keyboards, you may have come across the term “home row mods” and wondered what could that mean. Well, wonder no more for I shall explain!&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 12 Dec 2020 00:00:00 +0000</pubDate>
+        <link>
+        /home-row-mods</link>
+        <guid isPermaLink="true">/home-row-mods</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Pressing E with the thumb‽</title>
+        
+          <description>&lt;p&gt;Did you know that the letter “E” is the most common letter of the English language by a fair margin? It’s second only to space. Such an observation can also be made for the majority of European languages.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
+        <link>
+        /pressing-e-with-the-thumb</link>
+        <guid isPermaLink="true">/pressing-e-with-the-thumb</guid>
+      </item>
+      
+    
+  </channel>
+</rss>
