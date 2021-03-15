@@ -118,7 +118,7 @@ function showTextField(name) {
 }
 
 function surroundInCodeBlock(code, language="c") {
-    return "<pre><code>" + hljs.highlight(language, code).value + "</code></pre>";
+    return "<pre><code>" + code + "</code></pre>";
 }
 
 function buildUserChoices(formElements, program="QMK") {
