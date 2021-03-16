@@ -15,6 +15,13 @@ custom-js:
 description: Generate a heatmap of key presses for any QMK keyboard based on real key logging data
 ---
 
+Show key presses coming from:
+<select id="layerSelector" onchange="displayLayer(this)">
+<!-- The value of "All layers" is an arbitrary big number that will be converted to highestLayer+1 -->
+<option value="99">All layers</option>
+<option value="0">Layer 0</option>
+</select>
+
 <div id="keyboard">
 <canvas id="bgCanvas" width="830" height="290">
 </canvas> 
@@ -45,6 +52,22 @@ description: Generate a heatmap of key presses for any QMK keyboard based on rea
 This is a web-based tool to generate a pretty heatmap of your typing habits. As opposed to all the other available keyboard heatmap generators, this doesn't merely analyse a static piece of text and overlays the letter frequency of said piece of text over a picture of the most basic row-stagger keyboard. This generator has full support for unprintable keys like backspace, modifier keys, caps lock, F-keys, arrow keys etc. Additionally, advanced QMK features such as layers, modtaps, layertaps, [home row mods](home-row-mods), leader keys, autoshift, and even combos are also supported.
 
 Since QMK keyboards come in all shapes and sizes, you're invited to upload your own picture of your layout/keymap. It doesn't matter whether you use a TKL, an Atreus or a Dactyl Manuform; if it's available on the [QMK configurator], it's supported.
+
+<!--
+Mini version of my Dactyl Manuform 5x6 for testing
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│1B││1C││1D││1E││1F│                    │7A││7B││7C││7D││7E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│2B││2C││2D││2E││2F│                    │8A││8B││8C││8D││8E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│3B││3C││3D││3E││3F│                    │9A││9B││9C││9D││9E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+                ┌──┐┌──┐                    ┌──┐┌──┐
+                │4E││4F│                    │AA││AB│
+                └──┘└──┘                    └──┘└──┘
+-->
 
 # Gallery
 

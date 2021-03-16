@@ -1,14 +1,11 @@
 const bgCanvas = document.getElementById("bgCanvas");
-bgCanvas.style.backgroundImage = `url(/assets/images/qmk-heatmap/example_layout_for_qmk_heatmap_generator.jpg)`;
+bgCanvas.style.backgroundImage = "url(/assets/images/qmk-heatmap/example_layout_for_qmk_heatmap_generator.jpg)";
 
 document.getElementById("pictureFile").addEventListener("change", function(){
     const pictureFile = this.files[0];
     if (pictureFile) {
       var reader = new FileReader();
 
-
-    // ISSUE: uploading a picture with a transparent bg shows a tiled version of the initial
-    // canvas image in the background.
       reader.onload = function (evt) {
           var image = new Image();
           image.src = reader.result;
@@ -30,6 +27,7 @@ document.getElementById("pictureFile").addEventListener("change", function(){
 
       reader.onerror = function (evt) {
         console.error("An error ocurred reading the pictureFile",evt);
+        alert("An error ocurred reading while reading the file.");
       };
 
       reader.readAsDataURL(pictureFile);
@@ -62,7 +60,8 @@ tx.addEventListener("input", function OnInput() {
 /* array[str] */ var rowcolInTextMatrix = [];
 /* Object[str: Object[str: int]] */ var posMatchingTable = {};
 
-// Lines 18 and 19 of qmk_firmware/lib/python/qmk/cli/info.py
+// Constants taken from here:
+// https://github.com/qmk/qmk_firmware/blob/620a946d01477b64ee2f719141aa35400c0188c6/lib/python/qmk/constants.py#L22...L24
 const ROW_LETTERS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop'
 const COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijilmnopqrstuvwxyz'
 // Taken from the length of ROW_LETTERS and COL_LETTERS
@@ -153,6 +152,7 @@ bgCanvas.addEventListener("click", function(e) {
             } else {
                 eraseAllCircles();
                 alert("All matches are saved! Please upload your csv file now");
+                document.getElementById("howToMatchMatrix").innerText = 'Scroll down to see the "Upload key log csv" button'
                 document.getElementById("csvFileBtnWrapper").style.display = "block";
             }
         }
@@ -190,18 +190,15 @@ function fillNAs(lines) {
      */
     keycode2rowcol = {}
     // The keycode must be present in the expected line format
-    expectedLineFormat = /0x[A-F0-9]+,[0-9]+,[0-9]+/
+    const expectedLineFormat = /^0x[A-F0-9]+,[0-9]+,[0-9]+/
     // Go through each known association between a keycode and its row,col
     // to build the `keycode2rowcol` lookup table.
     lines.filter(line => expectedLineFormat.test(line)).forEach(line => {
-        keycode = line.match(/0x[0-9A-F]+/)[0]
-        line = line.replace(/0x[0-9A-F]+,/, "")
-        row = Number(line.slice(0, line.indexOf(",")))
-        col = Number(line.slice(line.indexOf(",")+1))
-        if (isNaN(row) || isNaN(col)) {
-            console.error('The row or column in line "' + line + '" is not a number. Skipping this line...')
-            return
-        } else if (row == 254 && col == 254) {
+        const loggedKeycodeAndVars = line.split(",")
+        const keycode = loggedKeycodeAndVars[0]
+        const row = Number(loggedKeycodeAndVars[1])
+        const col = Number(loggedKeycodeAndVars[2])
+        if (row == 254 && col == 254) {
             return // is a simple combo with sevanteri's combo improvements
         } else {
             keycode2rowcol[keycode] = [row, col]
@@ -220,38 +217,91 @@ function fillNAs(lines) {
     return lines
 }
 
-function getKeyFreqFromCsvLines(lines) {
-    keyFreq = {}
-    // The keycode DOES NOT have to be present in the expected line format
-    expectedLineFormat = /(0x[A-F0-9]+,)?[0-9]+,[0-9]+/
-    lines.filter(line => expectedLineFormat.test(line)).forEach(line => {
-        // Strip the leading keycode hexa
-        line = line.replace(/0x[0-9A-F]+,/, "")
-        row = Number(line.slice(0, line.indexOf(",")))
-        col = Number(line.slice(line.indexOf(",")+1))
-        if (isNaN(row) || isNaN(col)) {
-            console.error('The row or column in line "' + line + '" is not a number. Skipping this line...')
-            return
-        } else if (row < MAX_ROW && col < MAX_COL) {
-            rowcol = ROW_LETTERS[row] + COL_LETTERS[col]
-        } else {
-            // Is probably a combo whose row, col = 254, 254
-            rowcol = 'ØØ' // 'Ø' is totally arbitrary
-        }
-        keyFreq[rowcol] = (keyFreq[rowcol] || 0) + 1
-    })
+function getKeyFreq(line, keyFreq) {
+    /* Generates a hashmap that associates a key to the total amount of times it was pressed.
+     *
+     * Its format is as follows:
+     * {
+     * "2-letter code for row,column": [
+     *  total presses on layer 0, total presses on layer 1, ..., total presses on layer n
+     *  ]
+     * }
+     *
+     * Example:
+     * {"0A": [2800, 38], "9B": [50, 50]}
+     * The key in matrix position row=0, col=0 (denoted "0A")
+     * was pressed 2800 times when layer 0 was active and
+     * 38 times when layer 1 was active.
+     */
+
+    // Strip the leading keycode hexa
+    line = line.replace(/0x[0-9A-F]+,/, "")
+    const loggedVars = line.split(",")
+    const row        = Number(loggedVars[0])
+    const col        = Number(loggedVars[1])
+    const layer      = Number(loggedVars[2])
+    if (row < MAX_ROW && col < MAX_COL) {
+        rowcol = ROW_LETTERS[row] + COL_LETTERS[col]
+    } else {
+        // Is probably a combo whose row, col = 254, 254
+        rowcol = 'ØØ' // 'Ø' is totally arbitrary
+    }
+    if (keyFreq[rowcol] == undefined) {
+        keyFreq[rowcol] = []
+    }
+    keyFreq[rowcol][layer] = (keyFreq[rowcol][layer] || 0) + 1
     return keyFreq
 }
 
-function compileHeatmapDataPoints(rowcol2coords, rowcol2count) {
-    /*array[Object[str: int]]*/data = [];
-    for (const rowcol of Object.keys(rowcol2coords)) {
-        // Shallow copy clone of {x: int, y: int}
-        /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]};
-        coordsAndValue.value = rowcol2count[rowcol];
-        data.push(coordsAndValue);
+function sum(array) {
+    return array.reduce((a, b) => a+b, 0)
+}
+
+function getHighestLayer(line, highestLayer) {
+    line = line.replace(/0x[0-9A-F]+,/, "")
+    const loggedVars = line.split(",")
+    const layer = Number(loggedVars[2])
+    if (layer > highestLayer) {
+        highestLayer = layer
+     }
+    return highestLayer
+}
+
+function compileHeatmapDataPoints(rowcol2coords, rowcol2counts, highestLayer) {
+    /*array[array[Object[str: int]]]*/data = []
+    rowcols = Object.keys(rowcol2coords)
+    var i = rowcols.length
+    while (i--) {
+        rowcol = rowcols[i]
+        if (rowcol2counts[rowcol] == undefined) {
+            continue
+        }
+        for (let j=0; j<=highestLayer; j++) {
+            /*int*/const keypressesCount = rowcol2counts[rowcol][j]
+            if (keypressesCount == undefined) {
+                continue
+            }
+            // Shallow copy clone of {x: int, y: int}
+            /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]}
+            coordsAndValue["value"] = keypressesCount
+            coordsAndValue["rowcol"] = rowcol
+            if (data[j] == undefined) {
+                data[j] = []
+            }
+            data[j].push(coordsAndValue)
+        }
+        console.log("highestLayer is " + highestLayer)
+        /*int*/const totalKeypressesCount = sum(rowcol2counts[rowcol])
+        console.log("totalKeypressesCount is " + totalKeypressesCount)
+        /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]}
+        coordsAndValue["value"] = totalKeypressesCount
+        if (data[highestLayer+1] == undefined) {
+            data[highestLayer+1] = []
+        }
+        data[highestLayer+1].push(coordsAndValue)
+        console.log("total has been pushed to data, it is now:" + JSON.stringify(data))
     }
-    return data;
+    return data
 }
 
 function generateHeatmap(maxPresses, heatmapDataPoints) {
@@ -274,24 +324,57 @@ function generateHeatmap(maxPresses, heatmapDataPoints) {
     heatmapInstance.setData(heatmapFinalData)
 }
 
+let heatmapDataPoints = []
+let maxPresses = []
 document.getElementById("csvFile").addEventListener("change", function(){
     var csvFile = this.files[0];
 
     if (csvFile) {
       var reader = new FileReader();
+      const RECOMMENDED_AMOUNT_OF_ENTRIES = 100000
 
       reader.onload = function (evt) {
           csvText = evt.target.result
           csvLines = csvText.split(/\n|\r\n/)
+
+          if (csvLines.length < RECOMMENDED_AMOUNT_OF_ENTRIES) {
+              document.getElementById("howToMatchMatrix").innerText = `The submitted keylog only contains ${csvLines.length} lines.\nCollect more data for more accurate results.`
+          }
           if (csvText.includes("NA,NA")) {
             csvLines = fillNAs(csvLines)
           }
-          keyFreq = getKeyFreqFromCsvLines(csvLines);
-          // ... is used to unpack the values array
-          maxPresses = Math.max(...Object.values(keyFreq))
+          let keyFreq = {}
+          let highestLayer = 0
+          // The keycode DOES NOT have to be present in the expected line format
+          const expectedLineFormat = /^(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}/
+          csvLines.filter(line => expectedLineFormat.test(line)).forEach(line => {
+              keyFreq = getKeyFreq(line, keyFreq)
+              highestLayer = getHighestLayer(line, highestLayer)
+          })
+          maxPresses = []
+          keypressesOnEachLayer = Object.values(keyFreq)
+          for (let i=0; i<=highestLayer; i++) {
+            maxPresses.push(Math.max(...keypressesOnEachLayer.map(pressesInLayer => (pressesInLayer[i]||0))))
+          }
+          // Last element contains the total max presses for all layers combined
+          maxPresses.push(Math.max(...keypressesOnEachLayer.map(pressesInLayer => sum(pressesInLayer))))
+          console.log("maxPresses are " + maxPresses)
 
-          heatmapDataPoints = compileHeatmapDataPoints(posMatchingTable, keyFreq);
-          generateHeatmap(maxPresses, heatmapDataPoints);
+          heatmapDataPoints = compileHeatmapDataPoints(posMatchingTable, keyFreq, highestLayer);
+
+          // The code below related to updating the layerSelector can be a bit confusing because of
+          // the presence of the option "All Layers" at the first position in the drop-down list.
+          // By consequence, the option "Layer 0" has a value of "0" but an index of 0+1 etc.
+          const selector = document.getElementById("layerSelector")
+          // highestLayer+1 is the index of aggregated layers data in heatmapDataPoints.
+          currentlySelectedLayer = Math.min(Number(selector.value), highestLayer+1);
+          // Always keep at least "All layers" and "Layer 0" + whatever up to selected index or highestLayer+1
+          // These two options work with any keylog file because there is always at least a base layer.
+          selector.length = Math.max(2, Math.min(selector.selectedIndex, highestLayer+1))
+          for (let i=selector.length-1; i<=highestLayer; i++) {
+            addLayerToSelector(i)
+          }
+          generateHeatmap(maxPresses[currentlySelectedLayer], heatmapDataPoints[currentlySelectedLayer]);
       };
 
       reader.onerror = function (evt) {
@@ -300,4 +383,20 @@ document.getElementById("csvFile").addEventListener("change", function(){
 
       reader.readAsText(csvFile, "UTF-8");
     }
-},false);
+}, false);
+
+function displayLayer(options) {
+    console.log(options)
+    if (maxPresses.length > 0) {
+        chosenLayer = Math.min(Number(options.value), heatmapDataPoints.length-1)
+        generateHeatmap(maxPresses[chosenLayer], heatmapDataPoints[chosenLayer])
+    }
+}
+
+function addLayerToSelector(layer) {
+    selector = document.getElementById("layerSelector")
+    layerToAdd = document.createElement("option")
+    layerToAdd.text = "Layer " + layer
+    layerToAdd.value = layer
+    selector.add(layerToAdd)
+}
