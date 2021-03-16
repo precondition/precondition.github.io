@@ -39,3 +39,5 @@ _posts/2012-09-23-a-full-and-comprehensive-style-test.html
 assets/images/home-row-mods/RealisticHRM-Dark-Cover-Miryoku.jpeg
 assets/images/home-row-mods/RealisticHRM-Dark-SideLegends-Miryoku.png
 assets/images/home-row-mods/RealisticHRM-Light-Cover-Miryoku.jpeg
+
+assets/**/ignore
