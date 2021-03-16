@@ -56,7 +56,7 @@ The QMK Heatmap Generator expects:
 1. A picture of your layout
 2. A text representation of the matrix positions of your keyboard
 3. A link between each key in the matrix to the corresponding key in the provided picture
-4. A keylog CSV file in `keycode,row,col` format (`keycode` can be omitted)
+4. A keylog CSV file in `keycode,row,col,layer` format (`keycode` can be omitted)
 
 If you don't have a `keylog.csv` file yet, jump to the section on "[How to collect the required data](#how-to-collect-the-required-data)". It is pointless to go through steps 1–3 if you don't already have a `keylog.csv` file that contains at least 1000 entries.
 
@@ -156,7 +156,7 @@ After including `print.h`, head to the `process_record_user` function (More info
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
         if (record->event.pressed) {
-            uprintf("0x%04X,%u,%u\n", keycode, record->event.key.row, record->event.key.col);
+            uprintf("0x%04X,%u,%u,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state));
         }
     #endif
     switch (keycode) {
@@ -177,7 +177,7 @@ If you want to log combo key presses, there are a few more things you need to do
         uint8_t idx = 0;
         uint16_t combo_keycode;
         while ((combo_keycode = pgm_read_word(&combo->keys[idx])) != COMBO_END) {
-            uprintf("0x%04X,NA,NA\n", combo_keycode);
+            uprintf("0x%04X,NA,NA,%u\n", combo_keycode, get_highest_layer(layer_state));
             idx++;
         }
     }
@@ -187,13 +187,13 @@ As you can notice, `processs_combo_event` doesn't actually give any information 
 
 These missing values will be automatically filled in by the QMK Heatmap Generator based on keys you've typed outside of combos. For example, if you have a combo involving `KC_A` and `KC_S`, executing the combo will output these two lines:
 ```
-0x004,NA,NA
-0x018,NA,NA
+0x004,NA,NA,0
+0x018,NA,NA,0
 ```
 but simply tapping those keys by themselves, one after another would produce something like:
 ```
-0x004,3,2
-0x018,3,3
+0x004,3,2,0
+0x018,3,3,0
 ```
 Based on this, we can infer that the keycode `0x004` is positionned in the third row, second column and that `0x018` is positionned in the third row, third column.
 
@@ -212,7 +212,7 @@ To listen to your keyboard, you'll need to install [hid_listen](https://www.pjrc
 
 Now, all you need to start logging key presses is to let this command run in the background while you're using your keyboard normally:
 ```sh
-sudo ./hid_listen | egrep --line-buffered "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+)" | tee -a keylog.csv
+sudo ./hid_listen | egrep --line-buffered "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+),[0-9]{1,2}" | tee -a keylog.csv
 ```
 
 The output should look like this:
@@ -231,9 +231,9 @@ Every time you press any key on your keyboard, a new line should be appended to 
 
 If you don't want to flood the standard output, you can replace `| tee -a` by `>>` like so:
 ```sh
-sudo ./hid_listen | egrep --line-buffered "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+)" >> keylog.csv
+sudo ./hid_listen | egrep --line-buffered "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+),[0-9]{1,2}" >> keylog.csv
 ```
-This will silently append `<keycode>,<row>,<col>` to `keylog.csv` anytime you press a key on your keyboard.
+This will silently append `<keycode>,<row>,<col>,<layer>` to `keylog.csv` anytime you press a key on your keyboard.
 
 # Why should I trust this web-tool with my keylogging data?
 This entire website is static and open source, meaning none of your data gets sent to any server, all the processing happens client-side and anyone can inspect the code. More importantly, the `keylog.csv` file that you upload to the web-tool doesn't actually contain the key*sym* you've typed, only the raw hexadecimal key*codes*. 
@@ -242,4 +242,4 @@ For example, there isn't one clear-cut keycode that will always produce "A" on s
 
 I have no desire to deal with that ambiguous mess.
 
-The keycodes only get used to fill in NA values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) before uploading it. All that really matters to the generator is the `row` and the `col` of each key press.
+The keycodes only get used to fill in NA values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) before uploading it. All that really matters to the generator is the `row`, the `col`, and the `layer` of each key press.
