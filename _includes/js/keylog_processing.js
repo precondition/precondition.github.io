@@ -290,16 +290,13 @@ function compileHeatmapDataPoints(rowcol2coords, rowcol2counts, highestLayer) {
             }
             data[j].push(coordsAndValue)
         }
-        console.log("highestLayer is " + highestLayer)
         /*int*/const totalKeypressesCount = sum(rowcol2counts[rowcol])
-        console.log("totalKeypressesCount is " + totalKeypressesCount)
         /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]}
         coordsAndValue["value"] = totalKeypressesCount
         if (data[highestLayer+1] == undefined) {
             data[highestLayer+1] = []
         }
         data[highestLayer+1].push(coordsAndValue)
-        console.log("total has been pushed to data, it is now:" + JSON.stringify(data))
     }
     return data
 }
@@ -358,7 +355,6 @@ document.getElementById("csvFile").addEventListener("change", function(){
           }
           // Last element contains the total max presses for all layers combined
           maxPresses.push(Math.max(...keypressesOnEachLayer.map(pressesInLayer => sum(pressesInLayer))))
-          console.log("maxPresses are " + maxPresses)
 
           heatmapDataPoints = compileHeatmapDataPoints(posMatchingTable, keyFreq, highestLayer);
 
@@ -385,10 +381,9 @@ document.getElementById("csvFile").addEventListener("change", function(){
     }
 }, false);
 
-function displayLayer(options) {
-    console.log(options)
+function displayLayer(selectedLayer) {
     if (maxPresses.length > 0) {
-        chosenLayer = Math.min(Number(options.value), heatmapDataPoints.length-1)
+        chosenLayer = Math.min(Number(selectedLayer), heatmapDataPoints.length-1)
         generateHeatmap(maxPresses[chosenLayer], heatmapDataPoints[chosenLayer])
     }
 }

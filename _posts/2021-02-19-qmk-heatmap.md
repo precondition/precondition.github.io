@@ -16,7 +16,7 @@ description: Generate a heatmap of key presses for any QMK keyboard based on rea
 ---
 
 Show key presses coming from:
-<select id="layerSelector" onchange="displayLayer(this)">
+<select id="layerSelector" onchange="displayLayer(this.value)">
 <!-- The value of "All layers" is an arbitrary big number that will be converted to highestLayer+1 -->
 <option value="99">All layers</option>
 <option value="0">Layer 0</option>
