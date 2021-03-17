@@ -132,8 +132,40 @@ Matrix for "LAYOUT_dactyl":
 
 Only copy-paste the lines after "Matrix for ...". 
 
+Note: for a handwired board, there is the possibility that the actual wiring of your board differs from that of the matrix `qmk info -m` spits out. Double check that if you notice a key you rarely press gets colored in bright colors.
+
 ## 3. A link between each key in the matrix to the corresponding key in the provided picture
 After pasting the matrix into the text area, left click on the picture the spot that corresponds to each key in the text matrix starting from the top left corner and moving from left to right, top to bottom.
+
+Watch out for columnar staggered boards like the Lily 58. The web-tool reads in the matrix line by line so the following matrix:
+<pre style="line-height:16px">
+            ┌──┐                                  ┌──┐
+        ┌──┐│0D│┌──┐┌──┐                  ┌──┐┌──┐│5C│┌──┐
+┌──┐┌──┐│0C│└──┘│0E││0F│                  │5A││5B│└──┘│5D│┌──┐┌──┐
+│0A││0B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│5E││5F│
+└──┘└──┘┌──┐│1D│┌──┐┌──┐                  ┌──┐┌──┐│6C│┌──┐└──┘└──┘
+┌──┐┌──┐│1C│└──┘│1E││1F│                  │6A││6B│└──┘│6D│┌──┐┌──┐
+│1A││1B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│6E││6F│
+└──┘└──┘┌──┐│2D│┌──┐┌──┐                  ┌──┐┌──┐│7C│┌──┐└──┘└──┘
+┌──┐┌──┐│2C│└──┘│2E││2F│                  │7A││7B│└──┘│7D│┌──┐┌──┐
+│2A││2B│└──┘┌──┐└──┘└──┘┌──┐          ┌──┐└──┘└──┘┌──┐└──┘│7E││7F│
+└──┘└──┘┌──┐│3D│┌──┐┌──┐│4F│          │8A│┌──┐┌──┐│8D│┌──┐└──┘└──┘
+┌──┐┌──┐│3C│└──┘│3E││3F│└──┘          └──┘│8B││8C│└──┘│8E│┌──┐┌──┐
+│3A││3B│└──┘    └──┘└──┘                  └──┘└──┘    └──┘│8F││9F│
+└──┘└──┘  ┌──┐┌──┐┌──┐  ┌──┐          ┌──┐  ┌──┐┌──┐┌──┐  └──┘└──┘
+          │4B││4C││4D│  │4E│          │9B│  │9C││9D││9E│
+          └──┘└──┘└──┘  │  │          │  │  └──┘└──┘└──┘
+                        │  │          │  │
+                        └──┘          └──┘
+</pre>
+will read keys in the following order:
+<video controls width="922">
+<source src="assets/images/qmk-heatmap/matching-columnar-stagger-lily58.webm"
+alt="0D 5C 0C 0E 0F 5A 5B 5D 0A 0B 5E 5F 1D 6C 1C 1E 1F 6A 6B 6D 1A 1B 6E 6F"
+type="video/webm">
+</video>
+
+Is it annoying? Yes. I'll see what I can do to help.
 
 If you misclicked or placed the dot a few millimeters away from the true center of the keycap and it's driving you mad, you can Shift+Left Click anywhere on the canvas to undo the last operation.
 
