@@ -88,7 +88,7 @@ The first thing you need to do is to upload a picture of your layout. It can be 
 
 [QMK configurator]: https://config.qmk.fm/#/
 
-Avoid uploading a picture which separates all your different layers like in [this example](https://media.discordapp.net/attachments/663573863480950808/818128925447946271/layout.png). The QMK Heatmap Geneator tool doesn't care whether a key was pressed while a certain layer X was active or not. It only visualizes what are the *physical* keys that you press frequently, it couldn't care less what keysyms do those keys actually produce.
+Avoid uploading a picture which separates all your different layers like in [this example](https://media.discordapp.net/attachments/663573863480950808/818128925447946271/layout.png). You only get to match as many key as you have submitted in the text box for the ASCII representation of your board.
 
 ## 2. A text representation of the matrix positions of your keyboard
 Next, you can see a text box prompting you to paste the text representation of the matrix layout produced by `qmk info --matrix`, or `qmk info -m` in short. If you wish to obtain the pseudo-graphic layout for another board than your main (as defined by `qmk config`), you can run `qmk info -kb <name> -m`. For example, `qmk info -kb handwired/dactyl -m` produces the following output:
@@ -265,4 +265,4 @@ For example, there isn't one clear-cut keycode that will always produce "A" on s
 
 I have no desire to deal with that ambiguous mess.
 
-The keycodes only get used to fill in NA values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) before uploading it. All that really matters to the generator is the `row`, the `col`, and the `layer` of each key press.
+The keycodes only get used to fill in NA values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) and shuffle the order of the csv lines before uploading it. All that really matters to the generator is the `row`, the `col`, and the `layer` of each key press.
