@@ -88,7 +88,7 @@ The first thing you need to do is to upload a picture of your layout. It can be 
 
 [QMK configurator]: https://config.qmk.fm/#/
 
-Avoid uploading a picture which separates all your different layers like in [this example](https://media.discordapp.net/attachments/663573863480950808/818128925447946271/layout.png). You only get to match as many key as you have submitted in the text box for the ASCII representation of your board.
+Avoid uploading a picture which separates all your different layers like in [this example](https://media.discordapp.net/attachments/663573863480950808/818128925447946271/layout.png). You only get to match as many keys as you have submitted in the text box for the ASCII representation of your board.
 
 ## 2. A text representation of the matrix positions of your keyboard
 Next, you can see a text box prompting you to paste the text representation of the matrix layout produced by `qmk info --matrix`, or `qmk info -m` in short. If you wish to obtain the pseudo-graphic layout for another board than your main (as defined by `qmk config`), you can run `qmk info -kb <name> -m`. For example, `qmk info -kb handwired/dactyl -m` produces the following output:
