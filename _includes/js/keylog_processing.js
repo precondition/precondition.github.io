@@ -378,6 +378,8 @@ document.getElementById("csvFile").addEventListener("change", function(){
       };
 
       reader.readAsText(csvFile, "UTF-8");
+      // Reset the input field, so that an updated csv file with the same filename can be uploaded.
+      csvFile.value = '';
     }
 }, false);
 
