@@ -378,9 +378,15 @@ document.getElementById("csvFile").addEventListener("change", function(){
       };
 
       reader.readAsText(csvFile, "UTF-8");
-      // Reset the input field, so that an updated csv file with the same filename can be uploaded.
-      csvFile.value = '';
     }
+}, false);
+
+document.getElementById("csvFile").addEventListener("click", function(){
+  // Reset the input field, so that an updated csv file with the same filename can be uploaded.
+  var csvFile = this.files[0];
+  if (csvFile) {
+    csvFile.value = '';
+  }
 }, false);
 
 function displayLayer(selectedLayer) {
