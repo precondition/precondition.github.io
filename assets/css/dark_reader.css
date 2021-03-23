@@ -1132,6 +1132,7 @@ form {
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 
@@ -1144,3 +1145,6 @@ form {
 }
 
 .matchedKeys { background-color: #265670; font-style: italic; }
+
+/* Hopefully this fixes the double scrollbar issue */
+html { overflow-x: initial !important; }
