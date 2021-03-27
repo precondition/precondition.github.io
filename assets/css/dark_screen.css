@@ -20,6 +20,7 @@ production stylesheet in assets/built/screen.css
 9.  Error Template
 10. Subscribe Overlay
 11. Site Footer
+12. Pagination - Tools to let you flick between pages
 
 */
 
@@ -1865,4 +1866,130 @@ Usage (In Ghost editor):
   .site-footer-nav a:first-child {
     margin-left: 0px;
   }
+}
+
+/* 12. Pagination - Tools to let you flick between pages
+/* ---------------------------------------------------------- */
+
+/* The main wrapper for our pagination links */
+.pagination {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  margin: 4rem auto;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3rem;
+  color: rgb(184, 193, 199);
+  text-align: center;
+}
+
+.pagination a {
+  color: rgb(153, 203, 230);
+  transition: all 0.2s ease 0s;
+}
+
+/* Push the previous/next links out to the left/right */
+.newer-posts, .older-posts {
+  position: absolute;
+  display: inline-block;
+  padding: 0px 15px;
+  border: 1px solid rgb(72, 85, 91);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: border 0.3s ease 0s;
+}
+
+.older-posts {
+  right: 0px;
+}
+
+.page-number {
+  display: inline-block;
+  padding: 2px 0px;
+  min-width: 100px;
+}
+
+.newer-posts {
+  left: 0px;
+}
+
+.newer-posts:hover, .older-posts:hover {
+  color: rgb(153, 203, 230);
+  border-color: rgb(115, 125, 130);
+}
+
+.extra-pagination {
+  display: none;
+  border-bottom: 1px solid rgb(25, 45, 56);
+}
+
+.extra-pagination::after {
+  display: block;
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgb(30, 47, 56);
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -5px;
+  background: rgb(28, 28, 33);
+  border-radius: 100%;
+  box-shadow: rgb(28, 28, 33) 0px 0px 0px 5px;
+}
+
+.extra-pagination .pagination {
+  width: auto;
+}
+
+/* On page2+ make all the headers smaller */
+.paged .main-header {
+  max-height: 30vh;
+}
+
+/* On page2+ show extra pagination controls at the top of post list */
+.paged .extra-pagination {
+  display: block;
+}
+
+/* Every post, on every page, gets this style on its <article> tag */
+.pagination {
+  padding-top: 4rem;
+  border-top: 1px solid rgb(72, 85, 91);
+  overflow-wrap: break-word;
+}
+
+/* Add a little circle in the middle of the border-bottom on our .post */
+.pagination::before {
+  display: block;
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgb(72, 85, 91);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
+  background: rgb(33, 33, 33);
+  border-radius: 100%;
+  box-shadow: rgb(33, 33, 33) 0px 0px 0px 5px;
+}
+
+.highlight code, .highlight pre, .highlight table, .highlight tbody, .highlight tr, figure.highlight, td.code {
+  border: none;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.highlight table, .highlight td pre {
+  padding: 0px;
+  margin: 0px;
+}
+
+.highlight table td {
+  border: none;
+}
+
+.highlight table td:first-child, .highlight table td:last-child {
+  background: none;
 }
