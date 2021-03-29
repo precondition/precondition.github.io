@@ -343,7 +343,6 @@ th {
 
 html {
     overflow-x: hidden;
-    overflow-y: scroll;
     font-size: 62.5%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -796,9 +795,6 @@ form {
 
 .matchedKeys { background-color: #265670; font-style: italic; }
 
-/* Hopefully this fixes the double scrollbar issue */
-html { overflow-x: initial !important; }
-
 /* Addition */
 abbr {
     cursor: help;
@@ -887,7 +883,6 @@ summary {
   bottom: 0;
   width: 100%;
   max-height: 100%;
-  overflow: auto;
   padding: 3em .77em .7em;
   color: #fff;
   text-align: center;
