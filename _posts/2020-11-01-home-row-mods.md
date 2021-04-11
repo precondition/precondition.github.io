@@ -1217,14 +1217,14 @@ However, if we're willing to stretch the definition of "home row" to not only in
 
 Firstly, one could shift all the mod-taps outwards.
 
-![Dark Ortholinear Planck keyboard with the EscASDKL;' keys highlighted in purple](assets/images/home-row-mods/PlanckAlternative-OuterStraight.jpeg)
+![Dark Ortholinear Planck keyboard with the CapsLockASDKL;' keys highlighted in purple](assets/images/home-row-mods/PlanckAlternative-OuterStraight.jpeg)
 
 This is vaguely reminiscent of the [HHKB-style <kbd>Ctrl</kbd> key](https://www.itmedia.co.jp/news/articles/1912/10/news176.html) wherein the key that would usually be <kbd>Caps Lock</kbd> on standard keyboards is mapped to <kbd>Ctrl</kbd> instead.
 
 Be that as it may, two flaws are apparent with this layout:
 
 1. The pinkies have double duty when it comes to modifier activation:
-<kbd>A</kbd>,<kbd>;</kbd> *and* <kbd>Esc</kbd>,<kbd>'</kbd>
+<kbd>A</kbd>,<kbd>;</kbd> *and* <kbd>Caps Lock</kbd>,<kbd>'</kbd>
 2. In case you need to combine the two outer home row mods, the whole hand needs to shift 1u outwards from home position to let the ring finger hold down <kbd>A</kbd> or <kbd>;</kbd>
 
 Therefore, it may be better to go the other way and translate the home row mods *inwards*.
