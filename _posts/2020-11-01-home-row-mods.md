@@ -1428,7 +1428,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 [^9]: Americans seem to get a kick out of using their own standards that are different from everybody else's.
 
-[^10]: For our purposes, "steno-friendly" doesn't refer to whether a given keyboard supports N-key roll over or not. It's a quality of a keyboard that makes single-finger combos easier to chord. Factors that play positively in the "steno-friendliness" of a given keyboard could be flat keycaps, steno key tops, choc spacing, ortholinear or columnar stagger, light springs, ...
+[^10]: For our purposes, "steno-friendly" doesn't refer to whether a given keyboard supports N-key roll over or a steno protocol such as GeminiPR. It's a quality of a keyboard that makes single-finger combos easier to chord. Factors that play positively in the "steno-friendliness" of a given keyboard could be flat keycaps, steno key tops, choc spacing, ortholinear or columnar stagger, light springs, ...
 
 [^11]: Obviously, it has no benefits for a macro pad and home row mods are unfit for steno boards such as the Georgi.
 
