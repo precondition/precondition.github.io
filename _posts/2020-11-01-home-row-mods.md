@@ -168,7 +168,7 @@ Naturally, this is not an exhaustive list of all possible permutations of modifi
 Even so, despite having written much about the different home row mods orders, in the end, it truly isn't that important. Just pick one you like and roll with it. If you're already used to a certain order, don't let the above points convince you to change. When you're starting out, the pragmatic question of how to lay out the modifiers on the home row might seem important but that impression is misplaced.
 
 ## Implementation
-For the best home row mods experience, I heartily recommend a QMK-powered mechanical keyboard. At the time of writing, QMK supports over 675 keyboards! The greater part of which are DIY keyboards.
+For the best home row mods experience, I heartily recommend a QMK-powered mechanical keyboard. At the time of writing, QMK supports over 1624 keyboards! The greater part of which are DIY keyboards.
 
 The following section will be about implementing home row mods in a QMK-powered keyboard with all the necessary settings to make it work well.
 
