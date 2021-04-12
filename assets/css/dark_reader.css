@@ -585,231 +585,6 @@ h5, h6 {
 /*}*/
 
 
-code, kbd, pre, samp {
-    font-family: monospace, monospace;
-    font-size: 1em;
-}
-
-/* Darkening the kbd element */
-kbd {
-    display: inline-block;
-    margin: 0px;
-    padding: 3px 5px;
-    border: rgb(62, 68, 70) 1px solid;
-    border-color: rgb(62, 68, 70);
-    border-radius: 6px;
-    color: #bfbfbf;
-    font-size: 0.9em;
-    font-weight: 500;
-    line-height: 20px;
-    text-shadow: rgb(24, 26, 27) 0px 1px 0px;
-    background-color: rgb(30, 33, 34);
-    background-image: none;
-    box-shadow: 0 -1px 0 rgba(0,0,0,.2),inset 0 -2px 0 0 rgba(145, 145, 145, 0.2);
-}
-
-#markdown-toc::before {
-    content: "Contents";
-    font-weight: bold;
-}
-
-
-//Using numbers instead of bullets for listing
-#markdown-toc ul {
-    list-style: decimal;
-}
-
-#markdown-toc {
-    border: 1px solid #aaa;
-    padding: 1.5em;
-    padding-top: 0.8em;
-    list-style: decimal;
-    display: inline-block;
-}
-
-.heading-anchor {
-    opacity: 0;
-}
-
-:is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
-    opacity: 1;
-}
-
-h2::before {
-    display: block;
-    content: " ";
-    margin-top: -285px;
-    height: 285px;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.anchor {
-    padding-top: 100px;
-    margin-top: -100px;
-    visibility: hidden;
-}
-
-.img-to-hover {
-    position: relative;
-    display: inline-block;
-}
-
-.img-to-hover .img-shift {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    display: none;
-}
-
-.img-to-hover:hover .img-shift {
-    display: inline;
-}
-
-@media (any-hover: none) {
-    .img-to-hover .img-shift {
-     display: inline;
-     }
-}
-
-form {
-    min-width: 100%;
-}
-
-.typingScenario {
-    display: inline-block;
-    vertical-align: middle;
-/* no effect ? */
-}
-
-.typingScenario p {
-    display: inline;
-}
-
-.typingScenario img {
-    display: inline-block;
-    width: auto;
-    margin-top: -0.125em;
-}
-
-@media (min-width: 1000px) {
-    .typingScenario  img{
-    margin-left: 10em;
-    }
-}
-
-.modifiersRow {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
-    flex-wrap: wrap;
-}
-
-.modifierKey {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #2f312e;
-    border-radius: 6px;
-    font-family: Montserrat, sans-serif;
-    line-height: 100%;
-    box-shadow: inset 0 -1px 0 3px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.3);
-    border-left: 1px solid rgba(0,0,0,.1);
-    border-right: 1px solid rgba(0,0,0,.1);
-    height: 50px;
-    width: 70px;
-    text-align: center;
-    white-space: pre-line;
-    cursor: default;
-    padding: 1px;
-    padding-bottom: 3px;
-    font-size: smaller;
-    margin: 3px;
-}
-
-@media (min-width: 1000px) {
-    .modifiersRowSeparator {
-     margin-left: 3vh;
-     }
-}
-
-.qmkInfoMatrix {
-    font-family: monospace;
-    font-size: 15px;
-    line-height: 16px;
-    overflow: auto;
-    resize: both;
-/* Let the user stretch the text area horizontally
-    * in order to see all the keys at once */
-    max-width: none; 
-    width: 100%;
-    white-space: pre; /* Do not wrap text */
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.upload-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-.upload-btn-wrapper:hover  .btn {
-    background-color: #4154bb45;
-}
-
-.upload-btn-wrapper:active  .btn {
-    background-color: #1c2b7e45;
-     }
-
-.btn {
-    border: 2px solid gray;
-    color: #f0e4e4;
-    background-color: #30419d45;
-    padding: 8px 20px;
-    /* without this setting the top border with top padding of 8px was invisible for labels */
-    line-height: 45px;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-
-.upload-btn-wrapper input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-}
-
-.matchedKeys { background-color: #265670; font-style: italic; }
-
-/* Addition */
-abbr {
-    cursor: help;
-}
-
-details {
-    width: 100%;
-}
-
-summary {
-    cursor: pointer;
-    margin-bottom: 1em;
-    font-weight: bold;
-}
-
 /* Image Gallery
 /* ---------------------------------------------------------- */
 
@@ -1137,4 +912,229 @@ summary {
 }
 embed[type="application/pdf"] {
     filter: invert(90%);
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+/* Darkening the kbd element */
+kbd {
+    display: inline-block;
+    margin: 0px;
+    padding: 3px 5px;
+    border: rgb(62, 68, 70) 1px solid;
+    border-color: rgb(62, 68, 70);
+    border-radius: 6px;
+    color: #bfbfbf;
+    font-size: 0.9em;
+    font-weight: 500;
+    line-height: 20px;
+    text-shadow: rgb(24, 26, 27) 0px 1px 0px;
+    background-color: rgb(30, 33, 34);
+    background-image: none;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.2),inset 0 -2px 0 0 rgba(145, 145, 145, 0.2);
+}
+
+#markdown-toc::before {
+    content: "Contents";
+    font-weight: bold;
+}
+
+
+//Using numbers instead of bullets for listing
+#markdown-toc ul {
+    list-style: decimal;
+}
+
+#markdown-toc {
+    border: 1px solid #aaa;
+    padding: 1.5em;
+    padding-top: 0.8em;
+    list-style: decimal;
+    display: inline-block;
+}
+
+.heading-anchor {
+    opacity: 0;
+}
+
+:is(h1, h2, h3, h4, h5, h6):hover .heading-anchor {
+    opacity: 1;
+}
+
+h2::before {
+    display: block;
+    content: " ";
+    margin-top: -285px;
+    height: 285px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.anchor {
+    padding-top: 100px;
+    margin-top: -100px;
+    visibility: hidden;
+}
+
+.img-to-hover {
+    position: relative;
+    display: inline-block;
+}
+
+.img-to-hover .img-shift {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+
+.img-to-hover:hover .img-shift {
+    display: inline;
+}
+
+@media (any-hover: none) {
+    .img-to-hover .img-shift {
+     display: inline;
+     }
+}
+
+form {
+    min-width: 100%;
+}
+
+.typingScenario {
+    display: inline-block;
+    vertical-align: middle;
+/* no effect ? */
+}
+
+.typingScenario p {
+    display: inline;
+}
+
+.typingScenario img {
+    display: inline-block;
+    width: auto;
+    margin-top: -0.125em;
+}
+
+@media (min-width: 1000px) {
+    .typingScenario  img{
+    margin-left: 10em;
+    }
+}
+
+.modifiersRow {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.modifierKey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2f312e;
+    border-radius: 6px;
+    font-family: Montserrat, sans-serif;
+    line-height: 100%;
+    box-shadow: inset 0 -1px 0 3px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.3);
+    border-left: 1px solid rgba(0,0,0,.1);
+    border-right: 1px solid rgba(0,0,0,.1);
+    height: 50px;
+    width: 70px;
+    text-align: center;
+    white-space: pre-line;
+    cursor: default;
+    padding: 1px;
+    padding-bottom: 3px;
+    font-size: smaller;
+    margin: 3px;
+}
+
+@media (min-width: 1000px) {
+    .modifiersRowSeparator {
+     margin-left: 3vh;
+     }
+}
+
+.qmkInfoMatrix {
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 16px;
+    overflow: auto;
+    resize: both;
+/* Let the user stretch the text area horizontally
+    * in order to see all the keys at once */
+    max-width: none; 
+    width: 100%;
+    white-space: pre; /* Do not wrap text */
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.upload-btn-wrapper:hover  .btn {
+    background-color: #4154bb45;
+}
+
+.upload-btn-wrapper:active  .btn {
+    background-color: #1c2b7e45;
+     }
+
+.btn {
+    border: 2px solid gray;
+    color: #f0e4e4;
+    background-color: #30419d45;
+    padding: 8px 20px;
+    /* without this setting the top border with top padding of 8px was invisible for labels */
+    line-height: 45px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.matchedKeys { background-color: #265670; font-style: italic; }
+
+/* Addition */
+abbr {
+    cursor: help;
+}
+
+details {
+    width: 100%;
+}
+
+summary {
+    cursor: pointer;
+    margin-bottom: 1em;
+    font-weight: bold;
 }
