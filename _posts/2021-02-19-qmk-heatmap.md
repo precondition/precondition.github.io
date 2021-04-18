@@ -176,6 +176,8 @@ After having collected enough data in the expected format, you can now submit yo
 
 A heatmap overlay will appear over the keys as soon as you upload the file.
 
+NOTE: Make sure the keylog file is encoded in UTF-8! Windows may create a UTF-16 file if you pipe the output of `hid_listen`.
+
 ---
 
 # How to collect the required data
