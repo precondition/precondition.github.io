@@ -99,6 +99,10 @@ Logical layouts/keymaps which add another letter (circled) on the thumb:
 ![Colored KLE diagram of the QIEA layout with H on thumb](http://thedarnedestthing.com/images/keyboard-layout-splitography-thumb-h.jpg)
 * [X6.2h](https://keyboard-design.com/letterlayout.html?layout=x6-2h.en.ergolinear) <kbd>H</kbd> (and all the other funky layouts made by Ian Douglas of the ergolinear X family)
 ![KLE keyboard-design.com diagram of X6.2h](https://keyboard-design.com/klalayouts/x6-2h.en.ergolinear.jpg)
+* [Einbinder Orthogonal](https://keyboard-design.com/letterlayout.html?layout=einbinder-orthogonal.en.ergodox)
+![KLE keyboard-design.com diagram of einbinder-orthogonal.en.ergodox](https://user-images.githubusercontent.com/12673886/116615646-e4b27f80-a93b-11eb-9bf8-5eb368a6ef62.jpg)
+* [Einbinder 1975](https://keyboard-design.com/letterlayout.html?layout=einbinder-1975-mod-Ian.en.matrix)
+![KLE keyboard-design.com diagram of einbinder-1975-mod-ian.en.matrix](https://user-images.githubusercontent.com/12673886/116615640-e3815280-a93b-11eb-8f91-27ab6baa6c1a.jpg)
 * [BEAKRAK](https://qiita.com/ZeptByteS/items/6e6a3e46552dcb105948#1-beakrak-2017) <kbd>T</kbd> (link in Japanese)
 ![KLE keyboard-design.com diagram of BEAKRAK](https://keyboard-design.com/klalayouts/beakrak-mod-Ian.en.ergodox.jpg)
 * [ENNe 9640PM](https://keyboard-design.com/letterlayout.html?layout=eNNe-9640PM.en.ergodox) <kbd>T</kbd>
@@ -229,6 +233,9 @@ Have you ever used such layouts? Would you be willing to try it out, or is that 
 
 20 September 2020:
 * Added BEAKL QIEA to the list of Malt-like layouts
+
+01 May 2021:
+* Added Einbinder layouts to the list
 
 </details>
 
