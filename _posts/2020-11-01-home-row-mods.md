@@ -127,13 +127,13 @@ Highlighted modifier keys on a standard row-staggered TKL keyboard. When reading
 </figcaption>
 </figure>
 
-Moreover, this is a poor allocation of the mods in regard to their frequency of usage. Assuming that you do not use Caps Lock or Shift Lock,[^2] Shift is *by far* the most used modifier. It is generally unwise to let the pinky take on all this load. Although letting the pinky fingers deal with Shift is the option that will necessitate the least hand swaps when typing a string of capital letters. This order also positions Alt and GUI in an undeservingly good place. The index and middle fingers are the strongest of the four non-thumb fingers but Alt and GUI aren't the most frequently used modifiers for Windows, Linux and BSD users.
+Moreover, this is a poor allocation of the mods in regard to their frequency of usage. Assuming that you do not use Caps Lock or Shift Lock,[^1] Shift is *by far* the most used modifier. It is generally unwise to let the pinky take on all this load. Although letting the pinky fingers deal with Shift is the option that will necessitate the least hand swaps when typing a string of capital letters. This order also positions Alt and GUI in an undeservingly good place. The index and middle fingers are the strongest of the four non-thumb fingers but Alt and GUI aren't the most frequently used modifiers for Windows, Linux and BSD users.
 
 ### GASC/◆⎇⇧⎈
 
 This is the layout found in the cover pic of this article and what's used in most of the examples. Compared to the SCGA order, this is much more reasonable in terms of using the strongest fingers for the most common modifiers in operating systems that are not MacOS.
 
-Indeed, if you sort the four modifiers by their frequency in Windows and/or Linux, you will find: GUI < Alt < Control < Shift.[^3] The observant among you will have noticed that this does not stick with GASC/◆⎇⇧⎈. Why are Control and Shift swapped? There are multiple reasons that can justify this choice:
+Indeed, if you sort the four modifiers by their frequency in Windows and/or Linux, you will find: GUI < Alt < Control < Shift.[^2] The observant among you will have noticed that this does not stick with GASC/◆⎇⇧⎈. Why are Control and Shift swapped? There are multiple reasons that can justify this choice:
 1. The index finger is the finger that is responsible for the biggest amount of alpha keys so if you use the index finger to hold Shift, you'll have to swap hands if you want to type any of the six keys — or *seven* keys if you're on a row-stagger board and you type <kbd>C</kbd> with your left index — that the index finger is responsible for. If you're someone who would rather not have to swap hands too much when typing capital letters, this can be interesting for you. However, do keep letter frequency in mind. In most alternative layouts, the inner index columns are populated with infrequent keys while the home row middle finger keys are assigned very common letters such as "E".
 2. Putting Shift between Control and Alt is pretty nifty. It allows for easy chording of <kbd>Ctrl</kbd>+<kbd>Shift</kbd> and <kbd>Alt</kbd>+<kbd>Shift</kbd> (the most common combination of modifiers) by using adjacent fingers. That cannot be done with Shift placed on the index finger. Holding two modifiers that are one or two keys apart is not ideal.
 3. Concurrently to a Shift mod-tap on the home row, one may also have other Shift-like keys which are used in lieu of the home row mod to capitalize letters like for example [Caps Lock](#use-caps-lock) or a [Shift thumb key](#shift-thumb-keys). By doing so, the Shift home row mod-tap is generally only used in combination with other modifiers, most frequently Control and Alt. Consequently, in light of bullet point 2, its best place is in the middle finger column.
@@ -218,7 +218,7 @@ Configuring tap hold options is a mandatory step for using home row mods without
 
 With that out of the way, here comes the most difficult part: understanding the different tap hold configuration settings.
 
-I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings], [the proposed changes to the documentation](https://github.com/qmk/qmk_firmware/blob/155cc17359711a6dd7b67119ec994800588ebaaa/docs/tap_hold.md)[^4] by [sigprof] on <abbr title="Pull Request">PR</abbr> [#9404], and [Okke]'s [cheatsheet on MT and LT behaviour].<sup>[PDF]</sup>
+I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings], [the proposed changes to the documentation](https://github.com/qmk/qmk_firmware/blob/155cc17359711a6dd7b67119ec994800588ebaaa/docs/tap_hold.md)[^3] by [sigprof] on <abbr title="Pull Request">PR</abbr> [#9404], and [Okke]'s [cheatsheet on MT and LT behaviour].<sup>[PDF]</sup>
 
 [official QMK documentation page on tap hold configuration settings]: https://docs.qmk.fm/#/tap_hold
 [sigprof]: https://github.com/sigprof
@@ -234,7 +234,7 @@ Once you're done reading through these links, come back here for a more detailed
 
 Suffice to say that `IGNORE_MOD_TAP_INTERRUPT` is *the* most important tap hold configuration settings that's absolutely necessary for a good home row mods experience.
 
-Why is it so important and relevant to home row mods? To understand, let's look at the default behaviour for mod-taps. The underlying logic of basic mod-taps is quite simple. Did another key get pressed while the user was holding down the mod-tap key? If that's the case, this is a keyboard shortcut; apply the modifier on that pressed key. What if, instead, no key got pressed while the user was holding down the mod-tap? Well, if the user presses and releases a key by itself, without pressing any other key in between, it must mean the user wanted the tapping function of the mod-tap since there is no use to tapping a modifier key all by itself.[^5] Simple enough right? If you want to activate the holding function, just press on another key while holding the mod-tap key.
+Why is it so important and relevant to home row mods? To understand, let's look at the default behaviour for mod-taps. The underlying logic of basic mod-taps is quite simple. Did another key get pressed while the user was holding down the mod-tap key? If that's the case, this is a keyboard shortcut; apply the modifier on that pressed key. What if, instead, no key got pressed while the user was holding down the mod-tap? Well, if the user presses and releases a key by itself, without pressing any other key in between, it must mean the user wanted the tapping function of the mod-tap since there is no use to tapping a modifier key all by itself.[^4] Simple enough right? If you want to activate the holding function, just press on another key while holding the mod-tap key.
 
 
 Here comes the problem with that approach if one were to use home row mods. We like to imagine typing as tapping a sequence of keys all on their own, in order. However, there's quite some overlap between the press and release of each key. Especially so when typing at high speeds. When typing the word "no" for example, we rarely press and fully release <kbd>N</kbd> *before* pressing <kbd>O</kbd>. Try it! If you're not a hunt'n'pecker, this is how you're most likely going to type "no":
@@ -259,7 +259,7 @@ Here comes the problem with that approach if one were to use home row mods. We l
 
 Now imagine if <kbd>N</kbd> and <kbd>O</kbd> were both mod-taps — it would be the case if you use home row mods on Colemak like in the animation above. With default tap hold settings, this is bad news. Indeed, typing involves a lot of such rolls, where you press the next letter before having fully released the previous one.
 
-This is the reason why `IGNORE_MOD_TAP_INTERRUPT` was developed and first [released in 2015](https://github.com/qmk/qmk_firmware/commit/f024a462cdaa4a7a345160819bdf2d01fbabc97a) by [Erez Zukerman](https://github.com/ezuk). Though Erez didn't have home row mods in mind when coming up with this solution. In fact, it actually took two more years after the addition of `IGNORE_MOD_TAP_INTERRUPT` to QMK for the [first commit] to the main branch of the QMK firmware GitHub repository to feature home row mods.[^6]
+This is the reason why `IGNORE_MOD_TAP_INTERRUPT` was developed and first [released in 2015](https://github.com/qmk/qmk_firmware/commit/f024a462cdaa4a7a345160819bdf2d01fbabc97a) by [Erez Zukerman](https://github.com/ezuk). Though Erez didn't have home row mods in mind when coming up with this solution. In fact, it actually took two more years after the addition of `IGNORE_MOD_TAP_INTERRUPT` to QMK for the [first commit] to the main branch of the QMK firmware GitHub repository to feature home row mods.[^5]
 
 [first commit]: https://github.com/qmk/qmk_firmware/blob/82de4d039d39c87a1df68708f3033926c27f7e6c/keyboards/ergodox/keymaps/adam/keymap.c#L52
 
@@ -274,7 +274,7 @@ As long as your fingers don't linger on the keys for longer than the tapping ter
 
 The tapping term is an important concept to grasp for home row mods. As we've just seen in the previous section on ignore mod tap interrupt, the tapping term is what helps to tell tap and hold apart.
 
-The tapping term, in and of itself, is a very basic thing to understand. It is simply a period of time expressed in milliseconds that the user has defined. A timer starts on every key press and constantly checks whether the tapping term for that key has expired yet or not. The timer stops when the key is released. It is good to note that each pressed key is tracked by a specific, different timer, so to speak. When you press <kbd>A</kbd>, a timer starts but pressing another key like <kbd>O</kbd> does not bump up the timer that got started when you press <kbd>A</kbd>.[^7]
+The tapping term, in and of itself, is a very basic thing to understand. It is simply a period of time expressed in milliseconds that the user has defined. A timer starts on every key press and constantly checks whether the tapping term for that key has expired yet or not. The timer stops when the key is released. It is good to note that each pressed key is tracked by a specific, different timer, so to speak. When you press <kbd>A</kbd>, a timer starts but pressing another key like <kbd>O</kbd> does not bump up the timer that got started when you press <kbd>A</kbd>.[^6]
 
 Since a tap is defined as the act of pressing and releasing a key within **tap**ping term, the tapping term can be seen as the time window in which you need to release the key in order to register a tap. On the flip side, it can also be seen as the minimum amount of time a key must be held down to register a hold.
 
@@ -372,7 +372,7 @@ Retro Shift builds upon the functionality of Retro Tap in order to marry [Auto S
 
 Retro Shift lets you get the shifted state of a mod-tap by releasing the mod-tap key past the end of the tapping term, in a similar fashion to Auto Shift which emits the shifted state of a basic key if it's been held down for longer than the `AUTO_SHIFT_TIMEOUT`.
 
-With Auto Shift and Retro Shift, you can confidently eradicate all Shift keys from your keymap.[^8]
+With Auto Shift and Retro Shift, you can confidently eradicate all Shift keys from your keymap.[^7]
 
 In case you're worried for the flaws that plague Retro Tap to be present in Retro Shift too, don't be. As the [docs](https://github.com/manna-harbour/qmk_firmware/blob/retro-shift/docs/tap_hold.md#retro-shift) say, "if `RETRO_SHIFT` is defined to a value, hold times greater than that value will not produce a tap on release. This enables modifiers to be held for combining with mouse clicks without generating taps on release."
 
@@ -857,7 +857,7 @@ Write a short story all in lowercase with home row mods. In case you accidentall
 ## Use left and right modifiers but beware of AltGr!
 
 Let's talk about `RALT` (Right Alt, AltGr) first.
-The reason why you need to watch out for `RALT` is that while most right versions of modifiers act exactly the same as their left counterpart, this is not necessarily the case for <kbd>⎇ Alt</kbd>. Everywhere else except in the US,[^9] the right Alt becomes <kbd>AltGr</kbd> which is used as a momentary layer switch to access additional symbols. Keep this in mind when composing your right hand home row mods or you might get a surprise!
+The reason why you need to watch out for `RALT` is that while most right versions of modifiers act exactly the same as their left counterpart, this is not necessarily the case for <kbd>⎇ Alt</kbd>. Everywhere else except in the US,[^8] the right Alt becomes <kbd>AltGr</kbd> which is used as a momentary layer switch to access additional symbols. Keep this in mind when composing your right hand home row mods or you might get a surprise!
 
 If this odd case bothers you, you can either use American layout(s) which make(s) no distinction between left and right Alt or you can use the left version of modifiers for all the home row mods. Separating left and right modifiers, as done in the example shown at the beginning of "[Using home row mods with QMK](#using-home-row-mods-with-qmk)" and in the output of the home row mods code generators, is not strictly necessary for a functioning setup but doing so offers some perks.
 
@@ -1243,7 +1243,7 @@ This means we can use home *block* mods.
 
 The pinky remains unused for modifiers in this modification and pressing the fourth mod-tap with the index fingers is more comfortable but aligning modifiers vertically can be problematic.
 
-Unless you have a steno-friendly keyboard[^10] on which vertical combos are easy to do, you'll struggle to combine one-handedly the index modifiers.
+Unless you have a steno-friendly keyboard[^9] on which vertical combos are easy to do, you'll struggle to combine one-handedly the index modifiers.
 
 Finally, for a change, let's talk about an alternative home row mods layout that does not suffer from a mod-tap combination problem.
 
@@ -1386,7 +1386,7 @@ we would need 255 combos.
 Tap dances can offer a figurative layer of protection against unintended mod activations. Where in mod-taps, only a hold is required, you could code a tap dance in such a way that you need to double tap and then hold a key for it to register as a modifier.
 
 # Summary
-In summary, home row mods are an unorthodox, innovative way to use modifiers ergonomically. With the right piece of software, it can be used on any type of keyboard, and is beneficial regardless of the physical layout.[^11] It will take a bit of practice and time to get used to typing with home row mods but the pay-off is worth it.
+In summary, home row mods are an unorthodox, innovative way to use modifiers ergonomically. With the right piece of software, it can be used on any type of keyboard, and is beneficial regardless of the physical layout.[^10] It will take a bit of practice and time to get used to typing with home row mods but the pay-off is worth it.
 
 
 # TL;DR Table
