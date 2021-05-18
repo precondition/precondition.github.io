@@ -361,7 +361,7 @@ body {
     "Helvetica Neue",
     sans-serif;
     font-size: 1.5rem;
-    line-height: 1.6em;
+    line-height: 1.6;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0px;
@@ -435,7 +435,7 @@ ol {
 li {
     margin: 0.5em 0px;
     padding-left: 0.3em;
-    line-height: 1.6em;
+    line-height: 1.6;
 }
 
 dt {
@@ -929,7 +929,7 @@ kbd {
     color: #bfbfbf;
     font-size: 0.9em;
     font-weight: 500;
-    line-height: 20px;
+    line-height: 0.9;
     text-shadow: rgb(24, 26, 27) 0px 1px 0px;
     background-color: rgb(30, 33, 34);
     background-image: none;
@@ -1072,7 +1072,7 @@ form {
 .qmkInfoMatrix {
     font-family: monospace;
     font-size: 15px;
-    line-height: 16px;
+    line-height: 16;
     overflow: auto;
     resize: both;
 /* Let the user stretch the text area horizontally
@@ -1105,7 +1105,7 @@ form {
     background-color: #30419d45;
     padding: 8px 20px;
     /* without this setting the top border with top padding of 8px was invisible for labels */
-    line-height: 45px;
+    line-height: 45;
     border-radius: 8px;
     font-size: 20px;
     font-weight: bold;

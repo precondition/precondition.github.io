@@ -230,7 +230,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     padding: 11px 0;
     color: #fff;
     font-size: 1.7rem;
-    line-height: 1em;
+    line-height: 1;
     font-weight: bold;
     letter-spacing: -0.5px;
 }
@@ -330,7 +330,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     border: #fff 1px solid;
     color: #fff;
     font-size: 1.2rem;
-    line-height: 1em;
+    line-height: 1;
     border-radius: 10px;
     opacity: 0.8;
 }
@@ -430,7 +430,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     margin-bottom: 4px;
     color: var(--midgrey);
     font-size: 1.2rem;
-    line-height: 1.15em;
+    line-height: 1.15;
     font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -474,7 +474,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 .reading-time {
     font-size: 1.2rem;
     font-weight: 500;
-    line-height: 33px;
+    line-height: 33;
     flex-shrink: 0;
     margin-left: 20px;
     letter-spacing: .5px;
@@ -518,7 +518,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
     .home-template .post-feed .post-card:nth-child(6n+1):not(.no-image) p {
         font-size: 1.8rem;
-        line-height: 1.55em;
+        line-height: 1.55;
     }
 
     .home-template .post-feed .post-card:nth-child(6n+1):not(.no-image) .post-card-content-link {
@@ -627,7 +627,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
     min-height: 230px;
     font-family: Georgia, serif;
     font-size: 2.2rem;
-    line-height: 1.6em;
+    line-height: 1.6;
     background: #181a1b;
 }
 
@@ -713,7 +713,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-template .kg-card-markdown > p:first-child {
     font-size: 1.25em;
-    line-height: 1.5em;
+    line-height: 1.5;
 }
 
 .post-full-content a {
@@ -733,7 +733,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-content small {
     display: inline-block;
-    line-height: 1.6em;
+    line-height: 1.6;
 }
 
 .post-full-content li:first-child {
@@ -808,7 +808,7 @@ Usage (In Ghost editor):
 .post-full-content code {
     padding: 0 5px 2px;
     font-size: 0.8em;
-    line-height: 1em;
+    line-height: 1;
     font-weight: 400!important;
     background: var(--whitegrey);
     border-radius: 3px;
@@ -822,7 +822,7 @@ Usage (In Ghost editor):
     border: color(var(--darkgrey) l(-10%)) 1px solid;
     color: var(--whitegrey);
     font-size: 1.4rem;
-    line-height: 1.5em;
+    line-height: 1.5;
     background: color(var(--darkgrey) l(-3%));
     border-radius: 5px;
 }
@@ -923,7 +923,7 @@ Usage (In Ghost editor):
     color: var(--blue);
     font-family: Georgia,serif;
     font-size: 3.2rem;
-    line-height: 1.35em;
+    line-height: 1.35;
     text-align: center;
 }
 @media (min-width: 1180px) {
@@ -974,7 +974,7 @@ Usage (In Ghost editor):
 @media (max-width: 500px) {
     .post-full-meta {
         font-size: 1.2rem;
-        line-height: 1.3em;
+        line-height: 1.3;
     }
     .post-full-title {
         font-size: 2.9rem;
@@ -1070,7 +1070,7 @@ Usage (In Ghost editor):
     margin-bottom: 1em;
     color: var(--midgrey);
     font-size: 2.2rem;
-    line-height: 1.55em;
+    line-height: 1.55;
     letter-spacing: 0.2px;
 }
 
@@ -1093,7 +1093,7 @@ Usage (In Ghost editor):
     border: color(var(--lightgrey) l(+7%)) 1px solid;
     color: var(--midgrey);
     font-size: 1.8rem;
-    line-height: 1em;
+    line-height: 1;
     font-weight: normal;
     user-select: text;
     border-radius: 5px;
@@ -1115,7 +1115,7 @@ Usage (In Ghost editor):
     outline: none;
     color: #fff;
     font-size: 1.5rem;
-    line-height: 37px;
+    line-height: 37;
     font-weight: 400;
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
@@ -1200,7 +1200,7 @@ Usage (In Ghost editor):
 .author-card-content p {
     margin: 0;
     color: var(--midgrey);
-    line-height: 1.3em;
+    line-height: 1.3;
 }
 
 .post-full-footer-right {
@@ -1285,7 +1285,7 @@ Usage (In Ghost editor):
 .read-next-card-header-sitetitle {
     display: block;
     font-size: 1.3rem;
-    line-height: 1.3em;
+    line-height: 1.3;
     opacity: 0.8;
 }
 
@@ -1294,7 +1294,7 @@ Usage (In Ghost editor):
     padding: 0 20px;
     color: #fff;
     font-size: 3rem;
-    line-height: 1.2em;
+    line-height: 1.2;
     letter-spacing: 1px;
 }
 
@@ -1345,7 +1345,7 @@ Usage (In Ghost editor):
     margin: 0;
     padding: 0;
     font-size: 1.6rem;
-    line-height: 1.25em;
+    line-height: 1.25;
     font-weight: 200;
     letter-spacing: -0.5px;
 }
@@ -1408,7 +1408,7 @@ Usage (In Ghost editor):
     overflow: hidden;
     margin: 0 0 0 20px;
     font-size: 1.6rem;
-    line-height: 1em;
+    line-height: 1;
     letter-spacing: -1px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1418,7 +1418,7 @@ Usage (In Ghost editor):
     display: flex;
     align-items: center;
     color: #d9d6d1;
-    line-height: 1.1em;
+    line-height: 1.1;
     font-weight: 700;
 }
 
@@ -1433,7 +1433,7 @@ Usage (In Ghost editor):
 
 .floating-header-divider {
     margin: 0 5px;
-    line-height: 1em;
+    line-height: 1;
 }
 
 .floating-header-title {
@@ -1442,7 +1442,7 @@ Usage (In Ghost editor):
     margin: 0;
     color: #2e2e2e;
     font-size: 1.6rem;
-    line-height: 1.3em;
+    line-height: 1.3;
     font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1493,7 +1493,7 @@ Usage (In Ghost editor):
     width: 60px;
     height: 60px;
     color: #fff;
-    line-height: 48px;
+    line-height: 48;
     text-align: center;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -1561,7 +1561,7 @@ Usage (In Ghost editor):
     .floating-header-share-fb {
         width: 40px;
         height: 40px;
-        line-height: 38px;
+        line-height: 38;
     }
 }
 
@@ -1603,7 +1603,7 @@ Usage (In Ghost editor):
     margin: 5px 0 10px 0;
     max-width: 600px;
     font-size: 2rem;
-    line-height: 1.3em;
+    line-height: 1.3;
     font-weight: 300;
     letter-spacing: 0.5px;
     opacity: 0.8;
@@ -1638,7 +1638,7 @@ Usage (In Ghost editor):
 @media (max-width: 500px) {
     .site-header-content .author-bio {
         font-size: 1.8rem;
-        line-height: 1.15em;
+        line-height: 1.15;
         letter-spacing: 0;
     }
     .author-location,
@@ -1673,7 +1673,7 @@ Usage (In Ghost editor):
 .error-code {
     margin: 0;
     font-size: 12vw;
-    line-height: 1em;
+    line-height: 1;
     letter-spacing: -5px;
     opacity: 0.3;
 }
@@ -1682,7 +1682,7 @@ Usage (In Ghost editor):
     margin: 0;
     color: var(--midgrey);
     font-size: 3rem;
-    line-height: 1.3em;
+    line-height: 1.3;
     font-weight: 400;
 }
 
@@ -1749,7 +1749,7 @@ Usage (In Ghost editor):
     display: inline-block;
     margin: 0 0 10px 0;
     font-size: 6rem;
-    line-height: 1.15em;
+    line-height: 1.15;
 }
 
 .subscribe-overlay-description {
@@ -1757,7 +1757,7 @@ Usage (In Ghost editor):
     max-width: 650px;
     font-family: Georgia, serif;
     font-size: 3rem;
-    line-height: 1.3em;
+    line-height: 1.3;
     font-weight: 300;
     opacity: 0.8;
 }
@@ -1781,7 +1781,7 @@ Usage (In Ghost editor):
     border: none;
     color: var(--midgrey);
     font-size: 2rem;
-    line-height: 1em;
+    line-height: 1;
     font-weight: normal;
     letter-spacing: 0.5px;
     user-select: text;
@@ -1804,7 +1804,7 @@ Usage (In Ghost editor):
     outline: none;
     color: #fff;
     font-size: 1.7rem;
-    line-height: 37px;
+    line-height: 37;
     font-weight: 400;
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
