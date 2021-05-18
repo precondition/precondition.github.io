@@ -1019,7 +1019,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content table td, .post-full-content table th {
-  padding: 6px 12px;
+  padding: 1em 12px;
   border: 1px solid rgb(28, 48, 64);
 }
 
