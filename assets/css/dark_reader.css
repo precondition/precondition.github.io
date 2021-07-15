@@ -1072,7 +1072,7 @@ form {
 .qmkInfoMatrix {
     font-family: monospace;
     font-size: 15px;
-    line-height: 16;
+    line-height: 16px;
     overflow: auto;
     resize: both;
 /* Let the user stretch the text area horizontally
@@ -1105,7 +1105,7 @@ form {
     background-color: #30419d45;
     padding: 8px 20px;
     /* without this setting the top border with top padding of 8px was invisible for labels */
-    line-height: 45;
+    line-height: 45px;
     border-radius: 8px;
     font-size: 20px;
     font-weight: bold;
