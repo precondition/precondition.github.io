@@ -11,5 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: helaili/jekyll-action@2.0.1
+        with:
+            target_branch: 'gh-pages'
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
