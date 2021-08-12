@@ -1160,46 +1160,16 @@ For yet another implementation of this trick, one can also consult Steven Hum's 
 
 ## Using mod-taps in combos<!-- [WIP] -->
 
-At the time of writing, QMK only supports combos consisting of basic keycodes. Using something else will result in unexpected behaviour. However, if you feel comfortable with git, you can merge <abbr title="Pull Request">PR</abbr> [#8591] into your personal branch to enjoy mod-tap combos.
+At the time of writing, QMK only supports combos consisting of basic keycodes. Using something else will result in unexpected behaviour. However, you can checkout the `qmk:develop` branch or wait until Aug 28th for `qmk:develop` to get merged into `qmk:master` to benefit from [sevanteri]'s [combo improvements](https://github.com/qmk/qmk_firmware/pull/8591).
 
-<!-- hyperlink <code> in-line blocks have two pixels of the hyperlink overflowing from the code block style in a non-neat way -->
-In fact, there are now two different branches you can merge, the first one called [`sevanteri:early_combo`] is based on [`qmk:develop`] while the other one is called [`sevanteri:combos_on_master`] and is based on [`qmk:master`].
+[sevanteri]: https://github.com/sevanteri
 
-[`sevanteri:early_combo`]: https://github.com/sevanteri/qmk_firmware/tree/early_combo
-[`sevanteri:combos_on_master`]: https://github.com/sevanteri/qmk_firmware/tree/combos_on_master
-[`qmk:master`]: https://github.com/qmk/qmk_firmware/tree/master
-[`qmk:develop`]: https://github.com/qmk/qmk_firmware/tree/develop
+When defining combos that involve dual-role keys, make sure to use the full name of the dual-role key, not just its tap keycode. This is a common error.
 
-Below, you can find a rundown of shell commands you can type in the terminal in order to create a new branch `mod-tap-combos` based on `sevanteri:early_combo` in your own fork of the `qmk_firmware` repository.
-
-<!-- merging is maybe not the best way to go about it, change the recommended shell commands to run -->
-{% highlight sh %}
-# move to qmk folder
-cd ~/qmk_firmware
-# switch to your personal git branch where your keymap is
-git checkout <personal_branch>
-# add sevanteri's fork as a remote repository
-git remote add sevanteri_early_combo https://github.com/sevanteri/qmk_firmware.git
-# fetch refs and tags from sevanteri's fork
-git fetch sevanteri_early_combo
-# create a new branch called "mod-tap-combos", based on sevanteri's fork
-git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
-# pull commits from the "early_combo" branch of sevanteri's fork into your "mod-tap-combos"
-git pull sevanteri_early_combo early_combo
-# Update your GitHub fork with the new mod-tap-combos
-git push origin mod-tap-combos
-{% endhighlight %}
-
-Copy-pastable content without the comments (make sure to replace `<personal_branch>` with the name of your personal branch first):
-{% highlight sh %}
-cd ~/qmk_firmware
-git checkout <personal_branch>
-git remote add sevanteri_early_combo https://github.com/sevanteri/qmk_firmware.git
-git fetch sevanteri_early_combo
-git checkout -b mod-tap-combos sevanteri_early_combo/early_combo
-git pull sevanteri_early_combo early_combo
-git push origin mod-tap-combos
-{% endhighlight %}
+```c
+const uint16_t PROGMEM A_S_COMBO[] = {KC_A, KC_S, COMBO_END}; // ❎ Incorrect
+const uint16_t PROGMEM A_S_COMBO[] = {LGUI_T(KC_A), LALT_T(KC_S), COMBO_END}; // ✅ Correct
+```
 
 # Alternatives
 
