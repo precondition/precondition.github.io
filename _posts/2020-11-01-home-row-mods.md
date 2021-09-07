@@ -1160,10 +1160,6 @@ For yet another implementation of this trick, one can also consult Steven Hum's 
 
 ## Using mod-taps in combos<!-- [WIP] -->
 
-At the time of writing, QMK only supports combos consisting of basic keycodes. Using something else will result in unexpected behaviour. However, you can checkout the `qmk:develop` branch or wait until Aug 28th for `qmk:develop` to get merged into `qmk:master` to benefit from [sevanteri]'s [combo improvements](https://github.com/qmk/qmk_firmware/pull/8591).
-
-[sevanteri]: https://github.com/sevanteri
-
 When defining combos that involve dual-role keys, make sure to use the full name of the dual-role key, not just its tap keycode. This is a common error.
 
 ```c
