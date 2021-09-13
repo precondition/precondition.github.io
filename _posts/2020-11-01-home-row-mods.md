@@ -43,11 +43,11 @@ Homing bars
 </figcaption>
 </figure>
 
-Next is "mods". What is meant by "mods"? In this case, "mods" refer to modifiers, that is to say <kbd>⇧ Shift</kbd>, <kbd>⎈ Control</kbd>, <kbd>⎇ Alt</kbd>, and <kbd>◆ GUI</kbd>. The last modifier in the list is also known as WinKey on Windows, Command on MacOS or Super/Meta on Linux and BSD. It is not to be confused with actual graphical user interfaces.
+Next is "mods". What is meant by "mods"? In this case, "mods" refer to modifiers, that is to say <kbd>⇧ Shift</kbd>, <kbd>⎈ Control</kbd>, <kbd>⎇ Alt</kbd>, and <kbd>◆ GUI</kbd>. The last modifier in the list is also known as WinKey on Windows, Command on MacOS or Super/Meta[^1] on Linux and BSD. It is not to be confused with actual graphical user interfaces.
 
 So this means that "home row mods" are about placing modifiers on the home row.
 
-How can that be possible? Does this mean that the home row letters/symbols swap positions with the modifier keys? Most certainly not! You see, one of the untapped potential of modifiers that are active as long as you hold them is that they don't do anything useful when they're tapped (i.e. pressed and released) on their own — a notable exception is the Win/Super key which opens the start menu on Windows and Gnome and Alt which pops up the menu in graphical apps — but thanks to software like [QMK](https://docs.qmk.fm/#/), we can turn these momentary switch modifiers into dual-role keys which act as modifiers when held but act as other keys when tapped. This allows us to make more with less.
+How can that be possible? Does this mean that the home row letters/symbols swap positions with the modifier keys? Most certainly not! You see, one of the untapped potential of modifiers that are active as long as you hold them is that they don't do anything useful when they're tapped (i.e. pressed and released) on their own — a notable exception is the Win/Super key which opens the start menu on Windows and Gnome as well as Alt which pops up the menu in graphical apps — but thanks to software like [QMK](https://docs.qmk.fm/#/), we can turn these momentary switch modifiers into dual-role keys which act as modifiers when held but act as other keys when tapped. This allows us to make more with less.
 
 The name QMK gives to this functionality is "mod-tap". Mod-taps are a subset of [dual-role keys](http://en.wikipedia.org/wiki/Modifier_key#Dual-role_keys). Other software which also implement this functionality call it differently. Therefore, we really should say "home row mod-taps" but in common parlance, "home row mods" is what's always used.
 
@@ -127,13 +127,13 @@ Highlighted modifier keys on a standard row-staggered TKL keyboard. When reading
 </figcaption>
 </figure>
 
-Moreover, this is a poor allocation of the mods in regard to their frequency of usage. Assuming that you do not use Caps Lock or Shift Lock,[^1] Shift is *by far* the most used modifier. It is generally unwise to let the pinky take on all this load. Although letting the pinky fingers deal with Shift is the option that will necessitate the least hand swaps when typing a string of capital letters. This order also positions Alt and GUI in an undeservingly good place. The index and middle fingers are the strongest of the four non-thumb fingers but Alt and GUI aren't the most frequently used modifiers for Windows, Linux and BSD users.
+Moreover, this is a poor allocation of the mods in regard to their frequency of usage. Assuming that you do not use Caps Lock or Shift Lock,[^2] Shift is *by far* the most used modifier. It is generally unwise to let the pinky take on all this load. Although letting the pinky fingers deal with Shift is the option that will necessitate the least hand swaps when typing a string of capital letters. This order also positions Alt and GUI in an undeservingly good place. The index and middle fingers are the strongest of the four non-thumb fingers but Alt and GUI aren't the most frequently used modifiers for Windows, Linux and BSD users.
 
 ### GASC/◆⎇⇧⎈
 
 This is the layout found in the cover pic of this article and what's used in most of the examples. Compared to the SCGA order, this is much more reasonable in terms of using the strongest fingers for the most common modifiers in operating systems that are not MacOS.
 
-Indeed, if you sort the four modifiers by their frequency in Windows and/or Linux, you will find: GUI < Alt < Control < Shift.[^2] The observant among you will have noticed that this does not stick with GASC/◆⎇⇧⎈. Why are Control and Shift swapped? There are multiple reasons that can justify this choice:
+Indeed, if you sort the four modifiers by their frequency in Windows and/or Linux, you will find: GUI < Alt < Control < Shift.[^3] The observant among you will have noticed that this does not stick with GASC/◆⎇⇧⎈. Why are Control and Shift swapped? There are multiple reasons that can justify this choice:
 1. The index finger is the finger that is responsible for the biggest amount of alpha keys so if you use the index finger to hold Shift, you'll have to swap hands if you want to type any of the six keys — or *seven* keys if you're on a row-stagger board and you type <kbd>C</kbd> with your left index — that the index finger is responsible for. If you're someone who would rather not have to swap hands too much when typing capital letters, this can be interesting for you. However, do keep letter frequency in mind. In most alternative layouts, the inner index columns are populated with infrequent keys while the home row middle finger keys are assigned very common letters such as "E".
 2. Putting Shift between Control and Alt is pretty nifty. It allows for easy chording of <kbd>Ctrl</kbd>+<kbd>Shift</kbd> and <kbd>Alt</kbd>+<kbd>Shift</kbd> (the most common combination of modifiers) by using adjacent fingers. That cannot be done with Shift placed on the index finger. Holding two modifiers that are one or two keys apart is not ideal.
 3. Concurrently to a Shift mod-tap on the home row, one may also have other Shift-like keys which are used in lieu of the home row mod to capitalize letters like for example [Caps Lock](#use-caps-lock) or a [Shift thumb key](#shift-thumb-keys). By doing so, the Shift home row mod-tap is generally only used in combination with other modifiers, most frequently Control and Alt. Consequently, in light of bullet point 2, its best place is in the middle finger column.
@@ -168,7 +168,7 @@ Naturally, this is not an exhaustive list of all possible permutations of modifi
 Even so, despite having written much about the different home row mods orders, in the end, it truly isn't that important. Just pick one you like and roll with it. If you're already used to a certain order, don't let the above points convince you to change. When you're starting out, the pragmatic question of how to lay out the modifiers on the home row might seem important but that impression is misplaced.
 
 ## Implementation
-For the best home row mods experience, I heartily recommend a QMK-powered mechanical keyboard. At the time of writing, QMK supports over 1624 keyboards! The greater part of which are DIY keyboards.
+For the best home row mods experience, I heartily recommend a QMK-powered mechanical keyboard. At the time of writing, QMK supports over 2035 keyboards! The greater part of which are DIY keyboards.
 
 The following section will be about implementing home row mods in a QMK-powered keyboard with all the necessary settings to make it work well.
 
@@ -218,7 +218,7 @@ Configuring tap hold options is a mandatory step for using home row mods without
 
 With that out of the way, here comes the most difficult part: understanding the different tap hold configuration settings.
 
-I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings], [the proposed changes to the documentation](https://github.com/qmk/qmk_firmware/blob/155cc17359711a6dd7b67119ec994800588ebaaa/docs/tap_hold.md)[^3] by [sigprof] on <abbr title="Pull Request">PR</abbr> [#9404], and [Okke]'s [cheatsheet on MT and LT behaviour].<sup>[PDF]</sup>
+I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings], and [Okke]'s [cheatsheet on MT and LT behaviour].<sup>[PDF]</sup>
 
 [official QMK documentation page on tap hold configuration settings]: https://docs.qmk.fm/#/tap_hold
 [sigprof]: https://github.com/sigprof
@@ -302,9 +302,7 @@ This means that if you use `LSFT_T(KC_L)` for example and you want to type "came
 
 Avoiding this problem is easy; just append `#define TAPPING_FORCE_HOLD` to your `config.h` file in your personal keymap folder. This will have the effect of letting you activate the hold function instead, when holding a dual-role key after having tapped it. No more accidental repeats of mod-tap letters when typing quickly!
 
-The downside is that it removes the possibility of auto-repeating the letter/tapping function of the mod-tap. You will need to tap (press-release) repeatedly if you want to spam a letter.
-
-<!-- address "but muh vim keys!" fears -->
+The downside is that it removes the possibility of auto-repeating the letter/tapping function of the mod-tap. You will need to tap (press-release) repeatedly if you want to spam a letter. If you're a QWERTY Vim user without a navigation layer, this could be a deal-breaker for you so simply don't define it if that's the case, or use it as an opportunity to nudge yourself towards more efficient movements.
 
 Keep in mind that `TAPPING_FORCE_HOLD` is a universal configuration which applies on all dual-role keys (layer-taps and mod-taps). If your backspace key is a layer-tap, you may find that rather restrictive. The good news is that there exists a per-key variant of this configuration option: `TAPPING_FORCE_HOLD_PER_KEY`. Just follow the [instructions described in the docs](https://docs.qmk.fm/#/tap_hold?id=tapping-force-hold) to enable `TAPPING_FORCE_HOLD` for home row mods and disable it for other layer taps as you see fit.
 
@@ -378,7 +376,13 @@ In case you're worried for the flaws that plague Retro Tap to be present in Retr
 
 -----
 
-That is it for all the available QMK tap hold configuration settings. In summary, there are two essential tap hold settings: `TAPPING_TERM`, and `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_TERM` will require some tweaking and adaptation from your part (though not as much as you may be led to believe) but the `IGNORE_MOD_TAP_INTERRUPT` is just a matter of adding a line to your `config.h` file. Aside from those two tap hold settings, there exists two other very commonly recommended settings: `TAPPING_FORCE_HOLD`, and `PERMISSIVE_HOLD`. As with `IGNORE_MOD_TAP_INTERRUPT`, they can be enabled by simply appending `#define PERMISSIVE_HOLD` and `#define TAPPING_FORCE_HOLD` to your `config.h` file. As for `RETRO_TAPPING`, it might appear appealing at first glance but it has its load of problems which make it unsuitable for home row mods.
+That is it for all the available QMK tap hold configuration settings. In summary, there are two essential tap hold settings: `TAPPING_TERM`, and `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_TERM` will require some tweaking and adaptation from your part (though not as much as you may be led to believe) but the `IGNORE_MOD_TAP_INTERRUPT` is just a matter of adding a line to your `config.h` file.
+
+Aside from those two tap hold settings, there exists another very commonly recommended setting: `TAPPING_FORCE_HOLD`. It can be enabled by simply appending `#define TAPPING_FORCE_HOLD` to your `config.h` file.
+
+`PERMISSIVE_HOLD` can be useful if you have a very high tapping term but as previously said, setting the `TAPPING_TERM` to any value above 500ms will already enable permissive-hold-like behaviour so there isn't much point to defining it. If you have a lower tapping term, `PERMISSIVE_HOLD` generally produces many misfires unless you're very consistent in your typing style so it is not recommended.
+
+As for `RETRO_TAPPING`, it might appear appealing at first glance but it has its load of problems which make it unsuitable for home row mods.
 
 ### Getting started with home row mods on QMK
 
@@ -395,9 +399,6 @@ Let's start with tap hold configuration settings. Copy and paste those lines in 
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
-
-// Apply the modifier on keys that are tapped during a short hold of a modtap
-#define PERMISSIVE_HOLD
 {% endhighlight %}
 
 Once that's done, open up `keymap.c`, and convert all the home row keys into mod-tap keys. You have multiple options for doing so. In any case, it is best to use aliases as the convention is to keep all keycode names strictly under 8 characters long in order to keep a tidy, aligned and readable layout in the `keymap.c` file. This is not possible if you use something like `MT(mod, kc)` or `LMOD_T(kc)`. For example, potential aliases for US QWERTY with GASC/◆⎇⇧⎈ order could be:
@@ -431,6 +432,8 @@ If you feel like `HOME_letter` is too vague, nothing prevents you from doing som
 #define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 {% endhighlight %}
+
+Note: Do not redefine `SFT_T` because you have a <kbd>Shift</kbd>/<kbd>T</kbd> mod-tap. `SFT_T` is already in use in the core QMK code as an alias for `LSFT_T(kc)` and redefining it in your keymap will produce compile errors. You're advised to use `#define SHFT_T LSFT_T(KC_T)` instead.
 
 Afterwards, it's just a matter of replacing all the basic `KC_letter` situated on the home row in the `LAYOUT` of your `keymap.c` with the mod-taps aliases you've defined.
 
@@ -545,10 +548,10 @@ In the same spirit that we've defined an alias for mod-taps in the section on ge
 
 As you may have noticed, KMonad uses a lisp-like syntax for its configuration language. For more information on how to configure KMonad, you're invited to read through the [configuration tutorial], which has already been linked, or through the [public user configurations].
 
-[public user configurations]: https://github.com/david-janssen/kmonad/blob/master/keymap/user
-[configuration tutorial]: https://github.com/david-janssen/kmonad/blob/master/keymap/tutorial.kbd
-[section on multi-use buttons]: https://github.com/david-janssen/kmonad/blob/98317531da8b9c2f21d5cb80b748eb23ef8f6b63/keymap/tutorial.kbd#L601
-[KMonad]: https://github.com/david-janssen/kmonad
+[public user configurations]: https://github.com/kmonad/kmonad/blob/master/keymap/user
+[configuration tutorial]: https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd
+[section on multi-use buttons]: https://github.com/kmonad/kmonad/blob/98317531da8b9c2f21d5cb80b748eb23ef8f6b63/keymap/tutorial.kbd#L601
+[KMonad]: https://github.com/kmonad/kmonad
 
 ### Getting started with home row mods on KMonad
 
@@ -797,11 +800,9 @@ For [per key settings](https://docs.qmk.fm/#/tap_hold?id=tapping-term), it is re
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LALT_T(KC_S):
-        // Not recommended
-            return 130;
+            return 130; // Not recommended
         case SFT_T(KC_F):
-        // Recommended
-            return TAPPING_TERM + 50;
+            return TAPPING_TERM + 50; // Recommended
         default:
             return TAPPING_TERM;
     }
@@ -963,7 +964,7 @@ As opposed to KMonad, QMK does not allow for non-basic keycodes such as shifted 
 
 In the case of a keyboard shortcut such as `KC_DLR` (which is merely an alias for `S(KC_4)`) or `ALGR(KC_COMMA)` or a shortcut involving more than one modifier such as `S(A(KC_2))`, all the applied modifiers to the tapped key will be stripped, and you'll end up with only the unmodified basic keycode upon tapping the mod-tap. Although the holding function will still function exactly as expected. Thus, tapping `MT(MOD_LALT, KC_DLR)` will produce "4" on an US QWERTY keyboard and tapping `RCTL_T(S(A(KC_2)))` will produce "2" instead of "€" on US MacOS.
 
-As for custom keycodes/macros, the output you'll get will be dependant on the position of the custom keycode in your `custom_keycodes` enum and the amount of enabled quantum keycodes. The value of `SAFE_RANGE` is determined by the `quantum_keycodes` enum found in `qmk_firmware/quantum/quantum_keycodes.h`. Enabling features such `KEY_LOCK_ENABLE` and `FAUXCLICKY_ENABLE` in `rules.mk` will activate additional quantum keycodes and push up the value of `SAFE_RANGE`.
+As for custom keycodes/macros, the output you'll get will be dependant on the position of the custom keycode in your `custom_keycodes` enum and the amount of enabled quantum keycodes. The value of `SAFE_RANGE` is determined by the `quantum_keycodes` enum found in `qmk_firmware/quantum/quantum_keycodes.h`.
 
 The very first custom keycode/macro in the enum is always assigned to `SAFE_RANGE`. Trying to use it in a mod-tap may produce `KC_ENTER` on tap. The next custom keycode in your enum (which will be assigned the value of `SAFE_RANGE+1`), against all odds, will *not* produce your expected macro when tapped in the context of a mod-tap but instead may emit the `KC_ESCAPE` keycode. And on it goes down the [list of keycodes], *generally* starting from the punctuation block. In this situation given as an example,`SAFE_RANGE+5` will produce `KC_EQUAL`, et cetera, when casted down to `uint8_t`.
 
@@ -989,7 +990,7 @@ enum custom_keycodes {
 #define HOME_HASH CMD_T(MT_POUND)
 {% endhighlight %}
 
-(Note: `MT(MOD_LGUI, kc)`, `LGUI_T(kc)`, and `CMD_T(kc)` are all equivalent)
+Note: `MT(MOD_LGUI, kc)`, `LGUI_T(kc)`, and `CMD_T(kc)` are all equivalent
 
 To make things easier to read, I strongly recommend using aliases. How are you supposed to know, from cursory glance, that `MT(MOD_LGUI, KC_F23)` will actually output "#" on tap and not send <kbd>F23</kbd>?
 
@@ -1322,7 +1323,9 @@ The usage of this implementation is less convoluted than that of the layers impl
 
 Ideally, the thumb key used in chords shouldn't be a key that's often followed or preceded by a home row key such as space. All in the spirit of reducing accidental misfires when typing normally.
 
-This is also one of the rare cases where you're better off without the [combo improvements PR](https://github.com/qmk/qmk_firmware/pull/8591) by [sevanteri](https://github.com/sevanteri). Without support for overlapping combos, all you need to define is a combo for each of the 8 modifiers; chording multiple home row mods will automatically call all the required combos. Whereas with sevanteri's PR, you will need to specify a combo for
+One nifty thing about this method is that you don't need to keep holding down all the combo keys. You can press all the keys that compose the combo to trigger it and then only keep a single combo key down to maintain the modifier active, thus freeing your other fingers.
+
+Overlapping combos used to be unsupported so all you needed to define is a combo for each of the 8 modifiers; chording multiple home row mods would have automatically called all the required combos. Whereas with the new combo improvements, you will need to specify a combo for
 
   1. <kbd>Ctrl</kbd>
   2. <kbd>Alt</kbd>
@@ -1364,7 +1367,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 | Why use home row mods?  | It's a more ergonomic and efficient way to use modifiers |
 | How to use home row mods? | Either use a QMK keyboard or install KMonad |
 | How to lay out the modifiers on the home row? | It does not matter. If you're undecided, you can go for [GACS/◆⎇⎈⇧](#gacs) |
-| What tap hold configuration settings should I enable? | `IGNORE_MOD_TAP_INTERRUPT`. `PERMISSIVE_HOLD` and `TAPPING_FORCE_HOLD` can also prove useful |
+| What tap hold configuration settings should I enable? | `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_FORCE_HOLD` can also prove useful |
 | How do I get started with home row mods on QMK or KMonad? | Go to the generator for the program you wish to use ([QMK](#qmk-home-row-mods-code-generator)) ([KMonad](#kmonad-home-row-mods-code-generator)), select your options and click on the button "Generate". Follow the instructions to figure out where to paste the generated output |
 | What's the most important tip for using home row mods? | Get into the habit of typing with quick, swift taps. |
 
@@ -1372,15 +1375,22 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 <summary markdown="span">Updates Log</summary>
 03 Feb 2021:
 * Mentioned Callum style home row mods in Alternatives>Chording with thumb keys>Layers
+
+13 Sep 2021:
+* Updated KMonad links
+* De-emphasized the importance of `PERMISSIVE_HOLD`
+* Added a footnote about the "meta" modifier
+* Updated the count of supported QMK keyboards
+* No need to manually check out PRs #9404 and #8591 as they're now merged in `qmk:master`
 </details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
 
-[^1]: Caps Lock only capitalizes letters and keeps numbers and punctuations intact whereas Shift Lock acts exactly like the Shift keys and affects all the keys. <kbd>Caps Lock</kbd>+<kbd>-</kbd> = `-` ; <kbd>Shift Lock</kbd>+<kbd>-</kbd> = `_`.
+[^1]: "Meta" is an ambiguous modifier name. It used to be its own modifier but with the advent and domination of IBM PC-style keyboards, you won't find a physical <kbd>Meta</kbd> key anymore but the term remained in some places even as we standardised to the 2×4 modifiers of the HID spec that we know today. Sometimes, that's how some Linux apps call the Super/GUI modifier but in GNU Emacs, Meta actually refers to the Alt modifier by default, unless you remap it. Meanwhile, `xmodmap` and `xkb` map the level 2 of `<LALT>` to `Meta_L` thus meaning that Shift+Alt = Meta. The [Symbolics 3600](https://deskthority.net/download/file.php?id=47925) keyboard features both a <kbd>Super</kbd> and a <kbd>Meta</kbd> key but no <kbd>Alt</kbd>. On the [SAIL keyboard](http://xahlee.info/kbd/iold51593/sail_keyboard_8cd7f.jpg), <kbd>Meta</kbd> lives alongside <kbd>Alt</kbd> with no <kbd>Super</kbd> in sight. All in all, I'm in favour of abandoning the use of this term.
 
-[^2]: I have to admit that I couldn't find any hard numbers supporting this. I have yet to meet someone who disagrees with this ranking though. It's a very reasonable guess. Every capital letter in this article involved Shift. Ctrl+ZXCV is ridiculously common and most program shortcuts are either Ctrl+Letter or Ctrl+Shift+Letter. What's more likely to be debatable is GUI < Alt. The reasoning is that, while you don't find many programs using Alt for important keyboard shortcuts and rare are the people who use Alt to navigate through menus in graphical apps, it is much more frequently used than one might expect just because of Alt+Tab alone. As for GUI, only chorded keyboard shortcuts are considered here so if we ignore WinKey taps to open the Start Menu, we can easily imagine why GUI would end up at the bottom of the ranking.
+[^2]: Caps Lock only capitalizes letters and keeps numbers and punctuations intact whereas Shift Lock acts exactly like the Shift keys and affects all the keys. <kbd>Caps Lock</kbd>+<kbd>-</kbd> = `-` ; <kbd>Shift Lock</kbd>+<kbd>-</kbd> = `_`.
 
-[^3]: This links directly to a specific snapshot in the commit history of the proposed Tap Hold documentation page and may thus not be the latest version at the time you're reading this. For the latest version, check the [changed files tab of the PR](https://github.com/qmk/qmk_firmware/pull/9404/files). Also keep in mind that this <abbr title="Pull Request">PR</abbr> adds a new tap hold option called `HOLD_ON_OTHER_KEY_PRESS` which has yet to be merged into `qmk:master`.
+[^3]: I have to admit that I couldn't find any hard numbers supporting this. I have yet to meet someone who disagrees with this ranking though. It's a very reasonable guess. Every capital letter in this article involved Shift. Ctrl+ZXCV is ridiculously common and most program shortcuts are either Ctrl+Letter or Ctrl+Shift+Letter. What's more likely to be debatable is GUI < Alt. The reasoning is that, while you don't find many programs using Alt for important keyboard shortcuts and rare are the people who use Alt to navigate through menus in graphical apps, it is much more frequently used than one might expect just because of Alt+Tab alone. As for GUI, only chorded keyboard shortcuts are considered here so if we ignore WinKey taps to open the Start Menu, we can easily imagine why GUI would end up at the bottom of the ranking.
 
 [^4]: Once again, the GUI modifier on Desktop Environments such as Windows or Gnome is an exception to this. And so is the Alt modifier, which can be used as a leader key to navigate the menus of graphical applications.
 
