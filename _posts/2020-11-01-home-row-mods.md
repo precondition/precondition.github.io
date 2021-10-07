@@ -1202,7 +1202,7 @@ Although, the second flaw is essentially still present, the first flaw is mitiga
 
 Now, you may think to yourself that relieving the pinkies is good and all but what if you don't like lateral movement?
 
-The fellow pinky haters behind the "Balanced Effortless Keyboard Layout" ([BEAKL](https://deskthority.net/wiki/BEAKL)) introduced the concept of the "[home block](https://keyboard-design.com/easy-block-words.html)" wherein the lower row index keys (<kbd>V</kbd> and <kbd>M</kbd> in the illustration) have a much more favourable score in the key effort ratings than the inner index keys of the home/middle row (<kbd>G</kbd> and <kbd>H</kbd>) because the index finger is a short finger that's more comfortable to flex than to abduct.  The same concept is at play in [Workman](https://workmanlayout.org/#the-problem-with-colemak) and [Colemak-DH](https://colemakmods.github.io/mod-dh/#colemak-problems).
+The fellow pinky haters behind the "Balanced Effortless Keyboard Layout" ([BEAKL](https://deskthority.net/wiki/BEAKL)) introduced the concept of the "[home block](https://keyboard-design.com/easy-block-words.html)" wherein the lower row index keys (<kbd>V</kbd> and <kbd>M</kbd> in the illustration) have a much more favourable score in the key effort ratings than the inner index keys of the home/middle row (<kbd>G</kbd> and <kbd>H</kbd>) because the index finger is a short finger that's more comfortable to flex than to extend.  The same concept is at play in [Workman](https://workmanlayout.org/#the-problem-with-colemak) and [Colemak-DH](https://colemakmods.github.io/mod-dh/#colemak-problems).
 
 This means we can use home *block* mods.
 
