@@ -811,13 +811,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 That being said, it won't take you long to get annoyed from having to edit `config.h`, recompile the firmware and flash it onto your board anytime you want to tweak the tapping term, even just slightly, during this exercise. For this exact reason, a fantastic person going by the nickname of "precondition" has created three new quantum keys that let you tweak the tapping term on the fly.
 
-| Key       | Description                                                                |
-|-----------|----------------------------------------------------------------------------|
-| `TK_PRINT`| "Tapping Term Keys Print": Types the current tapping term, in milliseconds |
-| `TK_UP`   | "Tapping Term Keys Up": Increases the current tapping term by 5ms          |
-| `TK_DOWN` | "Tapping Term Keys Down": Decreases the current tapping term by 5ms        |
+| Key       | Description                                                                   |
+|-----------|-------------------------------------------------------------------------------|
+| `DT_PRINT`| "Dynamic Tapping Term Print": Types the current tapping term, in milliseconds |
+| `DT_UP`   | "Dynamic Tapping Term Up": Increases the current tapping term by 5ms          |
+| `DT_DOWN` | "Dynamic Tapping Term Down": Decreases the current tapping term by 5ms        |
 
-In order to use them, merge the commits of PR [#11036](https://github.com/qmk/qmk_firmware/pull/11036) into your personal branch of QMK (git knowledge required), and enable the feature in `rules.mk` with `TAP_TERM_KEYS_ENABLE = yes`.
+In order to use them, enable the feature in `rules.mk` with `DYNAMIC_TAPPING_TERM_ENABLE = yes`.
 
 Once you can easily type long strings of lowercase letters, the next step is to practice on text containing capital letters.
 
@@ -1382,6 +1382,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 * Added a footnote about the "meta" modifier
 * Updated the count of supported QMK keyboards
 * No need to manually check out PRs #9404 and #8591 as they're now merged in `qmk:master`
+
+27 Dec 2021:
+* No need to manually check out PR #11036 (Dynamic Tapping Term) as it is now merged in `qmk:master`.
 </details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
