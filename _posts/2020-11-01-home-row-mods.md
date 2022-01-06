@@ -1385,6 +1385,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 27 Dec 2021:
 * No need to manually check out PR #11036 (Dynamic Tapping Term) as it is now merged in `qmk:master`.
+
+6 Jan 2022:
+* Added a `if (record->event.pressed)` check before each code block overriding the tap of a modtap. Code should no longer fire twice now.
 </details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
