@@ -1000,7 +1000,7 @@ The next step is to write a case for our newly created special mod-tap in the sw
 
 {% highlight c %}
 case HOME_HASH:
-  if (record->tap.count > 0) {
+  if (record->event.pressed && record->tap.count > 0) {
     if (record->event.pressed) {
       // send advanced keycode, etc.
       // the 16 bit version of the `tap_code` function is used here
@@ -1063,7 +1063,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         We're only interested in overriding the tap behaviour
         in a certain cicumstance. The hold behaviour can stay the same.
         */
-        if (record->tap.count > 0) {
+        if (record->event.pressed && record->tap.count > 0) {
             // Detect right Shift
             if (get_mods() & MOD_BIT(KC_RSHIFT)) {
                 // temporarily disable right Shift
@@ -1091,7 +1091,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         and holding RSFT_T(KC_E) (which is the right Shift mod tap).
         */
 
-        if (record->tap.count > 0) {
+        if (record->event.pressed && record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_LSHIFT)) {
                 unregister_mods(MOD_BIT(KC_LSHIFT));
                 tap_code(KC_S);
@@ -1117,7 +1117,7 @@ and vice versa for the right hand;
 
 {% highlight c %}
     case RMOD_T(r_letter):
-        if (record->tap.count > 0) {
+        if (record->event.pressed && record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_RSHIFT)) {
                 unregister_mods(MOD_BIT(KC_RSHIFT));
                 tap_code(r_s_letter);
@@ -1129,7 +1129,7 @@ and vice versa for the right hand;
         return true;
 
     case LMOD_T(l_letter):
-        if (record->tap.count > 0) {
+        if (record->event.pressed && record->tap.count > 0) {
             if (get_mods() & MOD_BIT(KC_LSHIFT)) {
                 unregister_mods(MOD_BIT(KC_LSHIFT));
                 tap_code(l_s_letter);
