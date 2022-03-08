@@ -332,7 +332,7 @@ Consider the following case:
 
 </div>
 
-In English, this is a situation where you're tapping <kbd>O</kbd> while holding down <kbd>N</kbd>. It can also be called a "nested keypress". If all of this happens before the end of the tapping term, the output, assuming mod-tap interrupts are ignored, would be "no". Contrast this to the scenario when permissive hold is enabled where the output would instead be <kbd>Ctrl</kbd>+<kbd>O</kbd>.
+In English, this is a situation where you're tapping <kbd>O</kbd> while holding down <kbd>N</kbd>. It can also be called a "nested tap". If all of this happens before the end of the tapping term, the output, assuming mod-tap interrupts are ignored, would be "no". Contrast this to the scenario when permissive hold is enabled where the output would instead be <kbd>Ctrl</kbd>+<kbd>O</kbd>.
 
 As you can see, the assumption here is that if the user taps another key while holding down one or more mod-tap keys, he isn't doing typing rolls and as such desires to trigger a keyboard shortcut instead. The tapping term is irrelevant here.
 
