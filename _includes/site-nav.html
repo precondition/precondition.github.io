@@ -22,6 +22,7 @@
             {% if site.github %}
                 <a class="social-link social-link-tw" href="https://github.com/{{ site.github }}" target="_blank" rel="noopener">{% include github.html %}</a>
             {% endif %}
+            <a class="social-link social-link-rss" href="{{ site.url }}{{ site.baseurl }}feed.xml" target="_blank" rel="noopener">{% include rss.html %}</a>
         </div>
         {% if site.subscribers %}
             <a class="subscribe-button" href="#subscribe">Subscribe</a>
