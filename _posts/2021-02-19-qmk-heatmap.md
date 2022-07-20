@@ -212,18 +212,16 @@ After including `print.h`, head to the `process_record_user` function (More info
 ```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
-        if (record->event.pressed) {
-            uprintf("0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n",
-                 keycode,
-                 record->event.key.row,
-                 record->event.key.col,
-                 get_highest_layer(layer_state),
-                 record->event.pressed,
-                 get_mods(),
-                 get_oneshot_mods(),
-                 record->tap.count
-                 );
-        }
+        uprintf("0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n",
+             keycode,
+             record->event.key.row,
+             record->event.key.col,
+             get_highest_layer(layer_state),
+             record->event.pressed,
+             get_mods(),
+             get_oneshot_mods(),
+             record->tap.count
+             );
     #endif
     switch (keycode) {
     //...
@@ -238,22 +236,20 @@ This will print the hexadecimal representation of every key you press as well as
 If you want to log combo key presses, there are a few more things you need to do. Know that using the wrapper `[AB_ESC] = COMBO(combo_sequence, KC_ESC)` will not let you easily get matrix information. However, here's what you can insert in `processs_combo_event` if you use the `COMBO_ACTION` wrapper for defining your combos:
 ```c
 #ifdef CONSOLE_ENABLE
-    if (pressed) {
-        combo_t *combo = &key_combos[combo_index];
-        uint8_t idx = 0;
-        uint16_t combo_keycode;
-        while ((combo_keycode = pgm_read_word(&combo->keys[idx])) != COMBO_END) {
-            uprintf("0x%04X,NA,NA,%u,%u,0x%02X,0x%02X,0\n",
-                combo_keycode,
-                /* <missing row information> */
-                /* <missing column information> */
-                get_highest_layer(layer_state),
-                pressed,
-                get_mods(),
-                get_oneshot_mods()
-            );
-            idx++;
-        }
+    combo_t *combo = &key_combos[combo_index];
+    uint8_t idx = 0;
+    uint16_t combo_keycode;
+    while ((combo_keycode = pgm_read_word(&combo->keys[idx])) != COMBO_END) {
+        uprintf("0x%04X,NA,NA,%u,%u,0x%02X,0x%02X,0\n",
+            combo_keycode,
+            /* <missing row information> */
+            /* <missing column information> */
+            get_highest_layer(layer_state),
+            pressed,
+            get_mods(),
+            get_oneshot_mods()
+        );
+        idx++;
     }
 #endif
 ```
