@@ -165,7 +165,7 @@ alt="0D 5C 0C 0E 0F 5A 5B 5D 0A 0B 5E 5F 1D 6C 1C 1E 1F 6A 6B 6D 1A 1B 6E 6F"
 type="video/webm">
 </video>
 
-Is it annoying? Yes. I'll see what I can do to help.
+Is it annoying? Yes. I'm currently working on a desktop app that makes this process a lot more convenient. In the app, you'll be able to select a bunch of circles at once, copy, drag and paste them wherever you want, undo and redo previous actions and more, so stay tuned!
 
 If you misclicked or placed the dot a few millimeters away from the true center of the keycap and it's driving you mad, you can Shift+Left Click anywhere on the canvas to undo the last operation.
 
@@ -190,7 +190,7 @@ To collect key strokes data in the expected format, there are two things you nee
 1. Keyboard firmware
 2. A program that logs what the keyboard firmware sends into a csv file
 
-(The following instructions assume the use of a UNIX environment — sorry Windows users.)
+(The following instructions primarily cater to users of a UNIX environment — sorry Windows users.)
 
 ## Keyboard firmware setup
 
@@ -257,13 +257,18 @@ As you can notice, `processs_combo_event` doesn't actually give any information 
 
 These missing values will be automatically filled in by the QMK Heatmap Generator based on keys you've typed outside of combos. For example, if you have a combo involving `KC_A` and `KC_S`, executing the combo will output these two lines:
 ```
-0x004,NA,NA,0
-0x018,NA,NA,0
+0x004,NA,NA,0,1,0x00,0x00,0
+0x018,NA,NA,0,1,0x00,0x00,0
+0x004,NA,NA,0,0,0x00,0x00,0
+0x018,NA,NA,0,0,0x00,0x00,0
 ```
 but simply tapping those keys by themselves, one after another would produce something like:
+
 ```
-0x004,3,2,0
-0x018,3,3,0
+0x004,3,2,0,1,0x00,0x00,0
+0x004,3,2,0,0,0x00,0x00,0
+0x018,3,3,0,1,0x00,0x00,0
+0x018,3,3,0,0,0x00,0x00,0
 ```
 Based on this, we can infer that the keycode `0x004` is positionned in the third row, second column and that `0x018` is positionned in the third row, third column.
 
@@ -281,19 +286,25 @@ The next steps will be about setting up the host computer to listen to what the 
 To listen to your keyboard, you'll need to install [hid_listen](https://www.pjrc.com/teensy/hid_listen.html). There are pre-compiled binaries available for download for most operating systems except for Linux 64-bit for which you'll need to download the source code and run `make` at the root of the downloaded `hid_listen/` folder.
 
 Now, all you need to start logging key presses is to let this command run in the background while you're using your keyboard normally:
+
+UNIX system:
 ```sh
 sudo ./hid_listen | egrep --line-buffered "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+),[0-9]{1,2}" | tee -a keylog.csv
 ```
 
+Windows system (Powershell):
+```powershell
+.\hid_listen.exe | Select-String -Pattern "(0x[A-F0-9]+,)?(NA|[0-9]+),(NA|[0-9]+),[0-9]{1,2}" | Tee-Object keylog.csv
+```
+
 The output should look like this:
 ```
-0x0006,3,3
-0x0007,3,4
-0x002C,4,5
-0x4128,10,1
-0x4273,4,4
-0x640C,8,3
-0x7111,8,1
+0x6117,2,4,0,1,0x00,0x00,0
+0x002A,10,0,0,1,0x01,0x00,0
+0x002A,10,0,0,0,0x01,0x00,0
+0x6117,2,4,0,0,0x01,0x00,0
+0x6216,2,3,0,1,0x00,0x00,1
+0x6216,2,3,0,0,0x00,0x00,1
 ```
 
 Every time you press any key on your keyboard, a new line should be appended to the standard output and to the `keylog.csv` file which will be stored in the same directory as that of the `hid_listen` executable file.
