@@ -184,7 +184,7 @@ bgCanvas.addEventListener("click", function(e) {
 }, false);
 
 function fillNAs(lines) {
-    /* Fill in the missing row,col information (as denoted by "NA,NA") of a combo action
+    /* Fill in the missing row,col information (as denoted by "NA,NA" or "254,254") of a combo action
      * by looking for an occurrence of the same keycode used outside of a combo
      * and thus associated with a certain row and column.
      */
@@ -199,7 +199,7 @@ function fillNAs(lines) {
         const row = Number(loggedKeycodeAndVars[1])
         const col = Number(loggedKeycodeAndVars[2])
         if (row == 254 && col == 254) {
-            return // is a simple combo with sevanteri's combo improvements
+            return // is a combo
         } else {
             keycode2rowcol[keycode] = [row, col]
         }
@@ -207,10 +207,13 @@ function fillNAs(lines) {
 
     // Iterate a second time through `lines` to replace "keycode,NA,NA" by "keycode,row,col" if available in `keycode2rowcol`.
     for (i=0; i<lines.length; i++) {
-        if (lines[i].startsWith("0x") && lines[i].includes("NA,NA")) {
+        if (lines[i].startsWith("0x")) {
             keycode = lines[i].match(/0x[0-9A-F]+/)[0]
-            if (Object.keys(keycode2rowcol).includes(keycode)) {
-                lines[i] = lines[i].replace("NA,NA", keycode2rowcol[keycode][0] + "," + keycode2rowcol[keycode][1])
+            replacement_rowcol = (keycode2rowcol[keycode]||[254, 254]).join(",")
+            if (lines[i].includes("NA,NA")) {
+                lines[i] = lines[i].replace("NA,NA", replacement_rowcol)
+            } else if (lines[i].includes("254,254")) {
+                lines[i] = lines[i].replace("254,254", replacement_rowcol)
             }
         }
     }
@@ -337,7 +340,7 @@ document.getElementById("csvFile").addEventListener("change", function(){
           if (csvLines.length < RECOMMENDED_AMOUNT_OF_ENTRIES) {
               document.getElementById("howToMatchMatrix").innerText = `The submitted keylog only contains ${csvLines.length} lines.\nCollect more data for more accurate results.`
           }
-          if (csvText.includes("NA,NA")) {
+          if (csvText.includes("NA,NA") || csvText.includes("254,254")) {
             csvLines = fillNAs(csvLines)
           }
           let keyFreq = {}
