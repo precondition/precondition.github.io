@@ -3,6 +3,7 @@ layout: default
 current: post
 class: post-template
 disqus: false
+giscus: true
 ---
 
 <!-- default -->
@@ -85,6 +86,31 @@ into the {body} of the default.hbs template -->
                 {% endfor %}
                 <!-- /author  -->
             </footer>
+
+            {% if site.giscus or page.giscus %}
+                <section class="post-full-comments">
+                    {% include anchor_headings.html 
+                    html='<h1 id="comments">Comments</h1>' 
+                    anchorBody="¶" anchorClass="heading-anchor" 
+                    anchorTitle="Permalink to the comments section" %}
+                    <script src="https://giscus.app/client.js"
+                            data-repo="precondition/precondition.github.io"
+                            data-repo-id="MDEwOlJlcG9zaXRvcnkyODk0OTc2MTU="
+                            data-category="Comments"
+                            data-category-id="DIC_kwDOEUFiD84CQ-f6"
+                            data-mapping="title"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="dark_dimmed"
+                            data-lang="en"
+                            data-loading="lazy"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </section>
+            {% endif %}
 
             <!-- If you use Disqus comments, just uncomment this block.
             The only thing you need to change is "test-apkdzgmqhj" - which

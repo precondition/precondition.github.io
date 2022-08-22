@@ -47,6 +47,7 @@ feed:
 # Post's page cover as a per-post basis _posts/...
 # Disqus comments as a per-post basis
 # ...
+giscus: True
 
 # Settings for building master branch with travis-ci
 # with jekyll-travis

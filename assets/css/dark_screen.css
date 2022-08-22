@@ -706,11 +706,13 @@ body {
 .post-full-content li p {
  margin: 0px; }
 
+.post-full-comments a,
 .post-full-content a {
  color: rgb(191, 191, 191);
  box-shadow: rgb(88, 169, 213) 0px -1px 0px inset;
  }
 
+.post-full-comments a:hover,
 .post-full-content a:hover {
  color: rgb(153, 203, 230);
  text-decoration: none;
