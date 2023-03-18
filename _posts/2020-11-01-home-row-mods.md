@@ -380,7 +380,7 @@ In case you're worried for the flaws that plague Retro Tap to be present in Retr
 
 That is it for all the available QMK tap hold configuration settings. In summary, there are two essential tap hold settings: `TAPPING_TERM`, and `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_TERM` will require some tweaking and adaptation from your part (though not as much as you may be led to believe) but the `IGNORE_MOD_TAP_INTERRUPT` is just a matter of adding a line to your `config.h` file.
 
-Aside from those two tap hold settings, there exists another very commonly recommended setting: `TAPPING_FORCE_HOLD`. It can be enabled by simply appending `#define TAPPING_FORCE_HOLD` to your `config.h` file.
+Aside from those two tap hold settings, there exists another very commonly recommended setting: `QUICK_TAP_TERM`. Don't be misled by the name, it is not about quick taps but about the behaviour of the key if you double-press it within a certain time window. It is recommended to set it to 0 or another very low value.
 
 `PERMISSIVE_HOLD` can be useful if you have a very high tapping term but as previously said, setting the `TAPPING_TERM` to any value above 500ms will already enable permissive-hold-like behaviour so there isn't much point to defining it. If you have a lower tapping term, `PERMISSIVE_HOLD` generally produces many misfires unless you're very consistent in your typing style so it is not recommended.
 
@@ -400,7 +400,7 @@ Let's start with tap hold configuration settings. Copy and paste those lines in 
 #define IGNORE_MOD_TAP_INTERRUPT
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
-#define TAPPING_FORCE_HOLD
+#define QUICK_TAP_TERM 0
 {% endhighlight %}
 
 Once that's done, open up `keymap.c`, and convert all the home row keys into mod-tap keys. You have multiple options for doing so. In any case, it is best to use aliases as the convention is to keep all keycode names strictly under 8 characters long in order to keep a tidy, aligned and readable layout in the `keymap.c` file. This is not possible if you use something like `MT(mod, kc)` or `LMOD_T(kc)`. For example, potential aliases for US QWERTY with GASC/◆⎇⇧⎈ order could be:
@@ -1367,7 +1367,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 | Why use home row mods?  | It's a more ergonomic and efficient way to use modifiers |
 | How to use home row mods? | Either use a QMK keyboard or install KMonad |
 | How to lay out the modifiers on the home row? | It does not matter. If you're undecided, you can go for [GACS/◆⎇⎈⇧](#gacs) |
-| What tap hold configuration settings should I enable? | `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_FORCE_HOLD` can also prove useful |
+| What tap hold configuration settings should I enable? | `IGNORE_MOD_TAP_INTERRUPT`. A low `QUICK_TAP_TERM` can also prove useful |
 | How do I get started with home row mods on QMK or KMonad? | Go to the generator for the program you wish to use ([QMK](#qmk-home-row-mods-code-generator)) ([KMonad](#kmonad-home-row-mods-code-generator)), select your options and click on the button "Generate". Follow the instructions to figure out where to paste the generated output |
 | What's the most important tip for using home row mods? | Get into the habit of typing with quick, swift taps. |
 
