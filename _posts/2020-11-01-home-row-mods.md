@@ -294,6 +294,8 @@ Apart from these options, you may have noticed that QMK offers more tap hold con
 
 #### Tapping Force Hold
 
+NOTE: This option has been replaced by `QUICK_TAP_TERM` in QMK. See https://docs.qmk.fm/#/ChangeLog/20230226?id=quick-tap-term for a quick overview of the breaking change. This section will be updated in the near future.
+
 The first in the list and an important tap hold setting for home row mods is `TAPPING_FORCE_HOLD`.
 
 Over the course of normal computer usage, you will switch back and forth between typing and triggering keyboard shortcuts. When the modifiers are on the home row, sooner or later, you will feel the need to press a home row key to type a letter and then pressing that same key in order to activate a modifier. However, the default behaviour for a quick tap followed by a hold is to auto-repeat the tapping function of the mod-tap.
@@ -1386,6 +1388,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 6 Jan 2022:
 * Added a `if (record->event.pressed)` check before each code block overriding the tap of a modtap. Code should no longer fire twice now.
+
+18 Mar 2023:
+* Added a short note about the breaking change `TAPPING_FORCE_HOLD` → `QUICK_TAP_TERM` in QMK.
 </details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
