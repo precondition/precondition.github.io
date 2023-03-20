@@ -294,7 +294,7 @@ Apart from these options, you may have noticed that QMK offers more tap hold con
 
 #### Tapping Force Hold
 
-NOTE: This option has been replaced by `QUICK_TAP_TERM` in QMK. See https://docs.qmk.fm/#/ChangeLog/20230226?id=quick-tap-term for a quick overview of the breaking change. This section will be updated in the near future.
+NOTE: This option has been replaced by `QUICK_TAP_TERM` in QMK. See [the changelog for version 0.20.0](https://docs.qmk.fm/#/ChangeLog/20230226?id=quick-tap-term) for a quick overview of the breaking change. This section will be updated in the near future.
 
 The first in the list and an important tap hold setting for home row mods is `TAPPING_FORCE_HOLD`.
 
