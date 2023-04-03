@@ -212,10 +212,11 @@ After including `print.h`, head to the `process_record_user` function (More info
 ```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
+        const bool is_combo = record->event.type == COMBO_EVENT;
         uprintf("0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u\n",
              keycode,
-             record->event.key.row,
-             record->event.key.col,
+             is_combo ? 254 : record->event.key.row,
+             is_combo ? 254 : record->event.key.col,
              get_highest_layer(layer_state),
              record->event.pressed,
              get_mods(),
@@ -242,8 +243,8 @@ If you want to log combo key presses, there are a few more things you need to do
     while ((combo_keycode = pgm_read_word(&combo->keys[idx])) != COMBO_END) {
         uprintf("0x%04X,%u,%u,%u,%u,0x%02X,0x%02X,0\n",
             combo_keycode,
-            KEYLOC_COMBO,
-            KEYLOC_COMBO,
+            254,
+            254,
             get_highest_layer(layer_state),
             pressed,
             get_mods(),
@@ -254,7 +255,7 @@ If you want to log combo key presses, there are a few more things you need to do
     }
 #endif
 ```
-As you can notice, `processs_combo_event` doesn't actually give any meaningful information on the matrix position of combo key presses. This is why the row and column fields in the printed output are filled in with the constant value `KEYLOC_COMBO` (combo key location), which is equal to the value of 254.
+As you can notice, `processs_combo_event` doesn't actually give any meaningful information on the matrix position of combo key presses. This is why the row and column fields in the printed output are filled in with the "magic" constant value 254 (historically called `KEYLOC_COMBO`).
 
 These "missing" constant values will be automatically filled in by the QMK Heatmap Generator based on keys you've typed outside of combos. For example, if you have a combo involving `KC_A` and `KC_S`, executing the combo will output these two lines:
 ```
