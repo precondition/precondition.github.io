@@ -1137,3 +1137,17 @@ summary {
     margin-bottom: 1em;
     font-weight: bold;
 }
+
+h1.invisible-header,
+h2.invisible-header,
+h3.invisible-header,
+h4.invisible-header,
+h5.invisible-header,
+h6.invisible-header {
+  font-size: 0px;
+  /* visibility: none removes the ability to jump to 
+   * a certain header with its anchor, which is the
+   * whole reason we want invisible headers in the
+   * first place. */
+  visibility: hidden;
+}
