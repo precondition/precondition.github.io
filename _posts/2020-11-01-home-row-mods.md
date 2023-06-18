@@ -290,21 +290,19 @@ That concludes it for the *essential* tap hold configuration settings for home r
 
 Apart from these options, you may have noticed that QMK offers more tap hold configuration settings if you've read the documentation linked at the [beginning of this section](#tap-hold-configuration-settings) — please read through those links if you haven't yet. While non-essential, they can still be *very useful* and a better understanding of them can help you enable the settings that will prove beneficial to you.
 
-#### Tapping Force Hold
 
-NOTE: This option has been replaced by `QUICK_TAP_TERM` in QMK. See [the changelog for version 0.20.0](https://docs.qmk.fm/#/ChangeLog/20230226?id=quick-tap-term) for a quick overview of the breaking change. This section will be updated in the near future.
+<h4 id="tapping-force-hold" class="invisible-header">Tapping Force Hold</h4>
+#### Quick Tap Term
 
-The first in the list and an important tap hold setting for home row mods is `TAPPING_FORCE_HOLD`.
+The first in the list and an important tap hold setting for home row mods is `QUICK_TAP_TERM`, or as I prefer to call it `DOUBLE_PRESS_AUTO_REPEAT_TERM`.
 
 Over the course of normal computer usage, you will switch back and forth between typing and triggering keyboard shortcuts. When the modifiers are on the home row, sooner or later, you will feel the need to press a home row key to type a letter and then pressing that same key in order to activate a modifier. However, the default behaviour for a quick tap followed by a hold is to auto-repeat the tapping function of the mod-tap.
 
 This means that if you use `LSFT_T(KC_L)` for example and you want to type "camelCase", you will end up with "camelllllllllllllllllcase" instead. The reason is that you're tapping `LSFT_T(KC_L)` to get "l" and then immediately after, you're holding that same `LSFT_T(KC_L)` key to activate Shift in order to type the capital "C" of "camel**C**ase".
 
-Avoiding this problem is easy; just append `#define TAPPING_FORCE_HOLD` to your `config.h` file in your personal keymap folder. This will have the effect of letting you activate the hold function instead, when holding a dual-role key after having tapped it. No more accidental repeats of mod-tap letters when typing quickly!
+This problem occurs because the second press of the mod-tap key happens before the `QUICK_TAP_TERM` initiated by the first tap of the mod-tap key elapses. As you can see, the name of the option is misleading because the option is not actually about quick taps but about double presses of the same key.
 
-The downside is that it removes the possibility of auto-repeating the letter/tapping function of the mod-tap. You will need to tap (press-release) repeatedly if you want to spam a letter. If you're a QWERTY Vim user without a navigation layer, this could be a deal-breaker for you so simply don't define it if that's the case, or use it as an opportunity to nudge yourself towards more efficient movements.
-
-Keep in mind that `TAPPING_FORCE_HOLD` is a universal configuration which applies on all dual-role keys (layer-taps and mod-taps). If your backspace key is a layer-tap, you may find that rather restrictive. The good news is that there exists a per-key variant of this configuration option: `TAPPING_FORCE_HOLD_PER_KEY`. Just follow the [instructions described in the docs](https://docs.qmk.fm/#/tap_hold?id=tapping-force-hold) to enable `TAPPING_FORCE_HOLD` for home row mods and disable it for other layer taps as you see fit.
+To avoid this problem, you should thus reduce the `QUICK_TAP_TERM` from its default value of `TAPPING_TERM` into a much smaller value, or even 0 to disable the auto-repeat feature entirely. This will have the effect of letting you activate the hold function instead, when holding a dual-role key after having tapped it. No more accidental repeats of the mod-tap letters when typing quickly!
 
 #### Permissive Hold
 
