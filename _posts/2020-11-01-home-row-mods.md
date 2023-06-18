@@ -5,6 +5,7 @@ cover: assets/images/home-row-mods/RealisticHRM-Light-Cover-Half-GASC.jpeg
 navigation: True
 title: A guide to home row mods
 date: 2020-12-12
+last-update: 2023-06-18
 category: Keyboards
 tags: [Keymap, QMK]
 class: post-template
@@ -211,14 +212,14 @@ In case you're curious why `LALT` is used in place of `RALT` for the modifier of
 ### Tap Hold configuration settings
 <!-- idea: add interactive text fields in each tap hold config settings sections to invite readers to get a real feel for what typing scenarios does each setting apply for. Use something along the lines of QMK configurator test's KEYUP KEYDOWN events log box -->
 
-Configuring tap hold options is a mandatory step for using home row mods without pulling your hair. As such, a local QMK development environment is required since the [online configurator] currently does not support configuration settings. If you haven't set up a QMK build environment yet, follow the steps outlined in [this guide].
+Configuring tap hold options is a strongly recommended step for using home row mods without pulling your hair. As such, a local QMK development environment is required since the [online configurator] currently does not support configuration settings. If you haven't set up a QMK build environment yet, follow the steps outlined in [this guide].
 
 [online configurator]: https://config.qmk.fm/#/
 [this guide]: https://docs.qmk.fm/#/newbs_getting_started
 
 With that out of the way, here comes the most difficult part: understanding the different tap hold configuration settings.
 
-I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings], and [Okke]'s [cheatsheet on MT and LT behaviour].<sup>[PDF]</sup>
+I strongly advise you to attentively read through the [official QMK documentation page on tap hold configuration settings].
 
 [official QMK documentation page on tap hold configuration settings]: https://docs.qmk.fm/#/tap_hold
 [sigprof]: https://github.com/sigprof
@@ -226,53 +227,32 @@ I strongly advise you to attentively read through the [official QMK documentatio
 [Okke]: https://github.com/okke-formsma/
 [cheatsheet on MT and LT behaviour]: https://cdn.discordapp.com/attachments/663573863480950808/757162393209012304/modtap.pdf
 
-Once you're done reading through these links, come back here for a more detailed explanation of each tap hold configuration setting and their relation to home row mods.
+Once you're done reading through this link, come back here for a more detailed explanation of each tap hold configuration setting and their relation to home row mods.
 
-#### Ignore Mod-Tap Interrupt
+{% comment %}
+The old "Ignore Mod-Tap Interrupt" section has been renamed into "Default",
+so to keep old URLs pointing to this section still working, we add an invisible
+header with the "ignore-mod-tap-interrupt" ID. It is important to make it invisible and
+not hidden because jumping to hidden headers from the URL is impossible.
+I also added the invisible header "before" the new, real header so that users see the name
+of the section when using a ref link.
+{% endcomment %}
+<h4 id="ignore-mod-tap-interrupt" class="invisible-header">Ignore Mod-Tap Interrupt</h4>
+#### Default
 
-<!-- Mention that this is the default behaviour for layer-taps and that to imitate the hold_on_other_key_press behaviour that is default for mod-taps, you need to merge sigprof's branch -->
+Since QMK can't read your mind, nor predict the future, it can't decide between tap or hold in the moment when you first initially press down the physical key. Taps and holds both involve a key down event of the mod-tap key, so an additional event is needed to resolve the tap-or-hold decision.
 
-Suffice to say that `IGNORE_MOD_TAP_INTERRUPT` is *the* most important tap hold configuration settings that's absolutely necessary for a good home row mods experience.
+In the case of default settings, the additional event is the release of the mod-tap key or the end of the tapping term, whichever happens first.
 
-Why is it so important and relevant to home row mods? To understand, let's look at the default behaviour for mod-taps. The underlying logic of basic mod-taps is quite simple. Did another key get pressed while the user was holding down the mod-tap key? If that's the case, this is a keyboard shortcut; apply the modifier on that pressed key. What if, instead, no key got pressed while the user was holding down the mod-tap? Well, if the user presses and releases a key by itself, without pressing any other key in between, it must mean the user wanted the tapping function of the mod-tap since there is no use to tapping a modifier key all by itself.[^4] Simple enough right? If you want to activate the holding function, just press on another key while holding the mod-tap key.
-
-
-Here comes the problem with that approach if one were to use home row mods. We like to imagine typing as tapping a sequence of keys all on their own, in order. However, there's quite some overlap between the press and release of each key. Especially so when typing at high speeds. When typing the word "no" for example, we rarely press and fully release <kbd>N</kbd> *before* pressing <kbd>O</kbd>. Try it! If you're not a hunt'n'pecker, this is how you're most likely going to type "no":
-
-<div class="typingScenario">
-
-| Key          | Status
-|--------------|--------
-| <kbd>N</kbd> | Down/Press
-| <kbd>O</kbd> | Down/Press
-| <kbd>N</kbd> | Up/Release
-| <kbd>O</kbd> | Up/Release
-
-{%
-    include img.html
-    src="assets/images/home-row-mods/DarkRollingNO.gif"
-    title="Right half of a Squiggle keyboard with Colemak-DH"
-    alt="Typing &quot;no&quot; on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps"
-%}
-
-</div>
-
-Now imagine if <kbd>N</kbd> and <kbd>O</kbd> were both mod-taps — it would be the case if you use home row mods on Colemak like in the animation above. With default tap hold settings, this is bad news. Indeed, typing involves a lot of such rolls, where you press the next letter before having fully released the previous one.
-
-This is the reason why `IGNORE_MOD_TAP_INTERRUPT` was developed and first [released in 2015](https://github.com/qmk/qmk_firmware/commit/f024a462cdaa4a7a345160819bdf2d01fbabc97a) by [Erez Zukerman](https://github.com/ezuk). Though Erez didn't have home row mods in mind when coming up with this solution. In fact, it actually took two more years after the addition of `IGNORE_MOD_TAP_INTERRUPT` to QMK for the [first commit] to the main branch of the QMK firmware GitHub repository to feature home row mods.[^5]
-
-[first commit]: https://github.com/qmk/qmk_firmware/blob/82de4d039d39c87a1df68708f3033926c27f7e6c/keyboards/ergodox/keymaps/adam/keymap.c#L52
-
-
-Anyways, thanks to his contribution, we now have an option for ignoring key presses that interrupt a mod-tap. That is to say, keys which get pressed while the mod-tap is held down do not automatically activate the modifier of the mod-tap. The mod-tap ignores the interruptions, hence the name.
-
-Now, you might wonder... If mod-taps ignore key presses that happen while it is held down, what do they base themselves on to determine when to activate the modifier and when to send the basic keycode? The answer is that it relies on the tapping term, a user defined period of time which starts when the key gets pressed. Been holding the mod-tap for more than the time defined in the tapping term? Activate the modifier. Pressed the key and then released it before the tapping term expired? That's the QMK definition of a "tap", send the letter!
+You can think of it like this: Been holding the mod-tap for more than the time defined in the tapping term? Activate the modifier. Pressed the key and then released it before the tapping term expired? That's the QMK definition of a "tap", send the letter!
 
 As long as your fingers don't linger on the keys for longer than the tapping term, you won't get accidental mod activations.
 
+The default settings are the recommended mode for home row mods. If you read old posts about home row mods, you might come across comments urging you to enable "IGNORE_MOD_TAP_INTERRUPT" to use home row mods comfortably but since [QMK version 0.21](https://docs.qmk.fm/#/ChangeLog/20230528?id=i-m-t-i), released in 2023 May 28, that option is now removed because the mod-taps already ignore interrupts by default. That is to say, keys which get pressed while the mod-tap is held down do not automatically activate the modifier of the mod-tap.
+
 #### Tapping Term
 
-The tapping term is an important concept to grasp for home row mods. As we've just seen in the previous section on ignore mod tap interrupt, the tapping term is what helps to tell tap and hold apart.
+The tapping term is an important concept to grasp for home row mods. As we've just seen in the previous section, the tapping term is what helps to tell tap and hold apart.
 
 The tapping term, in and of itself, is a very basic thing to understand. It is simply a period of time expressed in milliseconds that the user has defined. A timer starts on every key press and constantly checks whether the tapping term for that key has expired yet or not. The timer stops when the key is released. It is good to note that each pressed key is tracked by a specific, different timer, so to speak. When you press <kbd>A</kbd>, a timer starts but pressing another key like <kbd>O</kbd> does not bump up the timer that got started when you press <kbd>A</kbd>.[^6]
 
@@ -286,10 +266,9 @@ For tips on configuring your tapping term and finding the sweet spot for you, cl
 
 ----------
 
-That concludes it for the *essential* tap hold configuration settings for home row mods. Don't try to use home row mods without `IGNORE_MOD_TAP_INTERRUPT` or with an insane `TAPPING_TERM`. You'll have a bad time if you do and will come out of it thinking that "home row mods are not for me".
+That concludes it for the *essential* tap hold configuration settings for home row mods. Don't try to use home row mods with an insane `TAPPING_TERM`. You'll have a bad time if you do and will come out of it thinking that "home row mods are not for me".
 
-Apart from these options, you may have noticed that QMK offers more tap hold configuration settings if you've read the documentation linked at the [beginning of this section](#tap-hold-configuration-settings) — please read through those links if you haven't yet. While non-essential, they can still be *very useful* and a better understanding of them can help you enable the settings that will prove beneficial to you.
-
+Apart from these options, you may have noticed that QMK offers more tap hold configuration settings if you've read the documentation linked at the [beginning of this section](#tap-hold-configuration-settings) — please read through those links if you haven't yet. While non-essential, they can still be very useful and a better understanding of them can help you enable the settings that will prove beneficial to you.
 
 <h4 id="tapping-force-hold" class="invisible-header">Tapping Force Hold</h4>
 #### Quick Tap Term
@@ -308,7 +287,7 @@ To avoid this problem, you should thus reduce the `QUICK_TAP_TERM` from its defa
 
 Second in the list is "permissive hold". It is an option that adds another way to trigger the hold function of dual-role keys.
 
-Whereas the modifier of the mod-tap is activated when another key gets *pressed* by default or gets activated when held down for longer than the tapping term if `IGNORE_MOD_TAP_INTERRUPT` is defined, permissive hold activates the modifier when another key is pressed and released while the mod-tap is held, regardless of the tapping term. This means that even when `IGNORE_MOD_TAP_INTERRUPT` is defined, this option allows the user to trigger a keyboard shortcut with a mod-tap key before the end of the tapping term.
+Permissive hold activates the modifier when another key is pressed and released while the mod-tap is held, regardless of the tapping term. It means that this option allows the user to trigger a keyboard shortcut with a mod-tap key before the end of the tapping term.
 
 Consider the following case:
 
@@ -342,6 +321,34 @@ As with many other tap hold settings, there exists a global `PERMISSIVE_HOLD` se
 
 [documentation]: https://docs.qmk.fm/#/tap_hold#permissive-hold
 
+#### Hold on Other Key Press
+
+The underlying logic of “hold on other key press” is quite simple. Did another key get pressed while the user was holding down the mod-tap key? If that's the case, this is a keyboard shortcut; apply the modifier on that pressed key. What if, instead, no key got pressed while the user was holding down the mod-tap? Well, if the user presses and releases a key by itself, without pressing any other key in between, it must mean the user wanted the tapping function of the mod-tap since there is no use to tapping a modifier key all by itself.[^4] Simple enough right? If you want to activate the holding function, just press on another key while holding the mod-tap key.
+
+Here comes the problem with that approach if one were to use home row mods. We like to imagine typing as tapping a sequence of keys all on their own, in order. However, there's quite some overlap between the press and release of each key. Especially so when typing at high speeds. When typing the word "no" for example, we rarely press and fully release <kbd>N</kbd> *before* pressing <kbd>O</kbd>. Try it! If you're not a hunt'n'pecker, this is how you're most likely going to type "no":
+
+<div class="typingScenario">
+
+| Key          | Status
+|--------------|--------
+| <kbd>N</kbd> | Down/Press
+| <kbd>O</kbd> | Down/Press
+| <kbd>N</kbd> | Up/Release
+| <kbd>O</kbd> | Up/Release
+
+{%
+    include img.html
+    src="assets/images/home-row-mods/DarkRollingNO.gif"
+    title="Right half of a Squiggle keyboard with Colemak-DH"
+    alt="Typing &quot;no&quot; on the right half of a Squiggle with dark Colemak-DH MBK choc keycaps"
+%}
+
+</div>
+
+Now imagine if <kbd>N</kbd> and <kbd>O</kbd> were both mod-taps — it would be the case if you use home row mods on Colemak like in the animation above. With `HOLD_ON_OTHER_KEY_PRESS` settings, this is bad news. Indeed, typing involves a lot of such rolls, where you press the next letter before having fully released the previous one.
+
+In conclusion, `HOLD_ON_OTHER_KEY_PRESS` is strongly discouraged for home row mods.
+
 #### Retro Tapping
 
 Remember how I said that there isn't much use in pressing and releasing a modifier all by itself? Mod-taps (ab)use this property, but as it turns out mod-taps have the exact same property themselves. If you hold down a mod-tap for longer than the tapping term and then release it without having pressed any other key in between, your QMK keyboard is going to send a press and release event of the modifier to your computer; not too different from tapping a basic modifier key. If that seems wasteful for you, then let me introduce you to *retro tapping*.
@@ -360,7 +367,7 @@ What if you use another way to bring up the start menu? You'll still have a prob
 
 The Alt and GUI modifiers aren't the only problem, think of the mouse too. The firmware that's running on your keyboard cannot tell that you have clicked or scrolled the mouse wheel while holding down a mod-tap key. All it sees is that you've been holding down a mod-tap for more than the tapping term and released it without pressing any other key in between. As we now know, this is the cue for the firmware to activate the tapping function of the mod-tap in question if retro tap is enabled. <kbd>Ctrl</kbd>+<kbd>Left-Click</kbd> to open a link in a new tab or <kbd>Shift</kbd>+<kbd>Scrollwheel</kbd> to scroll sideways would thus be accompanied with unintended letters.
 
-One tempting solution is to resort to per key retro tap in order to disable retro tap for the problematic GUI and Alt mod-taps and keep it for others. It's up to you whether it's disorientating or not to have some home row keys retro-tappable and some others not.
+One proposed solution is [sending a dummy keycode to neutralize the flashing modifiers](https://github.com/qmk/qmk_firmware/pull/20992) but it is still an open pull request.
 
 #### Retro Shift
 
@@ -374,11 +381,13 @@ In case you're worried for the flaws that plague Retro Tap to be present in Retr
 
 -----
 
-That is it for all the available QMK tap hold configuration settings. In summary, there are two essential tap hold settings: `TAPPING_TERM`, and `IGNORE_MOD_TAP_INTERRUPT`. `TAPPING_TERM` will require some tweaking and adaptation from your part (though not as much as you may be led to believe) but the `IGNORE_MOD_TAP_INTERRUPT` is just a matter of adding a line to your `config.h` file.
+That is it for all the available QMK tap hold configuration settings. In summary, there is only one essential tap hold setting: `TAPPING_TERM`. Even then, chances are that you won't even need to tweak it since the default value will suit most users.
 
-Aside from those two tap hold settings, there exists another very commonly recommended setting: `QUICK_TAP_TERM`. Don't be misled by the name, it is not about quick taps but about the behaviour of the key if you double-press it within a certain time window. It is recommended to set it to 0 or another very low value.
+Aside from that, there exists another very commonly recommended setting: `QUICK_TAP_TERM`. Don't be misled by the name, it is not about quick taps but about the behaviour of the key if you double-press it within a certain time window. It is recommended to set it to 0 or another very low value.
 
-`PERMISSIVE_HOLD` can be useful if you have a very high tapping term but as previously said, setting the `TAPPING_TERM` to any value above 500ms will already enable permissive-hold-like behaviour so there isn't much point to defining it. If you have a lower tapping term, `PERMISSIVE_HOLD` generally produces many misfires unless you're very consistent in your typing style so it is not recommended.
+`PERMISSIVE_HOLD` can be useful if you have a very high tapping term. If you have a lower tapping term, `PERMISSIVE_HOLD` generally produces many misfires unless you're very consistent in your typing style so it is not recommended.
+
+Though, it is nothing in comparison to the amount of misfires you'll get with `HOLD_ON_OTHER_KEY_PRESS`. Home row mods are pretty much unusable with that option.
 
 As for `RETRO_TAPPING`, it might appear appealing at first glance but it has its load of problems which make it unsuitable for home row mods.
 
@@ -391,9 +400,6 @@ Let's start with tap hold configuration settings. Copy and paste those lines in 
 {% highlight js %}
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
-
-// Prevent normal rollover on alphas from accidentally triggering mods.
-#define IGNORE_MOD_TAP_INTERRUPT
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
@@ -516,9 +522,11 @@ Paste this at the top of your `keymap.c` file
 
 ## Using home row mods with KMonad
 
+[Skip to "Tips & Tricks"](#tips-and-tricks)
+
 Aside from QMK, [KMonad] is another piece of software which allows the implementation of home row mods. Its greatest perk is that it does not require a special keyboard like QMK does (although Hasu's USB-to-USB controller can turn any USB keyboard into a QMK-compatible keyboard). It's a cross-platform application that runs on the computer, not on the keyboard chip.
 
-KMonad isn't the only computer program which features mod-taps, it's been preceded by [xcape](https://github.com/alols/xcape) and <a title="Space and Shift (archived link in Japanese)" href="https://web.archive.org/web/20020215203809/http://hp.vector.co.jp/authors/VA002116/sands/">SandS</a>, the very first mod-tap ever. What sets it apart though is that, unlike all those other programs, it features much more configuration options for mod-taps. On most, you're limited to simply tweaking the tapping term. No concept of something akin to `IGNORE_MOD_TAP_INTERRUPT`.
+KMonad isn't the only computer program which features mod-taps, it's been preceded by [xcape](https://github.com/alols/xcape) and <a title="Space and Shift (archived link in Japanese)" href="https://web.archive.org/web/20020215203809/http://hp.vector.co.jp/authors/VA002116/sands/">SandS</a>, the very first mod-tap ever. What sets it apart though is that, unlike all those other programs, it features much more configuration options for mod-taps. On most, you're not allowed to roll your keys and you're limited to simply tweaking the tapping term.
 
 That's not to say that KMonad uses the same configuration options as QMK does. They're different programs made by different people.
 
@@ -772,7 +780,7 @@ The most important tip I can give is to get into the habit of typing with quick,
 
 For some people, the transition to home row mods is little jarring because they got used to holding a key down for a little a less than the key repeat delay which is set by default to 500–1000ms on most operating systems.
 
-Parallels can be made between the key repeat delay and the tapping term. In both cases, releasing the key before the delay expires will result in one single letter to be produced. In that case, it is tempting to say that a person who's used to a key repeat delay of 500ms should crank up the default tapping term of 200ms up to 500ms. It can be seen as trading key auto-repeat for modifier activation. That will certainly help to avoid accidental mods. If the user never accidentally auto-repeats keys then he won't accidentally activate a modifier. In theory, this all sounds good and dandy but in practice, you'll realize that having to hold a key for ≥500ms is actually pretty long. It's actually so high that QMK will automatically enable [permissive hold](#permissive-hold) to allow you to trigger a keyboard shortcut without having to wait half a second to pass.
+Parallels can be made between the key repeat delay and the tapping term. In both cases, releasing the key before the delay expires will result in one single letter to be produced. In that case, it is tempting to say that a person who's used to a key repeat delay of 500ms should crank up the default tapping term of 200ms up to 500ms. It can be seen as trading key auto-repeat for modifier activation. That will certainly help to avoid accidental mods. If the user never accidentally auto-repeats keys then he won't accidentally activate a modifier. In theory, this all sounds good and dandy but in practice, you'll realize that having to hold a key for ≥500ms is actually pretty long. 
 
 My point is that the quicker your taps are, the more you can afford to reduce the tapping term which has the consequence of letting you trigger keyboard shortcuts much more rapidly.
 
@@ -782,7 +790,7 @@ Though it is not out of the question that learning to tap swiftly may lead to fa
 
 ## Finding the sweet spot
 
-Prior to looking for tips to find the sweet spot for the tapping term, I urge you to make sure to enable "[Ignore Mod Tap Interrupt](#ignore-mod-tap-interrupt)" first. Too many people make the mistake of endlessly tweaking the tapping term in the hope that they'll eventually find the golden number that will let them use home row mods with no accidents. You can increase or decrease the tapping term all you want but that won't help with rolling letters if your mod-taps aren't configured to ignore interruptions.
+Prior to looking for tips to find the sweet spot for the tapping term, I urge you to make sure to disable "[Hold on Other Key Press](#hold-on-other-key-press)" first. Too many people make the mistake of endlessly tweaking the tapping term in the hope that they'll eventually find the golden number that will let them use home row mods with no accidents. You can increase or decrease the tapping term all you want but that won't help with rolling letters if your mod-taps aren't configured to ignore interruptions.
 
 If they *are* configured to but you still get accidental alphas or modifiers occasionally, here's what you can try.
 
@@ -1269,7 +1277,7 @@ Besides, this alternative presents the great benefit of having access to all mod
 
 The biggest drawback with all the aforementioned points is that home row mod-combos are even more prone to misfires than home row mod-taps are. All that's needed for a combo to fire is to register a press event for all the combo keys, in any order, within the combo term.
 
-As a matter of fact, one should not be fooled by the idea that you're less likely to press down multiple keys simultaneously than to hold a single key a tad too long. You can't fine-tune when and how a combo activates like you can with mod-taps via tap hold configuration settings such as `IGNORE_MOD_TAP_INTERRUPT` and `PERMISSIVE_HOLD` — Although <abbr title="Pull Request">PR</abbr> [#8591] adds half a dozen new combo configuration settings that will be of interest for anyone looking to use home row mod-combos. Combos' indifference to key press order also prevents you from employing advanced tricks such as [rolled modifiers cancellation](#rolled-modifiers-cancellation) to help with accidental mods.
+As a matter of fact, one should not be fooled by the idea that you're less likely to press down multiple keys simultaneously than to hold a single key a tad too long. You can't fine-tune when and how a combo activates like you can with mod-taps via tap hold configuration settings such as `PERMISSIVE_HOLD` — Although <abbr title="Pull Request">PR</abbr> [#8591] adds half a dozen new combo configuration settings that will be of interest for anyone looking to use home row mod-combos. Combos' indifference to key press order also prevents you from employing advanced tricks such as [rolled modifiers cancellation](#rolled-modifiers-cancellation) to help with accidental mods.
 
 [#8591]: https://github.com/qmk/qmk_firmware/pull/8591
 
@@ -1363,12 +1371,20 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 | Why use home row mods?  | It's a more ergonomic and efficient way to use modifiers |
 | How to use home row mods? | Either use a QMK keyboard or install KMonad |
 | How to lay out the modifiers on the home row? | It does not matter. If you're undecided, you can go for [GACS/◆⎇⎈⇧](#gacs) |
-| What tap hold configuration settings should I enable? | `IGNORE_MOD_TAP_INTERRUPT`. A low `QUICK_TAP_TERM` can also prove useful |
+| What tap hold configuration settings should I enable? | Keep it default. A low `QUICK_TAP_TERM` can prove useful though. |
 | How do I get started with home row mods on QMK or KMonad? | Go to the generator for the program you wish to use ([QMK](#qmk-home-row-mods-code-generator)) ([KMonad](#kmonad-home-row-mods-code-generator)), select your options and click on the button "Generate". Follow the instructions to figure out where to paste the generated output |
 | What's the most important tip for using home row mods? | Get into the habit of typing with quick, swift taps. |
 
 <details>
 <summary markdown="span">Updates Log</summary>
+18 Jun 2023:
+* Updated explanations regarding the new default behavior of modtaps.
+* Removed outdated mentions of `IGNORE_MOD_TAP_INTERRUPT`
+* Added section on `HOLD_ON_OTHER_KEY_PRESS`.
+* Updated Tapping Force Hold section to talk about the new equivalent Quick Tap Term instead.
+* Removed outdated information about `PERMISSIVE_HOLD`-like behaviour automatically getting enabled if `TAPPING_TERM` ≥ 500ms.
+* Updated supported keyboards count.
+
 03 Feb 2021:
 * Mentioned Callum style home row mods in Alternatives>Chording with thumb keys>Layers
 
