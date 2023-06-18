@@ -43,7 +43,7 @@ Homing bars
 </figcaption>
 </figure>
 
-Next is "mods". What is meant by "mods"? In this case, "mods" refer to modifiers, that is to say <kbd>⇧ Shift</kbd>, <kbd>⎈ Control</kbd>, <kbd>⎇ Alt</kbd>, and <kbd>◆ GUI</kbd>. The last modifier in the list is also known as WinKey on Windows, Command on MacOS or Super/Meta[^1] on Linux and BSD. It is not to be confused with actual graphical user interfaces.
+Next is "mods". What is meant by "mods"? In this case, "mods" refer to modifiers, that is to say <kbd>⇧ Shift</kbd>, <kbd>⎈ Control</kbd>, <kbd>⎇ Alt</kbd>, and <kbd>◆ GUI</kbd>. The last modifier in the list is also known as WinKey on Windows, Command on MacOS or Super/Meta[^1] on Linux and BSD. Do not confuse the term with actual graphical user interfaces.
 
 So this means that "home row mods" are about placing modifiers on the home row.
 
@@ -74,7 +74,7 @@ This approach to keyboard shortcuts presents some biomechanical issues. These ch
 
 It is in your best interest to find a solution at the risk of maybe getting RSI and Emacs pinky one day. This is especially important for programmers as most of their keyboard usage isn't actually typing symbols but triggering commands with a plethora of different keyboard shortcuts. Though any power user of any application, not just programmers in their text editor, uses keyboard shortcuts extensively.
 
-Home row mods are about the best solution to this modifier problem. The fact that there are four modifiers, each coming with a left and a right version perfectly matches the eight fingers resting on the home row. We can put a modifier right under each finger and mirror it on both hands.
+Home row mods are about the best solution to this modifier problem. The fact that there are four modifiers, each coming with a left and a right version perfectly matches the eight fingers resting on the home row. We can put a modifier under each finger and mirror it on both hands.
 
 Isn't it great to have ALL the modifiers at our finger tips? No motion, stretching or strain required. This rapid access to modifier chords is very comfortable and allows to blend the execution of keyboard shortcuts in the typing flow, whereas it previously required a context switch to stop composing text, move the hands to the corner(s) of the keyboard, trigger the desired keyboard shortcut and then find back the homing position to continue touch typing text.
 
