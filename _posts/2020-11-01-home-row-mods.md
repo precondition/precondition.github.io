@@ -282,8 +282,6 @@ As such, a good tapping term that fits you is one that prevents accidental mod a
 
 The tapping term can be configured globally and per key to fit you. In general, people choose something between 150ms and 220ms, with the default QMK setting for the tapping term set at 200ms. Don't be scared to increase or decrease your tapping term as you see fit.
 
-It's helpful to note that setting the tapping term over 500ms will automatically enable permissive-hold-like behaviour regardless of whether or not you've enabled it in your configuration settings. For more information on what is permissive hold, consult the section on "[Permissive Hold](#permissive-hold)".
-
 For tips on configuring your tapping term and finding the sweet spot for you, click [here](#finding-the-sweet-spot).
 
 ----------
