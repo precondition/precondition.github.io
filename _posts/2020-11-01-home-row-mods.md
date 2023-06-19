@@ -1025,6 +1025,8 @@ break;
 
 Finally, all that's left to do is to place `HOME_HASH` wherever you want it to be in your layout and flash the new keymap onto your board.
 
+Note: since writing the guide, the ideas of this section have found their way into the official QMK docs: "[Intercepting Mod-Taps](https://docs.qmk.fm/#/mod_tap?id=intercepting-mod-taps)".
+
 ## Combined mod-taps on the lower row
 
 This tip is particularly useful if you use KMonad on a keyboard without N-key roll over which resort to blocking in order to prevent ghosting — QMK-compatible keyboards do not suffer from ghosting issues as they're mostly mechanical keyboards that use diodes. If that previous sentence sounded like technical gobbledegook to you, read through [this Deskthority wiki page](https://deskthority.net/wiki/Rollover,_blocking_and_ghosting) to learn more about what all those terms mean.
@@ -1384,6 +1386,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 <summary markdown="span">Updates Log</summary>
 19 Jun 2023:
 * Mentioned Caps Word in the section about Caps Lock
+* Mentioned the section about intercepting mod-taps in the official docs
 
 18 Jun 2023:
 * Updated explanations regarding the new default behavior of modtaps.
