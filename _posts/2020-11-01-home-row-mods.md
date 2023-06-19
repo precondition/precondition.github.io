@@ -112,7 +112,7 @@ To make this easier to understand, let's agree on common terminology first.
 
 This means that the home row mods setup shown in the cover picture of this blog post can be written as ◆⎇⇧⎈\_\_⎈⇧⎇◆ when using the symbols or as GASC\_\_CSAG when using the 1-letter abbreviations. However, since the mod-taps on the right hand are symmetric to the mod-taps on the left hand, the right-hand can be omitted. Trailing underscores can also be omitted to finally produce the following notation: GASC/◆⎇⇧⎈.
 
-Now that the semantics are clear, let's talk of some interesting orders of the home row mods to give you some ideas for your own.
+Now that the semantics are clear, let's talk about some interesting orders of the home row mods to give you some ideas for your own.
 
 ### SCGA/⇧⎈◆⎇
 
@@ -225,7 +225,7 @@ I strongly advise you to attentively read through the [official QMK documentatio
 [sigprof]: https://github.com/sigprof
 [#9404]: https://github.com/qmk/qmk_firmware/pull/9404
 [Okke]: https://github.com/okke-formsma/
-[cheatsheet on MT and LT behaviour]: https://cdn.discordapp.com/attachments/663573863480950808/757162393209012304/modtap.pdf
+[cheatsheet on MT and LT behavior]: https://cdn.discordapp.com/attachments/663573863480950808/757162393209012304/modtap.pdf
 
 Once you're done reading through this link, come back here for a more detailed explanation of each tap hold configuration setting and their relation to home row mods.
 
@@ -248,7 +248,9 @@ You can think of it like this: Been holding the mod-tap for more than the time d
 
 As long as your fingers don't linger on the keys for longer than the tapping term, you won't get accidental mod activations.
 
-The default settings are the recommended mode for home row mods. If you read old posts about home row mods, you might come across comments urging you to enable "IGNORE_MOD_TAP_INTERRUPT" to use home row mods comfortably but since [QMK version 0.21](https://docs.qmk.fm/#/ChangeLog/20230528?id=i-m-t-i), released in 2023 May 28, that option is now removed because the mod-taps already ignore interrupts by default. That is to say, keys which get pressed while the mod-tap is held down do not automatically activate the modifier of the mod-tap.
+The default settings are the recommended mode for home row mods. 
+
+If you read old posts about home row mods, you might come across comments urging you to enable `IGNORE_MOD_TAP_INTERRUPT` to use home row mods comfortably because the old default behavior of mod-taps was akin to "[hold on other key press](#hold-on-other-key-press)" but since [QMK version 0.21](https://docs.qmk.fm/#/ChangeLog/20230528?id=i-m-t-i), released in 2023 May 28, the default behavior has been changed and the now obsolete `IGNORE_MOD_TAP_INTERRUPT` option removed.
 
 #### Tapping Term
 
@@ -275,7 +277,7 @@ Apart from these options, you may have noticed that QMK offers more tap hold con
 
 The first in the list and an important tap hold setting for home row mods is `QUICK_TAP_TERM`, or as I prefer to call it `DOUBLE_PRESS_AUTO_REPEAT_TERM`.
 
-Over the course of normal computer usage, you will switch back and forth between typing and triggering keyboard shortcuts. When the modifiers are on the home row, sooner or later, you will feel the need to press a home row key to type a letter and then pressing that same key in order to activate a modifier. However, the default behaviour for a quick tap followed by a hold is to auto-repeat the tapping function of the mod-tap.
+Over the course of normal computer usage, you will switch back and forth between typing and triggering keyboard shortcuts. When the modifiers are on the home row, sooner or later, you will feel the need to press a home row key to type a letter and then pressing that same key in order to activate a modifier. However, the default behavior for a quick tap followed by a hold is to auto-repeat the tapping function of the mod-tap.
 
 This means that if you use `LSFT_T(KC_L)` for example and you want to type "camelCase", you will end up with "camelllllllllllllllllcase" instead. The reason is that you're tapping `LSFT_T(KC_L)` to get "l" and then immediately after, you're holding that same `LSFT_T(KC_L)` key to activate Shift in order to type the capital "C" of "camel**C**ase".
 
@@ -347,7 +349,7 @@ Here comes the problem with that approach if one were to use home row mods. We l
 
 Now imagine if <kbd>N</kbd> and <kbd>O</kbd> were both mod-taps — it would be the case if you use home row mods on Colemak like in the animation above. With `HOLD_ON_OTHER_KEY_PRESS` settings, this is bad news. Indeed, typing involves a lot of such rolls, where you press the next letter before having fully released the previous one.
 
-In conclusion, `HOLD_ON_OTHER_KEY_PRESS` is strongly discouraged for home row mods.
+For that reason, `HOLD_ON_OTHER_KEY_PRESS` is strongly discouraged for home row mods.
 
 #### Retro Tapping
 
@@ -355,7 +357,7 @@ Remember how I said that there isn't much use in pressing and releasing a modifi
 
 When a mod-tap is held for a long time and released on its own, retro tap will activate the tapping function, after having released the modifier of the mod-tap.
 
-To give an example, if you press and hold `LGUI_T(KC_A)` for longer than the tapping term and then release it by itself, the host computer that your QMK keyboard is connected to first sees `KC_LGUI` being pressed when you hold down the mod-tap for longer than the tapping term and then the host computer gets notified that `KC_LGUI` is released when you take your finger off `LGUI_T(KC_A)` on your keyboard. This is the default behaviour for mod-taps held and released by themselves. What retro tap does is sending `KC_A` once `KC_LGUI` is released/inactive.
+To give an example, if you press and hold `LGUI_T(KC_A)` for longer than the tapping term and then release it by itself, the host computer that your QMK keyboard is connected to first sees `KC_LGUI` being pressed when you hold down the mod-tap for longer than the tapping term and then the host computer gets notified that `KC_LGUI` is released when you take your finger off `LGUI_T(KC_A)` on your keyboard. This is the default behavior for mod-taps held and released by themselves. What retro tap does is sending `KC_A` once `KC_LGUI` is released/inactive.
 
 <!--Consider putting an animation of a keyboard pressing keys and a host computer receiving scan codes-->
 
@@ -363,7 +365,7 @@ Retro Tap thus gives another way to trigger the tapping function of mod-taps. Wi
 
 However, this particular example highlights a potential problem with retro tap. In many popular desktop environments, the start menu is brought up by tapping the GUI key. A user of this kind of desktop environment who would like to send "a" by retro-tapping `LGUI_T(KC_A)` would accidentally open up the start menu and type "a" in its search bar.
 
-What if you use another way to bring up the start menu? You'll still have a problem with the Alt key which is used for navigating through menus of graphical applications. You can avoid accidental pop-ups of the menu when retro-tapping the alt mod-taps by disabling the functionality in the apps settings. For example in Firefox, it can be done by going in `about:config` and turning `ui.key.menuAccessKeyFocuses` to `false`. Not all apps offer the possibility of disabling Alt's tapping behaviour though.
+What if you use another way to bring up the start menu? You'll still have a problem with the Alt key which is used for navigating through menus of graphical applications. You can avoid accidental pop-ups of the menu when retro-tapping the alt mod-taps by disabling the functionality in the apps settings. For example in Firefox, it can be done by going in `about:config` and turning `ui.key.menuAccessKeyFocuses` to `false`. Apps rarely offer the possibility of disabling Alt's tapping behavior though.
 
 The Alt and GUI modifiers aren't the only problem, think of the mouse too. The firmware that's running on your keyboard cannot tell that you have clicked or scrolled the mouse wheel while holding down a mod-tap key. All it sees is that you've been holding down a mod-tap for more than the tapping term and released it without pressing any other key in between. As we now know, this is the cue for the firmware to activate the tapping function of the mod-tap in question if retro tap is enabled. <kbd>Ctrl</kbd>+<kbd>Left-Click</kbd> to open a link in a new tab or <kbd>Shift</kbd>+<kbd>Scrollwheel</kbd> to scroll sideways would thus be accompanied with unintended letters.
 
@@ -383,7 +385,7 @@ In case you're worried for the flaws that plague Retro Tap to be present in Retr
 
 That is it for all the available QMK tap hold configuration settings. In summary, there is only one essential tap hold setting: `TAPPING_TERM`. Even then, chances are that you won't even need to tweak it since the default value will suit most users.
 
-Aside from that, there exists another very commonly recommended setting: `QUICK_TAP_TERM`. Don't be misled by the name, it is not about quick taps but about the behaviour of the key if you double-press it within a certain time window. It is recommended to set it to 0 or another very low value.
+Aside from that, there exists another very commonly recommended setting: `QUICK_TAP_TERM`. Don't be misled by the name, it is not about quick taps but about the behavior of the key if you double-press it within a certain time window. It is recommended to set it to 0 or another very low value.
 
 `PERMISSIVE_HOLD` can be useful if you have a very high tapping term. If you have a lower tapping term, `PERMISSIVE_HOLD` generally produces many misfires unless you're very consistent in your typing style so it is not recommended.
 
@@ -530,7 +532,7 @@ KMonad isn't the only computer program which features mod-taps, it's been preced
 
 That's not to say that KMonad uses the same configuration options as QMK does. They're different programs made by different people.
 
-If you want to tweak the mod-tap functionality, which by the way is called a "multi-use button" in KMonad, the way to go is to use the button that fits your desired behaviour. KMonad has a bunch of mod-tap buttons. The one that's of interest for home row mods is `tap-hold-next-release`.
+If you want to tweak the mod-tap functionality, which by the way is called a "multi-use button" in KMonad, the way to go is to use the button that fits your desired behavior. KMonad has a bunch of mod-tap buttons. The one that's of interest for home row mods is `tap-hold-next-release`.
 
 `tap-hold-next-release` works best for home row mods as it reliably acts exactly like a modifier past the tapping term and activates the "tapping" button in rolling sequences. For more information on how it works and how the other multi-use buttons work, refer to the [configuration tutorial], and in particular, the [section on multi-use buttons].
 
@@ -602,7 +604,7 @@ The `defcfg` code block looks like this:
 
 #### 2. defsrc
 
-This is where you specify the physical keys on which you want KMonad to apply. If all you want to do is add home row mods to your board and keep normal behaviour for every other key, enable `fallthrough` in the `defcfg` block and paste the following `defsrc` block to your `.kbd` configuration file:
+This is where you specify the physical keys on which you want KMonad to apply. If all you want to do is add home row mods to your board and keep normal behavior for every other key, enable `fallthrough` in the `defcfg` block and paste the following `defsrc` block to your `.kbd` configuration file:
 
 {% highlight clojure %}
 (defsrc
@@ -980,7 +982,7 @@ Naturally, this can be a little disappointing. Especially if you want to [put ho
 
 Fear not! As there exists a trick which doesn't force you to give up on the idea of using non-basic keycodes in mod-taps or to recode the entire mod-tap logic from scratch.
 
-The idea behind the trick is to create a mod-tap key as usual and let QMK naturally deal with the holding function of the mod-tap as well as the decision between tap and hold but override the normal tapping behaviour with our custom code in `process_record_user`.
+The idea behind the trick is to create a mod-tap key as usual and let QMK naturally deal with the holding function of the mod-tap as well as the decision between tap and hold but override the normal tapping behavior with our custom code in `process_record_user`.
 
 When creating the mod-tap key with QMK's built-in `MT()` function, you need to choose a dummy keycode for the tapping function that you know you'll never actually use. This can be any of the function keys in the range 13–24 or a keycode that's unsupported by all major operating systems like `KC_LANG6` or `KC_CRSEL`, or a dummy custom keycode created solely for this purpose. Regardless of what you choose, the OS will never receive the dummy keycode from your keyboard.
 
@@ -1000,7 +1002,7 @@ Note: `MT(MOD_LGUI, kc)`, `LGUI_T(kc)`, and `CMD_T(kc)` are all equivalent
 
 To make things easier to read, I strongly recommend using aliases. How are you supposed to know, from cursory glance, that `MT(MOD_LGUI, KC_F23)` will actually output "#" on tap and not send <kbd>F23</kbd>?
 
-It can be tempting to use `LGUI_T(KC_HASH)` and it would still work but you need to realise that `LGUI_T(KC_HASH)` is the same as `LGUI_T(S(KC_3))` which, as explained earlier, gets converted to `LGUI_T(KC_3)`. This means that if you override the default tap behaviour for `LGUI_T(KC_HASH)`, you will also override the behaviour of `LGUI_T(KC_3)`. For this reason, it's not recommended to do that.
+It can be tempting to use `LGUI_T(KC_HASH)` and it would still work but you need to realise that `LGUI_T(KC_HASH)` is the same as `LGUI_T(S(KC_3))` which, as explained earlier, gets converted to `LGUI_T(KC_3)`. This means that if you override the default tap behavior for `LGUI_T(KC_HASH)`, you will also override the behavior of `LGUI_T(KC_3)`. For this reason, it's not recommended to do that.
 
 The next step is to write a case for our newly created special mod-tap in the switch statement of the `process_record_user` function.
 
@@ -1064,8 +1066,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         /*
         Detect the tap.
-        We're only interested in overriding the tap behaviour
-        in a certain cicumstance. The hold behaviour can stay the same.
+        We're only interested in overriding the tap behavior
+        in a certain cicumstance. The hold behavior can stay the same.
         */
         if (record->event.pressed && record->tap.count > 0) {
             // Detect right Shift
@@ -1147,7 +1149,7 @@ and vice versa for the right hand;
 
 This trick is about cancelling the effect of home row Shift mod-tap on a nearby home row mod-tap but nothing prevents you from cancelling the effect of home row non-Shift mod-tap on another key that isn't even a mod-tap at all. It can be generalized.
 
-Sticking with the Colemak example, imagine you have repetitive accidental mod activations when doing `RGUI_T(KC_O)`+`KC_U` when rolling keys for the bigram "ou". You can add a case in your `process_record_user` for `KC_U` where you check the mod state for `RGUI` and override the default behaviour by sending "ou" instead of <kbd>GUI</kbd>+<kbd>U</kbd>.
+Sticking with the Colemak example, imagine you have repetitive accidental mod activations when doing `RGUI_T(KC_O)`+`KC_U` when rolling keys for the bigram "ou". You can add a case in your `process_record_user` for `KC_U` where you check the mod state for `RGUI` and override the default behavior by sending "ou" instead of <kbd>GUI</kbd>+<kbd>U</kbd>.
 
 That being said, I want to clarify that this trick is most definitely not necessary for an enjoyable home row mods experience.
 I've mentioned it here just to give another example why you might want to distinguish between right hand and left hand home row mods. You don't need to go this far.
@@ -1371,7 +1373,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 | Why use home row mods?  | It's a more ergonomic and efficient way to use modifiers |
 | How to use home row mods? | Either use a QMK keyboard or install KMonad |
 | How to lay out the modifiers on the home row? | It does not matter. If you're undecided, you can go for [GACS/◆⎇⎈⇧](#gacs) |
-| What tap hold configuration settings should I enable? | Keep it default. A low `QUICK_TAP_TERM` can prove useful though. |
+| What tap hold configuration settings should I enable? | On QMK version ≥0.21, keep it default. A low `QUICK_TAP_TERM` can also prove useful. |
 | How do I get started with home row mods on QMK or KMonad? | Go to the generator for the program you wish to use ([QMK](#qmk-home-row-mods-code-generator)) ([KMonad](#kmonad-home-row-mods-code-generator)), select your options and click on the button "Generate". Follow the instructions to figure out where to paste the generated output |
 | What's the most important tip for using home row mods? | Get into the habit of typing with quick, swift taps. |
 
@@ -1382,7 +1384,7 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 * Removed outdated mentions of `IGNORE_MOD_TAP_INTERRUPT`
 * Added section on `HOLD_ON_OTHER_KEY_PRESS`.
 * Updated Tapping Force Hold section to talk about the new equivalent Quick Tap Term instead.
-* Removed outdated information about `PERMISSIVE_HOLD`-like behaviour automatically getting enabled if `TAPPING_TERM` ≥ 500ms.
+* Removed outdated information about `PERMISSIVE_HOLD`-like behavior automatically getting enabled if `TAPPING_TERM` ≥ 500ms.
 * Updated supported keyboards count.
 
 03 Feb 2021:
