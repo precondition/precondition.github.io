@@ -960,6 +960,9 @@ As for the question on whether to keep the Shift mod-tap on the home row, it is 
 
 Nonetheless, it still doesn't deserve to be placed in the outer home row position.
 
+If you want to go one step further, you can check out [Caps Word](https://docs.qmk.fm/#/feature_caps_word) which works like a caps lock key that automatically toggles off once you're done typing a word.
+If you ever used caps lock to write a MACRO_IDENTIFIER in insert mode and forgot to toggle it off before entering back into normal mode in Vim and caused subsequent havoc before realizing your mistake, this is the perfect solution.
+
 ## Mechanical switch type
 
 Light tactile switches or clicky switches help with making short, light, snappy taps, and the feedback masks the lag of tap on release.
@@ -1379,6 +1382,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 <details>
 <summary markdown="span">Updates Log</summary>
+19 Jun 2023:
+* Mentioned Caps Word in the section about Caps Lock
+
 18 Jun 2023:
 * Updated explanations regarding the new default behavior of modtaps.
 * Removed outdated mentions of `IGNORE_MOD_TAP_INTERRUPT`
