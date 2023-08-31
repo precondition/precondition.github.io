@@ -369,7 +369,28 @@ What if you use another way to bring up the start menu? You'll still have a prob
 
 The Alt and GUI modifiers aren't the only problem, think of the mouse too. The firmware that's running on your keyboard cannot tell that you have clicked or scrolled the mouse wheel while holding down a mod-tap key. All it sees is that you've been holding down a mod-tap for more than the tapping term and released it without pressing any other key in between. As we now know, this is the cue for the firmware to activate the tapping function of the mod-tap in question if retro tap is enabled. <kbd>Ctrl</kbd>+<kbd>Left-Click</kbd> to open a link in a new tab or <kbd>Shift</kbd>+<kbd>Scrollwheel</kbd> to scroll sideways would thus be accompanied with unintended letters.
 
-One proposed solution is [sending a dummy keycode to neutralize the flashing modifiers](https://github.com/qmk/qmk_firmware/pull/20992) but it is still an open pull request.
+To counteract this, QMK lets you define a `DUMMY_MOD_NEUTRALIZER_KEYCODE` in `config.h` that will get sent in between the register and unregister events of a held mod-tap key. That way, the programs on your computer will no longer interpret the mod suppression induced by retro-tapping as a lone tap of a modifier key and will thus not falsely trigger the undesired action.
+
+Naturally, for this technique to be effective, you must choose a `DUMMY_MOD_NEUTRALIZER_KEYCODE` for which no keyboard shortcuts are bound to. Recommended values are: `KC_RIGHT_CTRL` or `KC_F18`. 
+Please note that `DUMMY_MOD_NEUTRALIZER_KEYCODE` must be a basic, unmodified, HID keycode so values like `KC_NO`, `KC_TRANSPARENT` or `KC_PIPE` aka `S(KC_BACKSLASH)` are not permitted.
+
+By default, only left Alt and left GUI are neutralized. If you want to change the list of applicable modifier masks, use the following in your `config.h`:
+
+```c
+#define MODS_TO_NEUTRALIZE { <mod_mask_1>, <mod_mask_2>, ... }
+```
+
+Examples:
+
+```c
+#define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_RIGHT_CTRL
+
+// Neutralize left alt and left GUI (Default value)
+#define MODS_TO_NEUTRALIZE { MOD_BIT(KC_LEFT_ALT), MOD_BIT(KC_LEFT_GUI) }
+
+// Neutralize left alt, left GUI, right GUI and left Control+Shift
+#define MODS_TO_NEUTRALIZE { MOD_BIT(KC_LEFT_ALT), MOD_BIT(KC_LEFT_GUI), MOD_BIT(KC_RIGHT_GUI), MOD_BIT(KC_LEFT_CTRL)|MOD_BIT(KC_LEFT_SHIFT) }
+```
 
 #### Retro Shift
 
@@ -1384,6 +1405,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 <details>
 <summary markdown="span">Updates Log</summary>
+31 Aug 2023:
+* `DUMMY_NEUTRALIZER_KEYCODE` is now merged into `qmk:main` so I copy-pasted the explanation from the docs. (I am the author of that feature and its documentation so I'm not plagiarizing anyone by copy-pasting :p)
+
 19 Jun 2023:
 * Mentioned Caps Word in the section about Caps Lock
 * Mentioned the section about intercepting mod-taps in the official docs
