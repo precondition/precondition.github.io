@@ -136,7 +136,7 @@ It didn't take long to break through the 65WPM mark.
 Then, I figured that I do not need to practice sentences with punctuations and capitalisations so much as I need to practice words containing “e” so I moved to [monkey-type.com](https://monkey-type.com/).
 Only 32 minutes had passed since I flashed my keyboard with <kbd>E</kbd> on thumb and I am already getting real close to my goal of 80WPM.
 
-![screenshot of monkey-type showing 69WPM](/assests/images/pressing-e-with-the-thumb/screenshot_of_monkey_type_showing_69_wpm.png)
+![screenshot of monkey-type showing 69WPM](/assets/images/pressing-e-with-the-thumb/screenshot_of_monkey_type_showing_69_wpm.png)
 
 At that point, I took a break and after a full day spent without any keyboard (or computer for that matter), I went back to my typing tests. This is when I reached my goal.
 
