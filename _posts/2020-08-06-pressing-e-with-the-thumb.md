@@ -88,7 +88,7 @@ Logical layouts/keymaps which add <kbd>E</kbd> on the thumb:
 * [ANISHTRO](https://github.com/lydell/anishtro)
 ![KLE diagram of the ANISHTRO v1 layout on minimal Kyria](/assets/images/ANISHTRO-KLE.png)
 * [TRIA](https://github.com/zigotica/kyria)
-![QMK configurator diagram of the TRIA layout on a Kyria](https://media.discordapp.net/attachments/745301752588271648/753602020962992138/Screenshot_2020-09-10_at_15.04.09.png)
+![QMK configurator diagram of the TRIA layout on a Kyria](/assets/images/pressing-e-with-the-thumb/QMK_configurator_diagram_of_the_TRIA_layout_on_a_Kyria.png)
 
 Logical layouts/keymaps which add another letter (circled) on the thumb:
 * [BEAKL Zi](http://thedarnedestthing.com/corne) <kbd>I</kbd>
@@ -127,24 +127,24 @@ Now, it was time to figure out how long it would take me to get back to ~80WPM u
 
 After merely a few minutes of practicing <kbd>E</kbd> on thumb using the terminal application “[wpm](https://github.com/cslarsen/wpm)”, I had already reached 57WPM for some sentences.
 
-![screenshot of wpm showing 57.0 WPM](https://media.discordapp.net/attachments/663573863480950808/726033697916190730/unknown.png?width=1260&height=266)
+![screenshot of wpm showing 57.0 WPM](/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_57_wpm.png)
 
 It didn't take long to break through the 65WPM mark.
 
-![screenshot of wpm showing 65.6 WPM](https://media.discordapp.net/attachments/663573863480950808/726034143003017276/unknown.png?width=1260&height=306)
+![screenshot of wpm showing 65.6 WPM](/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_65_wpm.png)
 
 Then, I figured that I do not need to practice sentences with punctuations and capitalisations so much as I need to practice words containing “e” so I moved to [monkey-type.com](https://monkey-type.com/).
 Only 32 minutes had passed since I flashed my keyboard with <kbd>E</kbd> on thumb and I am already getting real close to my goal of 80WPM.
 
-![screenshot of monkey-type showing 69WPM](https://media.discordapp.net/attachments/663573863480950808/726040383951339601/unknown.png?width=1260&height=352)
+![screenshot of monkey-type showing 69WPM](/assests/images/pressing-e-with-the-thumb/screenshot_of_monkey_type_showing_69_wpm.png)
 
 At that point, I took a break and after a full day spent without any keyboard (or computer for that matter), I went back to my typing tests. This is when I reached my goal.
 
-![screenshot of wpm with 84.3 WPM](https://media.discordapp.net/attachments/663573863480950808/726811215350857799/unknown.png)
+![screenshot of wpm with 84.3 WPM](/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_84_wpm.png)
 
 In fact, I even surpassed my goal.
 
-![screenshot of wpm with 97.9 WPM](https://media.discordapp.net/attachments/663573863480950808/726850211913138309/unknown.png)
+![screenshot of wpm with 97.9 WPM](/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_97_wpm.png)
 
 Despite all that, I still wasn't fully used to <kbd>E</kbd> on thumb yet. More often than not, I was still hitting the previous position of <kbd>E</kbd>. The screenshots I've shared here are the results of successful *sprints*, they do not really reflect the casual typing speed. Disclaimers aside, this still goes to show that it's actually not so hard to get used to <kbd>E</kbd> on thumb, it has only taken me a few hours to get to an acceptable speed.
 
