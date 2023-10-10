@@ -34,15 +34,12 @@ Let's first deconstruct the term. The "home row" refers to the middle row of alp
 <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd><kbd>G</kbd><kbd>H</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd><kbd>;</kbd>.
 This row is called the "*home* row" because if one were to follow touch typing technique, this is the row of keys on which your fingers are supposed to rest on. The bars or the dish found on <kbd>F</kbd> and <kbd>J</kbd> help to find back the home position without looking at the keyboard — this is especially important for relatively big keyboards which require you to move your hands to hit some of the keys like for example <kbd>Backspace</kbd> or the arrow keys on a classic <abbr title="Ten Key Less">TKL</abbr> and thus throw you off home position.
 
-<figure>
-<a href="https://hygo.com/wp-content/uploads/2017/06/f-j-5-bumps-on-keyboard.jpg">
-        <img src="https://hygo.com/wp-content/uploads/2017/06/f-j-5-bumps-on-keyboard.jpg"
-        alt="Zoom in on a keyboard with grey QWERTY keycaps with the F and J keys circled in red">
-</a>
-<figcaption>
-Homing bars
-</figcaption>
-</figure>
+{%
+    include figure.html
+    src="assets/images/home-row-mods/f-j-bumps-on-keyboard.jpg"
+    caption="Homing bars"
+    alt="Zoom in on a keyboard with grey QWERTY keycaps with the F and J keys circled in red"
+%}
 
 Next is "mods". What is meant by "mods"? In this case, "mods" refer to modifiers, that is to say <kbd>⇧ Shift</kbd>, <kbd>⎈ Control</kbd>, <kbd>⎇ Alt</kbd>, and <kbd>◆ GUI</kbd>. The last modifier in the list is also known as WinKey on Windows, Command on MacOS or Super/Meta[^1] on Linux and BSD. Do not confuse the term with actual graphical user interfaces.
 
