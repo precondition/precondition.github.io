@@ -1,0 +1,6 @@
+- Introduction
+  - [What are home row mods?](/intro/what.md)
+  - [Why use home row mods?](/intro/why.md)
+- How to
+  - [How to use home row mods?](/howto/how.md)
+- [Implementation](/implementation/withQMK.md)
