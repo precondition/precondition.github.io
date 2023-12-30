@@ -108,7 +108,7 @@ Logical layouts/keymaps which add another letter (circled) on the thumb:
 * [ENNe 9640PM](https://keyboard-design.com/letterlayout.html?layout=eNNe-9640PM.en.ergodox) <kbd>T</kbd>
 ![KLE keyboard-design.com diagram of ENNE-9640PM](https://keyboard-design.com/klalayouts/eNNe-9640PM.en.ergodox.jpg)
 * [Marsan](https://www.persee.fr/doc/linx_0246-8743_1991_hos_4_1_1206) <kbd>C</kbd> <kbd>G</kbd> (link in French) (this one is absolutely **awful**. there is no space key, you have to move that little stick under àÀ from right to left with your left thumb for space, everything is wrong with this “ergonomic” keyboard but I had to include it for completeness sake)
-![Patent drawing of the Marsan keyboard](https://www.qeyboard.fr/wordpress/wp-content/uploads/2016/12/clavier-marsan.png)
+![Patent drawing of the Marsan keyboard](/assets/images/pressing-e-with-the-thumb/clavier-marsan.png)
 
 This short list will be exhaustive — leave a comment if there's a Malt-like layout I've missed! — if we add in my mod to Colemak-DHm which moves <kbd>E</kbd> on the right thumb key like TRIA, as opposed to all those other layouts which put the letter on the left. I've always pressed space with my left thumb and I'm not going to change that habit any time soon. Additionally, <kbd>E</kbd> was on the right hand to begin with so it makes sense to keep it on the right hand.
 
