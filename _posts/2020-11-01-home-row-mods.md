@@ -5,9 +5,10 @@ cover: assets/images/home-row-mods/RealisticHRM-Light-Cover-Half-GASC.jpeg
 navigation: True
 title: A guide to home row mods
 date: 2020-12-12
-last-update: 2023-06-18
+last-update: 2023-08-31
 category: Keyboards
 tags: [Keymap, QMK]
+pinned: True
 class: post-template
 subclass: 'post'
 author: precondition
