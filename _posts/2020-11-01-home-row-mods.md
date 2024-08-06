@@ -840,7 +840,7 @@ That being said, it won't take you long to get annoyed from having to edit `conf
 
 | Key       | Description                                                                   |
 |-----------|-------------------------------------------------------------------------------|
-| `DT_PRINT`| "Dynamic Tapping Term Print": Types the current tapping term, in milliseconds |
+| `DT_PRNT`| "Dynamic Tapping Term Print": Types the current tapping term, in milliseconds |
 | `DT_UP`   | "Dynamic Tapping Term Up": Increases the current tapping term by 5ms          |
 | `DT_DOWN` | "Dynamic Tapping Term Down": Decreases the current tapping term by 5ms        |
 
@@ -1436,6 +1436,9 @@ In summary, home row mods are an unorthodox, innovative way to use modifiers erg
 
 18 Mar 2023:
 * Added a short note about the breaking change `TAPPING_FORCE_HOLD` → `QUICK_TAP_TERM` in QMK.
+
+6 Aug 2024:
+* Replaced `DT_PRINT` typo by `DT_PRNT`.
 </details>
 
 <h5 class="no_toc" id="footnotes">Footnotes</h5>
