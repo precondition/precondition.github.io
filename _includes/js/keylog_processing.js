@@ -27,7 +27,7 @@ document.getElementById("pictureFile").addEventListener("change", function(){
 
       reader.onerror = function (evt) {
         console.error("An error ocurred reading the pictureFile",evt);
-        alert("An error ocurred reading while reading the file.");
+        alert("An error occurred reading while reading the file.");
       };
 
       reader.readAsDataURL(pictureFile);
@@ -63,7 +63,7 @@ tx.addEventListener("input", function OnInput() {
 // Constants taken from here:
 // https://github.com/qmk/qmk_firmware/blob/620a946d01477b64ee2f719141aa35400c0188c6/lib/python/qmk/constants.py#L22...L24
 const ROW_LETTERS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop'
-const COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijilmnopqrstuvwxyz'
+const COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 // Taken from the length of ROW_LETTERS and COL_LETTERS
 const MAX_ROW = 52;
 const MAX_COL = 52;
@@ -377,7 +377,7 @@ document.getElementById("csvFile").addEventListener("change", function(){
       };
 
       reader.onerror = function (evt) {
-        console.error("An error ocurred reading the csvFile",evt);
+        console.error("An error occurred reading the csvFile",evt);
       };
 
       reader.readAsText(csvFile, "UTF-8");
