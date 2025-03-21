@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>/pressing-e-with-the-thumb</loc>
+<lastmod>2020-08-06T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>/home-row-mods</loc>
+<lastmod>2020-12-12T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>/qmk-heatmap</loc>
+<lastmod>2021-02-19T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>/</loc>
+</url>
+<url>
+<loc>/about/</loc>
+</url>
+<url>
+<loc>/tag/keyboards/</loc>
+</url>
+<url>
+<loc>/tag/keymap/</loc>
+</url>
+<url>
+<loc>/tag/qmk/</loc>
+</url>
+</urlset>

@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator>
+  <link href="/tag/keyboards/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="/" rel="alternate" type="text/html" />
+  <updated>2025-03-21T00:03:48+00:00</updated>
+  <id>/tag/keyboards/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">precondition | </title>
+  
+
+  
+    <subtitle>Typing about what I type on</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">QMK Heatmap Generator</title>
+      <link href="/qmk-heatmap" rel="alternate" type="text/html" title="QMK Heatmap Generator" />
+      <published>2021-02-19T00:00:00+00:00</published>
+      <updated>2021-02-19T00:00:00+00:00</updated>
+      <id>/qmk-heatmap</id>
+      <content type="html" xml:base="/qmk-heatmap">&lt;p&gt;Show key presses coming from:
+&lt;select id=&quot;layerSelector&quot; onchange=&quot;displayLayer(this.value)&quot;&gt;
+&lt;!-- The value of &quot;All layers&quot; is an arbitrary big number that will be converted to highestLayer+1 --&gt;
+&lt;option value=&quot;99&quot;&gt;All layers&lt;/option&gt;
+&lt;option value=&quot;0&quot;&gt;Layer 0&lt;/option&gt;
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;div id=&quot;keyboard&quot;&gt;
+  &lt;canvas id=&quot;bgCanvas&quot; width=&quot;830&quot; height=&quot;290&quot;&gt;
+&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;div id=&quot;howToMatchMatrix&quot; style=&quot;display: none;min-width: 100%;text-align: center;&quot;&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;pre class=&quot;highlight&quot; id=&quot;matrixToMatch&quot; style=&quot;display:none; line-height:16px;&quot;&gt;&lt;/pre&gt;
+&lt;div class=&quot;upload-btn-wrapper&quot; id=&quot;resetMatrixBtnWrapper&quot; style=&quot;display:none;&quot;&gt;
+  &lt;label class=&quot;btn&quot; for=&quot;resetInfoMatrix&quot;&gt;Use another matrix&lt;/label&gt;
+  &lt;button id=&quot;resetInfoMatrix&quot; style=&quot;position:absolute&quot; onclick=&quot;resetMatrix()&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;textarea class=&quot;qmkInfoMatrix&quot; id=&quot;infoMatrix&quot; rows=&quot;5&quot; placeholder=&quot;Paste the matrix layout outputted by `qmk info -m` here&quot; onchange=&quot;reactToTextAreaChanges(document.getElementById('infoMatrix'))&quot; enabled=&quot;&quot;&gt;&lt;/textarea&gt;
+&lt;div class=&quot;upload-btn-wrapper&quot;&gt;
+  &lt;label class=&quot;btn&quot; for=&quot;pictureFile&quot;&gt;Upload keyboard picture&lt;/label&gt;
+  &lt;input type=&quot;file&quot; id=&quot;pictureFile&quot; class=&quot;btn&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;upload-btn-wrapper&quot; id=&quot;csvFileBtnWrapper&quot; style=&quot;display:none;&quot;&gt;
+  &lt;label class=&quot;btn&quot; for=&quot;csvFile&quot;&gt;Upload key log csv&lt;/label&gt;
+  &lt;input type=&quot;file&quot; id=&quot;csvFile&quot; /&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;what-it-is&quot;&gt;What it is&lt;/h1&gt;
+&lt;p&gt;This is a web-based tool to generate a pretty heatmap of your typing habits. As opposed to all the other available keyboard heatmap generators, this doesn’t merely analyse a static piece of text and overlays the letter frequency of said piece of text over a picture of the most basic row-stagger keyboard. This generator has full support for unprintable keys like backspace, modifier keys, caps lock, F-keys, arrow keys etc. Additionally, advanced QMK features such as layers, modtaps, layertaps, &lt;a href=&quot;home-row-mods&quot;&gt;home row mods&lt;/a&gt;, leader keys, autoshift, and even combos are also supported.&lt;/p&gt;
+
+&lt;p&gt;Since QMK keyboards come in all shapes and sizes, you’re invited to upload your own picture of your layout/keymap. It doesn’t matter whether you use a TKL, an Atreus or a Dactyl Manuform; if it’s available on the &lt;a href=&quot;https://config.qmk.fm/#/&quot;&gt;QMK configurator&lt;/a&gt;, it’s supported.&lt;/p&gt;
+
+&lt;!--
+Mini version of my Dactyl Manuform 5x6 for testing
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│1B││1C││1D││1E││1F│                    │7A││7B││7C││7D││7E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│2B││2C││2D││2E││2F│                    │8A││8B││8C││8D││8E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│3B││3C││3D││3E││3F│                    │9A││9B││9C││9D││9E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+                ┌──┐┌──┐                    ┌──┐┌──┐
+                │4E││4F│                    │AA││AB│
+                └──┘└──┘                    └──┘└──┘
+--&gt;
+
+&lt;h1 id=&quot;gallery&quot;&gt;Gallery&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/qmk-heatmap/precondition-dactyl-manuform-heatmap.png&quot; alt=&quot;Precondition's Dactyl Manuform 5x6 heatmap&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;instructions&quot;&gt;Instructions&lt;/h1&gt;
+
+&lt;p&gt;The QMK Heatmap Generator expects:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;A picture of your layout&lt;/li&gt;
+  &lt;li&gt;A text representation of the matrix positions of your keyboard&lt;/li&gt;
+  &lt;li&gt;A link between each key in the matrix to the corresponding key in the provided picture&lt;/li&gt;
+  &lt;li&gt;A keylog CSV file in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keycode,row,col,layer&lt;/code&gt; format (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keycode&lt;/code&gt; can be omitted)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you don’t have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; file yet, jump to the section on “&lt;a href=&quot;#how-to-collect-the-required-data&quot;&gt;How to collect the required data&lt;/a&gt;”. It is pointless to go through steps 1–3 if you don’t already have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; file that contains at least 1000 entries.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-a-picture-of-your-layout&quot;&gt;1. A picture of your layout&lt;/h2&gt;
+&lt;p&gt;The first thing you need to do is to upload a picture of your layout. It can be any image you want but for best effects, I recommend a 2D black and white picture with high contrast. Avoid blue, green, yellow, and red in your layout graphic as those are used to draw the heatmap. If you don’t already have a graphic representation of your keymap, you can use &lt;a href=&quot;https://keyboard-layout-editor.com&quot;&gt;keyboard-layout-editor&lt;/a&gt; or take a screenshot from the &lt;a href=&quot;https://config.qmk.fm/#/&quot;&gt;QMK configurator&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Avoid uploading a picture which separates all your different layers like in &lt;a href=&quot;/assets/images/qmk-heatmap/keymap_layout_broken_down_by_layers.png&quot;&gt;this example&lt;/a&gt;. You only get to match as many keys as you have submitted in the text box for the ASCII representation of your board.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-a-text-representation-of-the-matrix-positions-of-your-keyboard&quot;&gt;2. A text representation of the matrix positions of your keyboard&lt;/h2&gt;
+&lt;p&gt;Next, you can see a text box prompting you to paste the text representation of the matrix layout produced by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk info --matrix&lt;/code&gt;, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk info -m&lt;/code&gt; in short. If you wish to obtain the pseudo-graphic layout for another board than your main (as defined by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk config&lt;/code&gt;), you can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk info -kb &amp;lt;name&amp;gt; -m&lt;/code&gt;. For example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk info -kb handwired/dactyl -m&lt;/code&gt; produces the following output:&lt;/p&gt;
+
+&lt;pre style=&quot;line-height:16px&quot;&gt;
+Keyboard Name: Dactyl
+Manufacturer: Unknown
+Website: 
+Maintainer: QMK Community
+Keyboard Folder: handwired/dactyl
+Layouts: LAYOUT_dactyl
+Size: 17 x 8
+Processor: atmega32u4
+Bootloader: halfkay
+Matrix for &quot;LAYOUT_dactyl&quot;:
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│0A││0B││0C││0D││0E││0F│                    │0G││0H││0I││0J││0K││0L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│1A││1B││1C││1D││1E││1F│                    │1G││1H││1I││1J││1K││1L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│2A││2B││2C││2D││2E││2F│                    │2G││2H││2I││2J││2K││2L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│3A││3B││3C││3D││3E││3F│                    │3G││3H││3I││3J││3K││3L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                            ┌──┐┌──┐┌──┐┌──┐┌──┐
+│4A││4B││4C││4D││4E│                            │4H││4I││4J││4K││4L│
+└──┘└──┘└──┘└──┘└──┘                            └──┘└──┘└──┘└──┘└──┘
+                        ┌──┐┌──┐    ┌──┐┌──┐
+                        │5F││5A│    │5L││5G│
+                        └──┘└──┘    └──┘└──┘
+                    ┌──┐┌──┐┌──┐    ┌──┐┌──┐┌──┐
+                    │5D││5C││5E│    │5H││5J││5I│
+                    │  ││  │└──┘    └──┘│  ││  │
+                    │  ││  │┌──┐    ┌──┐│  ││  │
+                    │  ││  ││5B│    │5K││  ││  │
+                    └──┘└──┘└──┘    └──┘└──┘└──┘
+&lt;/pre&gt;
+
+&lt;p&gt;Only copy-paste the lines after “Matrix for …”.&lt;/p&gt;
+
+&lt;p&gt;Note: for a handwired board, there is the possibility that the actual wiring of your board differs from that of the matrix &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qmk info -m&lt;/code&gt; spits out. Double check that if you notice a key you rarely press gets colored in bright colors.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-a-link-between-each-key-in-the-matrix-to-the-corresponding-key-in-the-provided-picture&quot;&gt;3. A link between each key in the matrix to the corresponding key in the provided picture&lt;/h2&gt;
+&lt;p&gt;After pasting the matrix into the text area, left click on the picture the spot that corresponds to each key in the text matrix starting from the top left corner and moving from left to right, top to bottom.&lt;/p&gt;
+
+&lt;p&gt;Watch out for columnar staggered boards like the Lily 58. The web-tool reads in the matrix line by line so the following matrix:&lt;/p&gt;
+&lt;pre style=&quot;line-height:16px&quot;&gt;
+            ┌──┐                                  ┌──┐
+        ┌──┐│0D│┌──┐┌──┐                  ┌──┐┌──┐│5C│┌──┐
+┌──┐┌──┐│0C│└──┘│0E││0F│                  │5A││5B│└──┘│5D│┌──┐┌──┐
+│0A││0B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│5E││5F│
+└──┘└──┘┌──┐│1D│┌──┐┌──┐                  ┌──┐┌──┐│6C│┌──┐└──┘└──┘
+┌──┐┌──┐│1C│└──┘│1E││1F│                  │6A││6B│└──┘│6D│┌──┐┌──┐
+│1A││1B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│6E││6F│
+└──┘└──┘┌──┐│2D│┌──┐┌──┐                  ┌──┐┌──┐│7C│┌──┐└──┘└──┘
+┌──┐┌──┐│2C│└──┘│2E││2F│                  │7A││7B│└──┘│7D│┌──┐┌──┐
+│2A││2B│└──┘┌──┐└──┘└──┘┌──┐          ┌──┐└──┘└──┘┌──┐└──┘│7E││7F│
+└──┘└──┘┌──┐│3D│┌──┐┌──┐│4F│          │8A│┌──┐┌──┐│8D│┌──┐└──┘└──┘
+┌──┐┌──┐│3C│└──┘│3E││3F│└──┘          └──┘│8B││8C│└──┘│8E│┌──┐┌──┐
+│3A││3B│└──┘    └──┘└──┘                  └──┘└──┘    └──┘│8F││9F│
+└──┘└──┘  ┌──┐┌──┐┌──┐  ┌──┐          ┌──┐  ┌──┐┌──┐┌──┐  └──┘└──┘
+          │4B││4C││4D│  │4E│          │9B│  │9C││9D││9E│
+          └──┘└──┘└──┘  │  │          │  │  └──┘└──┘└──┘
+                        │  │          │  │
+                        └──┘          └──┘
+&lt;/pre&gt;
+&lt;p&gt;will read keys in the following order:&lt;/p&gt;
+&lt;video controls=&quot;&quot; width=&quot;922&quot;&gt;
+&lt;source src=&quot;assets/images/qmk-heatmap/matching-columnar-stagger-lily58.webm&quot; alt=&quot;0D 5C 0C 0E 0F 5A 5B 5D 0A 0B 5E 5F 1D 6C 1C 1E 1F 6A 6B 6D 1A 1B 6E 6F&quot; type=&quot;video/webm&quot; /&gt;
+&lt;/video&gt;
+
+&lt;p&gt;Is it annoying? Yes. I’m currently working on a desktop app that makes this process a lot more convenient. In the app, you’ll be able to select a bunch of circles at once, copy, drag and paste them wherever you want, undo and redo previous actions and more, so stay tuned!&lt;/p&gt;
+
+&lt;p&gt;If you misclicked or placed the dot a few millimeters away from the true center of the keycap and it’s driving you mad, you can Shift+Left Click anywhere on the canvas to undo the last operation.&lt;/p&gt;
+
+&lt;p&gt;Click a final time on the picture after having matched all matrix positions to points on the image to save the matching pairs and finally spawn the button that will let you upload your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-generating-a-heatmap&quot;&gt;4. Generating a heatmap&lt;/h2&gt;
+&lt;p&gt;After having collected enough data in the expected format, you can now submit your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; file (the exact name of the csv file isn’t important) to the above tool in order to generate a pretty heatmap of your typing habits.&lt;/p&gt;
+
+&lt;p&gt;A heatmap overlay will appear over the keys as soon as you upload the file.&lt;/p&gt;
+
+&lt;p&gt;NOTE: Make sure the keylog file is encoded in UTF-8! Windows may create a UTF-16 file if you pipe the output of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hid_listen&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;how-to-collect-the-required-data&quot;&gt;How to collect the required data&lt;/h1&gt;
+
+&lt;p&gt;To accurately modelize your typing habits, you first need to collect enough real-word data. The more, the better.&lt;/p&gt;
+
+&lt;p&gt;To avoid skewing results, don’t play typing games such &lt;a href=&quot;https://monkeytype.com&quot;&gt;monkeytype&lt;/a&gt; or &lt;a href=&quot;https://typingracer.com&quot;&gt;typingracer&lt;/a&gt; while logging your keystrokes. Typing random strings of words and movie quotes isn’t a good reflection of your actual keyboard usage — unless you’re into competitive typing.&lt;/p&gt;
+
+&lt;p&gt;To collect key strokes data in the expected format, there are two things you need to setup:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Keyboard firmware&lt;/li&gt;
+  &lt;li&gt;A program that logs what the keyboard firmware sends into a csv file&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;(The following instructions primarily cater to users of a UNIX environment — sorry Windows users.)&lt;/p&gt;
+
+&lt;h2 id=&quot;keyboard-firmware-setup&quot;&gt;Keyboard firmware setup&lt;/h2&gt;
+
+&lt;p&gt;First off, you need to program your keyboard firmware to send your desired information to the host.&lt;/p&gt;
+
+&lt;p&gt;To do that, append the following line to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rules.mk&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-mk&quot;&gt;CONSOLE_ENABLE = yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, open &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keymap.c&lt;/code&gt; and add these lines at the top of the file. This will import the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uprintf&lt;/code&gt; function that we’ll later use, but only if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CONSOLE_ENABLE&lt;/code&gt; is turned on.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#ifdef CONSOLE_ENABLE
+#include&lt;/span&gt; &lt;span class=&quot;cpf&quot;&gt;&quot;print.h&quot;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#endif
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After including &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;print.h&lt;/code&gt;, head to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process_record_user&lt;/code&gt; function (More info about this function can be found &lt;a href=&quot;https://docs.qmk.fm/#/custom_quantum_functions?id=programming-the-behavior-of-any-keycode&quot;&gt;here&lt;/a&gt;) and write the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#ifdef&lt;/code&gt; code block just after the function signature but before the switch statement:&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;process_record_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint16_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keycode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyrecord_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#ifdef CONSOLE_ENABLE
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_combo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COMBO_EVENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;uprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;keycode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;is_combo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;254&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;is_combo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;254&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;get_highest_layer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layer_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pressed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;get_mods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;get_oneshot_mods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keycode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This will print the hexadecimal representation of every key you press as well as its row and its column. Make sure to not leave any space between the commas and to end the string with a newline &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Additional instructions for combos&lt;/summary&gt;
+  &lt;p&gt;If you want to log combo key presses, there are a few more things you need to do. If you’re using the wrapper &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[AB_ESC] = COMBO(combo_sequence, KC_ESC)&lt;/code&gt;, there is nothing extra that you have to do. However, here’s what you have to insert in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;processs_combo_event&lt;/code&gt; if you use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMBO_ACTION&lt;/code&gt; wrapper for defining (some of) your combos:&lt;/p&gt;
+  &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#ifdef CONSOLE_ENABLE
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;combo_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;combo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key_combos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;combo_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint8_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint16_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;combo_keycode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;combo_keycode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pgm_read_word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;combo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COMBO_END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;uprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0x%04X,%u,%u,%u,%u,0x%02X,0x%02X,0&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;combo_keycode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;mi&quot;&gt;254&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;mi&quot;&gt;254&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;get_highest_layer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layer_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;pressed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;get_mods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;get_oneshot_mods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;cm&quot;&gt;/* tap_count */&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  &lt;p&gt;As you can notice, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;processs_combo_event&lt;/code&gt; doesn’t actually give any meaningful information on the matrix position of combo key presses. This is why the row and column fields in the printed output are filled in with the “magic” constant value 254 (historically called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KEYLOC_COMBO&lt;/code&gt;).&lt;/p&gt;
+
+  &lt;p&gt;These “missing” constant values will be automatically filled in by the QMK Heatmap Generator based on keys you’ve typed outside of combos. For example, if you have a combo involving &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KC_A&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KC_S&lt;/code&gt;, executing the combo will output these two lines:&lt;/p&gt;
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0x004,254,254,0,1,0x00,0x00,0
+0x018,254,254,0,1,0x00,0x00,0
+0x004,254,254,0,0,0x00,0x00,0
+0x018,254,254,0,0,0x00,0x00,0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  &lt;p&gt;but simply tapping those keys by themselves, one after another would produce something like:&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0x004,3,2,0,1,0x00,0x00,0
+0x004,3,2,0,0,0x00,0x00,0
+0x018,3,3,0,1,0x00,0x00,0
+0x018,3,3,0,0,0x00,0x00,0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  &lt;p&gt;Based on this, we can infer that the keycode &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x004&lt;/code&gt; is positionned in the third row, second column and that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x018&lt;/code&gt; is positionned in the third row, third column.&lt;/p&gt;
+
+  &lt;p&gt;Thus, if you use a key &lt;em&gt;exclusively&lt;/em&gt; in combos, there won’t be any row,col information associated with that keycode in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; and as such, the generator cannot infer what’s the row and column of that key and it will remain 254. This is why it helps to press every key of your keyboard at least once; to get a complete record.&lt;/p&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;At this stage, the keyboard firmware is ready to go and you can flash the firmware onto your board.&lt;/p&gt;
+
+&lt;h2 id=&quot;host-computer-setup&quot;&gt;Host computer setup&lt;/h2&gt;
+
+&lt;p&gt;The next steps will be about setting up the host computer to listen to what the keyboard sends and actually log that output to a csv file.&lt;/p&gt;
+
+&lt;p&gt;To listen to your keyboard, you’ll need to install &lt;a href=&quot;https://www.pjrc.com/teensy/hid_listen.html&quot;&gt;hid_listen&lt;/a&gt;. There are pre-compiled binaries available for download for most operating systems except for Linux 64-bit for which you’ll need to download the source code and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make&lt;/code&gt; at the root of the downloaded &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hid_listen/&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;Now, all you need to start logging key presses is to let this command run in the background while you’re using your keyboard normally:&lt;/p&gt;
+
+&lt;p&gt;UNIX system:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./hid_listen | egrep &lt;span class=&quot;nt&quot;&gt;--line-buffered&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; keylog.csv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Windows system (Powershell):&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;\hid_listen.exe&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Select-String&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-Pattern&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tee-Object&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keylog.csv&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The output should look like this:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0x6117,2,4,0,1,0x00,0x00,0
+0x002A,10,0,0,1,0x01,0x00,0
+0x002A,10,0,0,0,0x01,0x00,0
+0x6117,2,4,0,0,0x01,0x00,0
+0x6216,2,3,0,1,0x00,0x00,1
+0x6216,2,3,0,0,0x00,0x00,1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Every time you press any key on your keyboard, a new line should be appended to the standard output and to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; file which will be stored in the same directory as that of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hid_listen&lt;/code&gt; executable file.&lt;/p&gt;
+
+&lt;p&gt;If you don’t want to flood the standard output, you can replace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;| tee -a&lt;/code&gt; by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&amp;gt;&lt;/code&gt; like so:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./hid_listen | egrep &lt;span class=&quot;nt&quot;&gt;--line-buffered&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; keylog.csv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This will silently append &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;keycode&amp;gt;,&amp;lt;row&amp;gt;,&amp;lt;col&amp;gt;,&amp;lt;layer&amp;gt;,&amp;lt;pressed&amp;gt;,&amp;lt;mod_state&amp;gt;,&amp;lt;oneshot_mod_state&amp;gt;,&amp;lt;tap_count&amp;gt;&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; anytime you press a key on your keyboard.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-should-i-trust-this-web-tool-with-my-keylogging-data&quot;&gt;Why should I trust this web-tool with my keylogging data?&lt;/h1&gt;
+&lt;p&gt;This entire website is static and open source, meaning none of your data gets sent to any server, all the processing happens client-side and anyone can inspect the code. More importantly, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keylog.csv&lt;/code&gt; file that you upload to the web-tool doesn’t actually contain the key&lt;em&gt;sym&lt;/em&gt; you’ve typed, only the raw hexadecimal key&lt;em&gt;codes&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, there isn’t one clear-cut keycode that will always produce “A” on screen. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KC_LSHIFT&lt;/code&gt; followed by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;KC_A&lt;/code&gt; will produce a different keycode from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;S(KC_A)&lt;/code&gt; and yet produces the same final output nonetheless. Tapping &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LGUI_T(KC_A)&lt;/code&gt; will result in yet another hexadecimal keycode and so will &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LT(_LAYER, KC_A)&lt;/code&gt;. And all of that doesn’t take into account the variability of regional OS keyboard layouts. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x0004&lt;/code&gt; would get interpreted as “a” if your OS is configured to use QWERTY but for all I know, you may as well be using AZERTY, in which case that keycode will instead output “q” or, to give another example, “ф” if you use ЙЦУКЕН.&lt;/p&gt;
+
+&lt;p&gt;I have no desire to deal with that ambiguous mess.&lt;/p&gt;
+
+&lt;p&gt;The keycodes only get used to fill in the row,col values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) and shuffle the order of the csv lines before uploading it. All that really matters to the generator is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;row&lt;/code&gt;, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;col&lt;/code&gt;, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layer&lt;/code&gt; of each key press.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>precondition</name>
+        
+        
+      </author>
+
+      
+        <category term="Keyboards" />
+      
+
+      
+        <category term="Keyboards" />
+      
+        <category term="Keymap" />
+      
+        <category term="QMK" />
+      
+
+      
+        <summary type="html">Show key presses coming from: All layers Layer 0</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Pressing E with the thumb‽</title>
+      <link href="/pressing-e-with-the-thumb" rel="alternate" type="text/html" title="Pressing E with the thumb‽" />
+      <published>2020-08-06T00:00:00+00:00</published>
+      <updated>2020-08-06T00:00:00+00:00</updated>
+      <id>/pressing-e-with-the-thumb</id>
+      <content type="html" xml:base="/pressing-e-with-the-thumb">&lt;p&gt;Did you know that the letter “E” is the most common letter of the English language by a fair margin? It’s second only to space. Such an observation can also be made for the majority of European languages.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;p&gt;&lt;a href=&quot;https://i.redd.it/4euaismc7x301.png&quot;&gt;
+        &lt;img src=&quot;https://i.redd.it/4euaismc7x301.png&quot; alt=&quot;Colored map of Europe showing the most common letters in different European languages&quot; title=&quot;The most common letters, letter pairs and letter triplets&quot; width=&quot;1013&quot; height=&quot;352&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+  &lt;figcaption&gt;
+    &lt;p&gt;&lt;a href=&quot;https://i.redd.it/4euaismc7x301.png&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.reddit.com/r/europe/comments/7jsyv3/the_most_common_letters_in_different_european/&quot;&gt;Source of the diagram&lt;/a&gt;. Click on the picture to enlarge it.&lt;/p&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Now, consider the fact that from the dawn of typewriters to our days, &lt;em&gt;both&lt;/em&gt; thumbs have been historically assigned a single key, the most important key: the spacebar. While, it’s certainly a sensible choice to let the strongest finger(s) deal with the most commonly pressed key on the keyboard, chances are that you mostly only use one of your thumbs to press the spacebar. A wide spacebar has the benefit to give the users a choice on which thumb to use. Some people always use the same thumb while some others alternate between the thumbs, using the left while gaming and using the right while typing. Meanwhile, you can also find people doing away with the thumb altogether and using the index for space instead. In any case, past some time, your spacebar is most likely going to look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://live.staticflickr.com/7144/6705479829_b31dd82da4_n.jpg&quot; alt=&quot;Photograph of an ABS spacebar with a shiny spot on one side&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can sense what I’m getting at. This is wasteful, why not let the second thumb press the second most commonly pressed character? That would certainly balance the load between your strongest digits.&lt;/p&gt;
+
+&lt;p&gt;Moreover, this is not the only advantage of putting &lt;kbd&gt;E&lt;/kbd&gt; on the thumb. Naturally, as the most frequent letter, “E” is present in most common n-grams. This makes it hard to place “E” on the keyboard without increasing same finger utilization. A common strategy used by most alternative layouts is to isolate “E” (and other vowels in general, as vowels may be followed by any consonant whereas groups of consonants are rare) by putting punctuation and/or rare consonants around it. What better way to isolate “E” than to put it on the thumb?&lt;/p&gt;
+
+&lt;p&gt;Balanced load and greatly reduced &lt;abbr title=&quot;Same Finger Utilization&quot;&gt;SFU&lt;/abbr&gt; is not all! The use of thumb keys extends the amount of home keys, the keys that each of your fingers rest on, in idle state. By placing “E” on a thumb key, you gain one free home row position and any touch typist knows that the home row is prime real estate. By extension, this also widens the range of easily reachable keys on the base layer. This is great for other languages whose alphabet is extended with accented letters. For example, in French, the letter “é”, e acute, is more frequent than “v”, “h”, “g”, “f”, “b”, “q”, “j”, “x”, “z”, “y”, “k”, and “w”&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; and yet is never put into the main alpha block as opposed to all the aforementioned letters (one notable exception is the &lt;a href=&quot;https://bepo.fr&quot; title=&quot;Link in French&quot;&gt;Bépo&lt;/a&gt; layout and all its derivatives). Aside from accented characters, one can also put punctuation, additional frequently used symbols or even a macro like a dedicated “th” key if you really want to be fancy — the digraph “th” is the descendant of what used to be a standalone letter in the English alphabet, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Thorn_(letter)&quot;&gt;“thorn” (Þ, þ)&lt;/a&gt;, after all!&lt;/p&gt;
+
+&lt;p&gt;Obviously, this requires to do away with big, long spacebars but these have been around for the longest time and are most likely going to stay that way into the future despite the historic trend towards smaller and smaller spacebars.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/spacebar_timeline.png&quot; alt=&quot;Timeline of various keyboards with reducing spacebars right up until the Plank&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is probably why, despite the long history of typing machines, the idea of putting &lt;kbd&gt;E&lt;/kbd&gt; on the thumb is quite novel and rather alienating to most typists.&lt;/p&gt;
+
+&lt;p&gt;It wasn’t until 19 May 1977, when the Maltron Mark II layout, pictured below, first appeared, that a keyboard layout was designed to use thumbs to input letters.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://4.bp.blogspot.com/-ORP5pXO3ug4/Vk7j86BINfI/AAAAAAAABp0/sQRRyL7F3tw/s1600/89MaltronDual3d.jpg&quot; alt=&quot;Diagram of the Maltron Mark II layout&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you’re interested, you can read the introductory paper of the Maltron layout &lt;a href=&quot;https://www.maltron.com/lillian-malt-papers.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, there are, in fact, plenty of keyboards featuring &lt;kbd&gt;E&lt;/kbd&gt; on their thumb keys which predate the Maltron Ergonomic Keyboard but it requires stretching the definition of &lt;em&gt;typing&lt;/em&gt;. Typing consists in hitting individual keys to express individual letters but there exists other forms of text input such as &lt;em&gt;machine stenography&lt;/em&gt;. Stenography has long been used to write at over 200 words per minute, faster than most people speak, with the use of &lt;em&gt;chords&lt;/em&gt; on special stenotype machines with extremely light actuation force. Most stenographic theories put &lt;kbd&gt;E&lt;/kbd&gt; alongside other vowels on the thumb keys. You can learn more about stenography &lt;a href=&quot;https://www.artofchording.com/introduction/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://www.stenograph.com/history-writers&quot;&gt;stenotype machines pictured below&lt;/a&gt; were all made between 1889 and 1963, much earlier than the Maltron.&lt;/p&gt;
+
+&lt;figure class=&quot;wp-block-gallery columns-3 is-cropped&quot;&gt;
+  &lt;ul class=&quot;blocks-gallery-grid&quot;&gt;
+  &lt;li class=&quot;blocks-gallery-item&quot;&gt;
+   &lt;figure&gt;&lt;img src=&quot;https://www.stenograph.com/content/files/images/MachineHistory/02anderson.jpg&quot; alt=&quot;1889 Anderson Shorthand Typewriter&quot; title=&quot;1889 Anderson Shorthand Typewriter&quot; class=&quot;wp-image-18&quot; /&gt; &lt;/figure&gt; 
+  &lt;/li&gt;
+  &lt;li class=&quot;blocks-gallery-item&quot;&gt;
+   &lt;figure&gt;&lt;img src=&quot;https://www.stenograph.com/content/files/images/MachineHistory/03ireland.jpg&quot; alt=&quot;1911 Ireland Stenotype Shorthand Machine&quot; title=&quot;1911 Ireland Stenotype Shorthand Machine&quot; class=&quot;wp-image-19&quot; /&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;blocks-gallery-item&quot;&gt;
+   &lt;figure&gt;&lt;img src=&quot;https://www.stenograph.com/content/files/images/MachineHistory/07stenograph.jpg&quot; alt=&quot;1963 Stenograph Data Writer&quot; title=&quot;1963 Stenograph Data Writer&quot; class=&quot;wp-image-20&quot; /&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Outside of steno though, the adoption of letter thumb keys is nearly null. That can mostly be explained by path dependence and hardware limitations.&lt;/p&gt;
+
+&lt;p&gt;We all know that QWERTY is here to stay and that most people can’t be bothered to learn a new keyboard layout and those who do quickly face hardware limitations which prevent them from giving exotic keyboard layouts a spin. We’re thankfully past the days when Kinesis and Maltron were the only available choices for keyboards with a thumb cluster but despite the rise of DIY ergonomic mechanical keyboards, getting your hands on an ergonomic keyboard is still cost-prohibitive.&lt;/p&gt;
+
+&lt;p&gt;Consequently, since the (potential) user base is so small — “small” is an understatement —, there aren’t a whole lot of Malt-like alternatives (for the sake of argument, “Malt-like” merely means any layout which puts a letter on a thumb key). Despite the odds, there &lt;em&gt;are&lt;/em&gt; Malt-like layouts out there, all very recent.&lt;/p&gt;
+
+&lt;p&gt;Logical layouts/keymaps which add &lt;kbd&gt;E&lt;/kbd&gt; on the thumb:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/&quot;&gt;RSTHD&lt;/a&gt;
+&lt;img src=&quot;https://xsznix.files.wordpress.com/2016/04/screen-shot-2016-04-22-at-22-40-26.png&quot; alt=&quot;ASCII diagram of the RSTHD layout&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.adnw.de/index.php?n=Main.FehlerfreihheitUndDaumentasten&quot;&gt;Malt ++&lt;/a&gt; (link in German)
+&lt;img src=&quot;https://i.ibb.co/KDtRMq3/ADNW-white-malt.png&quot; alt=&quot;Diagram of ADNW-optimized Malt++&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/zenaan/quick-fixes-ftfw/blob/master/keyboard/README-ZenTron.md&quot;&gt;ZenTron&lt;/a&gt;
+&lt;img src=&quot;https://github.com/zenaan/quick-fixes-ftfw/raw/master/keyboard/ZenTron-1210x452.png&quot; alt=&quot;Oryx configurator of ZenTron&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keyboard-design.com/letterlayout.html?layout=opuiany.en.ergodox&quot;&gt;Opuiany&lt;/a&gt;
+&lt;img src=&quot;https://keyboard-design.com/klalayouts/opuiany.en.ergodox.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of Opuiany&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.bepo.fr/viewtopic.php?id=1696&quot;&gt;FR-Godox&lt;/a&gt; (link in French)
+&lt;img src=&quot;https://i.imgur.com/f2NDm7l.png&quot; alt=&quot;KLE diagram of the FR-Godox on an Ergodox keyboard&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lydell/anishtro&quot;&gt;ANISHTRO&lt;/a&gt;
+&lt;img src=&quot;/assets/images/ANISHTRO-KLE.png&quot; alt=&quot;KLE diagram of the ANISHTRO v1 layout on minimal Kyria&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/zigotica/kyria&quot;&gt;TRIA&lt;/a&gt;
+&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/QMK_configurator_diagram_of_the_TRIA_layout_on_a_Kyria.png&quot; alt=&quot;QMK configurator diagram of the TRIA layout on a Kyria&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Logical layouts/keymaps which add another letter (circled) on the thumb:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thedarnedestthing.com/corne&quot;&gt;BEAKL Zi&lt;/a&gt; &lt;kbd&gt;I&lt;/kbd&gt;
+&lt;img src=&quot;http://thedarnedestthing.com/images/chimera-beakl-si.jpg&quot; alt=&quot;KLE diagram of the BEAKL Zi layout on a Corne&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deskthority.net/wiki/BEAKL#P_RN&quot;&gt;BEAKL P_RN&lt;/a&gt; &lt;kbd&gt;P&lt;/kbd&gt; &lt;kbd&gt;R&lt;/kbd&gt; &lt;kbd&gt;N&lt;/kbd&gt;
+&lt;img src=&quot;assets/images/BEAKL_P_RN-KLE.png&quot; alt=&quot;Color coded KLE Diagram of the BEAKL_P_RN layout on a Preonic-style keyboard&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thedarnedestthing.com/thumb%20h&quot;&gt;BEAKL QIEA&lt;/a&gt; &lt;kbd&gt;H&lt;/kbd&gt;
+&lt;img src=&quot;http://thedarnedestthing.com/images/keyboard-layout-splitography-thumb-h.jpg&quot; alt=&quot;Colored KLE diagram of the QIEA layout with H on thumb&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keyboard-design.com/letterlayout.html?layout=x6-2h.en.ergolinear&quot;&gt;X6.2h&lt;/a&gt; &lt;kbd&gt;H&lt;/kbd&gt; (and all the other funky layouts made by Ian Douglas of the ergolinear X family)
+&lt;img src=&quot;https://keyboard-design.com/klalayouts/x6-2h.en.ergolinear.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of X6.2h&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keyboard-design.com/letterlayout.html?layout=einbinder-orthogonal.en.ergodox&quot;&gt;Einbinder Orthogonal&lt;/a&gt;
+&lt;img src=&quot;https://user-images.githubusercontent.com/12673886/116615646-e4b27f80-a93b-11eb-9bf8-5eb368a6ef62.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of einbinder-orthogonal.en.ergodox&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keyboard-design.com/letterlayout.html?layout=einbinder-1975-mod-Ian.en.matrix&quot;&gt;Einbinder 1975&lt;/a&gt;
+&lt;img src=&quot;https://user-images.githubusercontent.com/12673886/116615640-e3815280-a93b-11eb-8f91-27ab6baa6c1a.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of einbinder-1975-mod-ian.en.matrix&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://qiita.com/ZeptByteS/items/6e6a3e46552dcb105948#1-beakrak-2017&quot;&gt;BEAKRAK&lt;/a&gt; &lt;kbd&gt;T&lt;/kbd&gt; (link in Japanese)
+&lt;img src=&quot;https://keyboard-design.com/klalayouts/beakrak-mod-Ian.en.ergodox.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of BEAKRAK&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keyboard-design.com/letterlayout.html?layout=eNNe-9640PM.en.ergodox&quot;&gt;ENNe 9640PM&lt;/a&gt; &lt;kbd&gt;T&lt;/kbd&gt;
+&lt;img src=&quot;https://keyboard-design.com/klalayouts/eNNe-9640PM.en.ergodox.jpg&quot; alt=&quot;KLE keyboard-design.com diagram of ENNE-9640PM&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.persee.fr/doc/linx_0246-8743_1991_hos_4_1_1206&quot;&gt;Marsan&lt;/a&gt; &lt;kbd&gt;C&lt;/kbd&gt; &lt;kbd&gt;G&lt;/kbd&gt; (link in French) (this one is absolutely &lt;strong&gt;awful&lt;/strong&gt;. there is no space key, you have to move that little stick under àÀ from right to left with your left thumb for space, everything is wrong with this “ergonomic” keyboard but I had to include it for completeness sake)
+&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/clavier-marsan.png&quot; alt=&quot;Patent drawing of the Marsan keyboard&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This short list will be exhaustive — leave a comment if there’s a Malt-like layout I’ve missed! — if we add in my mod to Colemak-DHm which moves &lt;kbd&gt;E&lt;/kbd&gt; on the right thumb key like TRIA, as opposed to all those other layouts which put the letter on the left. I’ve always pressed space with my left thumb and I’m not going to change that habit any time soon. Additionally, &lt;kbd&gt;E&lt;/kbd&gt; was on the right hand to begin with so it makes sense to keep it on the right hand.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.ibb.co/MpGN8p1/Colemak-DHm-Thumb-E.png&quot; alt=&quot;KLE diagram on Dactyl Manuform of Colemak-DHm-E&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had recently learned and become fluid in Colemak-DHm and, while I was curious to try out &lt;kbd&gt;E&lt;/kbd&gt; on thumb after @frogmouth brought up the topic of RSTHD on the &lt;a href=&quot;https://splitkb.com&quot;&gt;splitkb.com&lt;/a&gt; &lt;a href=&quot;https://discord.gg/6zFR3zE&quot;&gt;Discord server&lt;/a&gt;, I wasn’t too fond of the idea of learning a totally new layout right after having gotten comfortable with Colemak. Later maybe, but not now. Despite these qualms, I still like experimenting with keymaps.&lt;/p&gt;
+
+&lt;p&gt;Thus, I went ahead and replaced the classic &lt;kbd&gt;E&lt;/kbd&gt; position with merely shift (since I am using home row mods, the topic of a future blog post). At first, I wanted to keep backspace on the right home thumb position so I put &lt;kbd&gt;E&lt;/kbd&gt; on the key to the left of it but I very quickly understood that this was a bad idea. The thumb key in question isn’t the most comfortable thumb key to hit and required lateral movement plus a repositioning of the thumb on its home position. For some reasons, my thumbs aren’t as good as my other fingers to find the home/resting position again so that &lt;kbd&gt;E&lt;/kbd&gt; position was problematic. The solution would thus be to put &lt;kbd&gt;E&lt;/kbd&gt; on my home right thumb key but I didn’t want to let go of backspace so I came up with another bad idea, magnitudes worse than the previous one. What if I turned the right thumb key into a dual-function key which yields “E” on tap and backspace on hold? Needless to say, it was impossible not to overshoot backspace like that.&lt;/p&gt;
+
+&lt;p&gt;Finally, I let go of my attachment to backspace’s position and let &lt;kbd&gt;E&lt;/kbd&gt; take its place, pushing backspace to the left key, the previous position of delete.
+At this point, the right thumb cluster looked like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.ibb.co/j814TZs/e-thumb-cluster.png&quot; alt=&quot;KLE diagram of right thumb cluster with Colemak-dhm-e&quot; style=&quot;width: 50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, it was time to figure out how long it would take me to get back to ~80WPM using only the thumb for “E”.&lt;/p&gt;
+
+&lt;p&gt;After merely a few minutes of practicing &lt;kbd&gt;E&lt;/kbd&gt; on thumb using the terminal application “&lt;a href=&quot;https://github.com/cslarsen/wpm&quot;&gt;wpm&lt;/a&gt;”, I had already reached 57WPM for some sentences.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_57_wpm.png&quot; alt=&quot;screenshot of wpm showing 57.0 WPM&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It didn’t take long to break through the 65WPM mark.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_65_wpm.png&quot; alt=&quot;screenshot of wpm showing 65.6 WPM&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then, I figured that I do not need to practice sentences with punctuations and capitalisations so much as I need to practice words containing “e” so I moved to &lt;a href=&quot;https://monkey-type.com/&quot;&gt;monkey-type.com&lt;/a&gt;.
+Only 32 minutes had passed since I flashed my keyboard with &lt;kbd&gt;E&lt;/kbd&gt; on thumb and I am already getting real close to my goal of 80WPM.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/screenshot_of_monkey_type_showing_69_wpm.png&quot; alt=&quot;screenshot of monkey-type showing 69WPM&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At that point, I took a break and after a full day spent without any keyboard (or computer for that matter), I went back to my typing tests. This is when I reached my goal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_84_wpm.png&quot; alt=&quot;screenshot of wpm with 84.3 WPM&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In fact, I even surpassed my goal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pressing-e-with-the-thumb/screenshot_of_wpm_showing_97_wpm.png&quot; alt=&quot;screenshot of wpm with 97.9 WPM&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Despite all that, I still wasn’t fully used to &lt;kbd&gt;E&lt;/kbd&gt; on thumb yet. More often than not, I was still hitting the previous position of &lt;kbd&gt;E&lt;/kbd&gt;. The screenshots I’ve shared here are the results of successful &lt;em&gt;sprints&lt;/em&gt;, they do not really reflect the casual typing speed. Disclaimers aside, this still goes to show that it’s actually not so hard to get used to &lt;kbd&gt;E&lt;/kbd&gt; on thumb, it has only taken me a few hours to get to an acceptable speed.&lt;/p&gt;
+
+&lt;p&gt;However, I still was not wholly convinced by the &lt;kbd&gt;E&lt;/kbd&gt; thumb. It’s certainly nice to have a balanced load between the two thumbs but the rolls don’t feel as satisfying. Colemak wasn’t designed to take advantage of thumb keys.&lt;/p&gt;
+
+&lt;p&gt;Take for example the sentence &lt;em&gt;“The enter key”&lt;/em&gt;, here’s a side by side example of writing that sentence using the two keymaps. Tapped keys are highlighted in yellow and held modifier keys in orange.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ibb.co/N7FMT9v&quot;&gt;&lt;img src=&quot;https://i.ibb.co/0QnxsC7/The-enter-key-as-typed-on-Thumb-E-Colemak-DHm.gif&quot; alt=&quot;The enter key, as typed on Colemak-DHm-ThumbE&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;https://ibb.co/JsnJpt7&quot;&gt;&lt;img src=&quot;https://i.ibb.co/DR42MWC/The-enter-key-as-typed-on-Vanilla-Colemak-DHm.gif&quot; alt=&quot;The enter key, as typed on Colemak-DHm&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I am no carpalx scientist but the classic DHm layout fares better in my opinion.&lt;/p&gt;
+
+&lt;p&gt;The way I adapted Colemak to use &lt;kbd&gt;E&lt;/kbd&gt; on thumb is only one way, there are many other potentially better ways to implement it. Colemak mods probably can’t beat keymap layouts designed around this peculiar arrangement though.&lt;/p&gt;
+
+&lt;p&gt;In the end, I gave up on the &lt;kbd&gt;E&lt;/kbd&gt; thumb. If it weren’t for the fact that it didn’t feel right in conjunction with Colemak and that I’ve since moved to using the &lt;kbd&gt;Backspace&lt;/kbd&gt; key extensively in combos for my hybrid steno setup (more on that topic in another upcoming article), I would have certainly kept on using it as I find the idea very sound.&lt;/p&gt;
+
+&lt;p&gt;The most important is that the people who have gone off the beaten path and dared to learn this exotic, ergonomic design are happy about it:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I’ve tried e on thumb with RSTHD and I think it’s the way to go. It will take me time to get used to it, though so I’ve put that particular learning curve on hiatus for the near future as I’ve been a bit busy. Things I like about it:&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Remove all conflicts in bigrams with e for free&lt;/li&gt;
+    &lt;li&gt;Reduce the size of the rolls for less fatigue&lt;/li&gt;
+    &lt;li&gt;Gain one free homerow position&lt;/li&gt;
+    &lt;li&gt;Gain one free of the next priority position etc. until where you put your backspace&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;It feels like a lot of gain. &lt;strong&gt;&lt;em&gt;— @pierrec about RSTHD&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I like it. But I haven’t spent any time learning other layouts. It does lead to a different feel on both hands, although I’m not sure that’s any different from any other layout.&lt;/p&gt;
+
+  &lt;p&gt;I’ve tweaked mine so the left hand fingers are used slightly more than the right, and when the whole hand is taken into account the right is used more. I think this is good, some other (ergo) layouts like modDH are all on the right. It also can give you very low &lt;abbr title=&quot;Same Finger Utilization&quot;&gt;SFU&lt;/abbr&gt;. However it’s not just a matter of moving something to the thumb, everything interacts, just moving a letter can lead to other issues.&lt;/p&gt;
+
+  &lt;p&gt;The downside of course is that you have used a thumb key that might otherwise have been available for a mod or layer shift. When you look at what happens in the analyzer this can mean more thumb movement if you’re not careful, which penalizes the layout. Some of this is guesswork as the analyzers (that I’ve seen) don’t have great support for layers, the patorjk one and derivatives have a start at it with AltGr so might be a good starting point for adding more.&lt;/p&gt;
+
+  &lt;p&gt;I was going to say that if someone wanted to try it, the best thing would be to just put either RSTHD or Malt in your keymap and give it a go to get the feel of it. However it’s not as straightforward as trying other layouts because whatever is on the left thumb key home has to move somewhere else. Also, you do need space on right thumb home and enter next to it (or possibly, shifted, I haven’t tried that yet) &lt;strong&gt;&lt;em&gt;— @frogmouth about RSTHD&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Qwerty 30+ years to Dvorak about 5 years ago. Then moved from a staggered to a premade ortho about 3 years ago. Coffee spill killed that, so back to the old staggered while waiting for the Kyria to arrive. This is all to let you know my fingers have been confused for a while now.&lt;/p&gt;
+
+  &lt;p&gt;My thumbs are not my smartest fingers but thumb E, in use is fantastic. It’s used so often but dedicated to its own thumb. Really a great follow through.&lt;/p&gt;
+
+  &lt;p&gt;The efficiency change from Qwerty to Dvorak was noticeable. I already feel that same sort of improvement in moving from Dvorak to RSTHD. I have no idea if I will ever change again, I don’t really see enough room left to make another leap this size in efficiency. In general, RSTHD feels much more efficient, and my RSI pain issues are reduced too.&lt;/p&gt;
+
+  &lt;p&gt;Time will tell if I can see a speed increase too. &amp;gt;60WPM is fast enough for my cares, though, so speed is not a driving factor for alternate arrangements.&lt;/p&gt;
+
+  &lt;p&gt;If you are currently using Qwerty, it is in your best interest to find a better option. &lt;strong&gt;&lt;em&gt;— @BiggerCryptoRoi about RSTHD&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RSTHD is good, and I highly recommend it. I’m on day 5 and have broken 60 wpm after 2 hrs of 1 minute typing tests. It’s very comfortable, and it feels like the workload is spread evenly between your hands. E on the homerow takes some getting used to, and the punctuation sitting in and amongst the letters is kind of unusual, but it doesn’t get in the way at all.&lt;/p&gt;
+
+  &lt;p&gt;Seems that Colemak can type 827 words with the homerow, about 0.37% of all English words, whereas RSTHD can do 1323, which is around 0.6%. I guess that’s because you have the E on the thumb, which I’m counting as part of the homerow too&lt;/p&gt;
+
+  &lt;p&gt;Anyway yeah, long story short, typing requires very little effort because you barely need to move your hands. &lt;strong&gt;&lt;em&gt;— Anonymous about RSTHD&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Using thumb for a common letter vastly improves finger balance across the board; it helps with other languages too, in contrast with Colemak that sometimes has, for example, underutilized ‘wrx’ column or overloaded right index finger.&lt;/p&gt;
+
+  &lt;p&gt;The main point around Colemak (and similar layouts) is the so-called &lt;em&gt;rolling&lt;/em&gt;, i.e., using adjacent fingers of the same hand in sequences. Well, Maltron is the original layout based on this idea; but it also relies on the keyboard’s &lt;em&gt;columnar&lt;/em&gt; physical layout: offset columns as an adjustment for shorter/longer fingers, especially little fingers. “Ortholinear” layouts lack this feature, though. That’s why I recommend at &lt;em&gt;least&lt;/em&gt; Atreus, or better something like Dactyl-Manuform. &lt;strong&gt;&lt;em&gt;— /u/Schemik about Maltron&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/BiggerCryptoRoi-transp.png&quot; alt=&quot;BiggerCryptoRoi's left hand Kyria with RSTHD DSA keycaps&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Have you ever used such layouts? Would you be willing to try it out, or is that too weird for you? Share your thoughts!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;Updates Log&lt;/summary&gt;
+
+  &lt;p&gt;09 August 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added FR-Godox to the list of Malt-like layouts&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;03 September 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added STRENIA and TRIA to the list of Malt-like layouts&lt;/li&gt;
+    &lt;li&gt;ported the blog post from WordPress.com to this Jekyll site&lt;/li&gt;
+    &lt;li&gt;Changed the cover picture to @Sergi’s Kyria sporting his TRIA layout&lt;/li&gt;
+    &lt;li&gt;Moved the old cover picture to the end of the article in addition of making it transparent.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;04 September 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added BEAKL P_RN to the list of Malt-like layouts&lt;/li&gt;
+    &lt;li&gt;renamed ADNW to Malt++ (ADNW is the name of the layout optimizer algorithm used to generate the layout, not the name of the layout itself)&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;09 September 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added a testimonial from an anonymous RSTHD user&lt;/li&gt;
+    &lt;li&gt;Added a paragraph on the benefits of &lt;kbd&gt;E&lt;/kbd&gt; on the thumb&lt;/li&gt;
+    &lt;li&gt;Developed a little bit on why I gave up on &lt;kbd&gt;E&lt;/kbd&gt; thumb&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;10 September 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added ANISHTRO to the list of Malt-like layouts&lt;/li&gt;
+    &lt;li&gt;Added a mention of the “thorn” (Þ, þ) letter&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;20 September 2020:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added BEAKL QIEA to the list of Malt-like layouts&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;01 May 2021:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Added Einbinder layouts to the list&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/details&gt;
+
+&lt;!-- https://community.keyboard.io/t/maltron-layouts/98 --&gt;
+&lt;!-- https://mathematicalmulticore.wordpress.com/category/keyboards/ --&gt;
+&lt;!-- http://mtgap.bilfo.com/completed_keyboard.html --&gt;
+&lt;!-- https://deskthority.net/viewtopic.php?f=2&amp;t=23838 --&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.sttmedia.com/characterfrequency-french&quot;&gt;Source for French character frequency&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>precondition</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="Keyboards" />
+      
+        <category term="Keymap" />
+      
+
+      
+        <summary type="html">Did you know that the letter “E” is the most common letter of the English language by a fair margin? It’s second only to space. Such an observation can also be made for the majority of European languages.</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>QMK Heatmap Generator</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <!--<link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />-->
+    <link rel="stylesheet" type="text/css" href="/assets/built/scrollbar.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/dark_screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/dark_reader.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/dark_syntax.css" />
+    <!-- highlight.js -->
+    <!--original:-->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Generate a heatmap of key presses for any QMK keyboard based on real key logging data" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="/qmk-heatmap" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="precondition" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="QMK Heatmap Generator" />
+    <meta property="og:description" content="Generate a heatmap of key presses for any QMK keyboard based on real key logging data" />
+    <meta property="og:url" content="/qmk-heatmap" />
+    <meta property="og:image" content="/assets/images/qmk-heatmap/tornadical-corne-unreal-heatmap.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:tag" content="Keyboards" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QMK Heatmap Generator" />
+    <meta name="twitter:description" content="Generate a heatmap of key presses for any QMK keyboard based on real key logging data" />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image" content="/assets/images/qmk-heatmap/tornadical-corne-unreal-heatmap.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="precondition" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Keyboards" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "precondition",
+        "logo": "/assets/images/blog-icon.png"
+    },
+    "url": "/qmk-heatmap",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/assets/images/qmk-heatmap/tornadical-corne-unreal-heatmap.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/qmk-heatmap"
+    },
+    "description": "Generate a heatmap of key presses for any QMK keyboard based on real key logging data"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="QMK Heatmap Generator" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/"><img src="/assets/images/blog-icon.png" alt="precondition" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-my-keymap" role="menuitem"><a href="https://github.com/precondition/dactyl-manuform-keymap">My Keymap</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+            
+                <a class="social-link social-link-tw" href="https://github.com/precondition" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+</a>
+            
+            <a class="social-link social-link-rss" href="/feed.xml" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-keyboards tag-keymap tag-qmk post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="19 February 2021">19 February 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/keyboards/'>KEYBOARDS</a>,
+                            
+                        
+                            
+                               <a href='/tag/keymap/'>KEYMAP</a>,
+                            
+                        
+                            
+                               <a href='/tag/qmk/'>QMK</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">QMK Heatmap Generator</h1>
+            </header>
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Show key presses coming from:
+<select id="layerSelector" onchange="displayLayer(this.value)">
+<!-- The value of "All layers" is an arbitrary big number that will be converted to highestLayer+1 -->
+<option value="99">All layers</option>
+<option value="0">Layer 0</option>
+</select></p>
+
+<div id="keyboard">
+  <canvas id="bgCanvas" width="830" height="290">
+</canvas>
+</div>
+<div id="howToMatchMatrix" style="display: none;min-width: 100%;text-align: center;"></div><hr />
+
+<pre class="highlight" id="matrixToMatch" style="display:none; line-height:16px;"></pre>
+<div class="upload-btn-wrapper" id="resetMatrixBtnWrapper" style="display:none;">
+  <label class="btn" for="resetInfoMatrix">Use another matrix</label>
+  <button id="resetInfoMatrix" style="position:absolute" onclick="resetMatrix()"></button>
+</div>
+<textarea class="qmkInfoMatrix" id="infoMatrix" rows="5" placeholder="Paste the matrix layout outputted by `qmk info -m` here" onchange="reactToTextAreaChanges(document.getElementById('infoMatrix'))" enabled=""></textarea>
+<div class="upload-btn-wrapper">
+  <label class="btn" for="pictureFile">Upload keyboard picture</label>
+  <input type="file" id="pictureFile" class="btn" />
+</div>
+<div class="upload-btn-wrapper" id="csvFileBtnWrapper" style="display:none;">
+  <label class="btn" for="csvFile">Upload key log csv</label>
+  <input type="file" id="csvFile" />
+</div>
+      <h1 id="what-it-is">
+        
+        
+          What it is <a href="#what-it-is" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h1>
+    
+<p>This is a web-based tool to generate a pretty heatmap of your typing habits. As opposed to all the other available keyboard heatmap generators, this doesn’t merely analyse a static piece of text and overlays the letter frequency of said piece of text over a picture of the most basic row-stagger keyboard. This generator has full support for unprintable keys like backspace, modifier keys, caps lock, F-keys, arrow keys etc. Additionally, advanced QMK features such as layers, modtaps, layertaps, <a href="home-row-mods">home row mods</a>, leader keys, autoshift, and even combos are also supported.</p>
+
+<p>Since QMK keyboards come in all shapes and sizes, you’re invited to upload your own picture of your layout/keymap. It doesn’t matter whether you use a TKL, an Atreus or a Dactyl Manuform; if it’s available on the <a href="https://config.qmk.fm/#/">QMK configurator</a>, it’s supported.</p>
+
+<!--
+Mini version of my Dactyl Manuform 5x6 for testing
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│1B││1C││1D││1E││1F│                    │7A││7B││7C││7D││7E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│2B││2C││2D││2E││2F│                    │8A││8B││8C││8D││8E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐
+│3B││3C││3D││3E││3F│                    │9A││9B││9C││9D││9E│
+└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘
+                ┌──┐┌──┐                    ┌──┐┌──┐
+                │4E││4F│                    │AA││AB│
+                └──┘└──┘                    └──┘└──┘
+-->
+      <h1 id="gallery">
+        
+        
+          Gallery <a href="#gallery" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h1>
+    
+
+<p><img src="/assets/images/qmk-heatmap/precondition-dactyl-manuform-heatmap.png" alt="Precondition's Dactyl Manuform 5x6 heatmap" /></p>
+      <h1 id="instructions">
+        
+        
+          Instructions <a href="#instructions" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h1>
+    
+
+<p>The QMK Heatmap Generator expects:</p>
+<ol>
+  <li>A picture of your layout</li>
+  <li>A text representation of the matrix positions of your keyboard</li>
+  <li>A link between each key in the matrix to the corresponding key in the provided picture</li>
+  <li>A keylog CSV file in <code class="language-plaintext highlighter-rouge">keycode,row,col,layer</code> format (<code class="language-plaintext highlighter-rouge">keycode</code> can be omitted)</li>
+</ol>
+
+<p>If you don’t have a <code class="language-plaintext highlighter-rouge">keylog.csv</code> file yet, jump to the section on “<a href="#how-to-collect-the-required-data">How to collect the required data</a>”. It is pointless to go through steps 1–3 if you don’t already have a <code class="language-plaintext highlighter-rouge">keylog.csv</code> file that contains at least 1000 entries.</p>
+      <h2 id="1-a-picture-of-your-layout">
+        
+        
+          1. A picture of your layout <a href="#1-a-picture-of-your-layout" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+<p>The first thing you need to do is to upload a picture of your layout. It can be any image you want but for best effects, I recommend a 2D black and white picture with high contrast. Avoid blue, green, yellow, and red in your layout graphic as those are used to draw the heatmap. If you don’t already have a graphic representation of your keymap, you can use <a href="https://keyboard-layout-editor.com">keyboard-layout-editor</a> or take a screenshot from the <a href="https://config.qmk.fm/#/">QMK configurator</a>.</p>
+
+<p>Avoid uploading a picture which separates all your different layers like in <a href="/assets/images/qmk-heatmap/keymap_layout_broken_down_by_layers.png">this example</a>. You only get to match as many keys as you have submitted in the text box for the ASCII representation of your board.</p>
+      <h2 id="2-a-text-representation-of-the-matrix-positions-of-your-keyboard">
+        
+        
+          2. A text representation of the matrix positions of your keyboard <a href="#2-a-text-representation-of-the-matrix-positions-of-your-keyboard" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+<p>Next, you can see a text box prompting you to paste the text representation of the matrix layout produced by <code class="language-plaintext highlighter-rouge">qmk info --matrix</code>, or <code class="language-plaintext highlighter-rouge">qmk info -m</code> in short. If you wish to obtain the pseudo-graphic layout for another board than your main (as defined by <code class="language-plaintext highlighter-rouge">qmk config</code>), you can run <code class="language-plaintext highlighter-rouge">qmk info -kb &lt;name&gt; -m</code>. For example, <code class="language-plaintext highlighter-rouge">qmk info -kb handwired/dactyl -m</code> produces the following output:</p>
+
+<pre style="line-height:16px">
+Keyboard Name: Dactyl
+Manufacturer: Unknown
+Website: 
+Maintainer: QMK Community
+Keyboard Folder: handwired/dactyl
+Layouts: LAYOUT_dactyl
+Size: 17 x 8
+Processor: atmega32u4
+Bootloader: halfkay
+Matrix for "LAYOUT_dactyl":
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│0A││0B││0C││0D││0E││0F│                    │0G││0H││0I││0J││0K││0L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│1A││1B││1C││1D││1E││1F│                    │1G││1H││1I││1J││1K││1L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│2A││2B││2C││2D││2E││2F│                    │2G││2H││2I││2J││2K││2L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐                    ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐
+│3A││3B││3C││3D││3E││3F│                    │3G││3H││3I││3J││3K││3L│
+└──┘└──┘└──┘└──┘└──┘└──┘                    └──┘└──┘└──┘└──┘└──┘└──┘
+┌──┐┌──┐┌──┐┌──┐┌──┐                            ┌──┐┌──┐┌──┐┌──┐┌──┐
+│4A││4B││4C││4D││4E│                            │4H││4I││4J││4K││4L│
+└──┘└──┘└──┘└──┘└──┘                            └──┘└──┘└──┘└──┘└──┘
+                        ┌──┐┌──┐    ┌──┐┌──┐
+                        │5F││5A│    │5L││5G│
+                        └──┘└──┘    └──┘└──┘
+                    ┌──┐┌──┐┌──┐    ┌──┐┌──┐┌──┐
+                    │5D││5C││5E│    │5H││5J││5I│
+                    │  ││  │└──┘    └──┘│  ││  │
+                    │  ││  │┌──┐    ┌──┐│  ││  │
+                    │  ││  ││5B│    │5K││  ││  │
+                    └──┘└──┘└──┘    └──┘└──┘└──┘
+</pre>
+
+<p>Only copy-paste the lines after “Matrix for …”.</p>
+
+<p>Note: for a handwired board, there is the possibility that the actual wiring of your board differs from that of the matrix <code class="language-plaintext highlighter-rouge">qmk info -m</code> spits out. Double check that if you notice a key you rarely press gets colored in bright colors.</p>
+      <h2 id="3-a-link-between-each-key-in-the-matrix-to-the-corresponding-key-in-the-provided-picture">
+        
+        
+          3. A link between each key in the matrix to the corresponding key in the provided picture <a href="#3-a-link-between-each-key-in-the-matrix-to-the-corresponding-key-in-the-provided-picture" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+<p>After pasting the matrix into the text area, left click on the picture the spot that corresponds to each key in the text matrix starting from the top left corner and moving from left to right, top to bottom.</p>
+
+<p>Watch out for columnar staggered boards like the Lily 58. The web-tool reads in the matrix line by line so the following matrix:</p>
+<pre style="line-height:16px">
+            ┌──┐                                  ┌──┐
+        ┌──┐│0D│┌──┐┌──┐                  ┌──┐┌──┐│5C│┌──┐
+┌──┐┌──┐│0C│└──┘│0E││0F│                  │5A││5B│└──┘│5D│┌──┐┌──┐
+│0A││0B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│5E││5F│
+└──┘└──┘┌──┐│1D│┌──┐┌──┐                  ┌──┐┌──┐│6C│┌──┐└──┘└──┘
+┌──┐┌──┐│1C│└──┘│1E││1F│                  │6A││6B│└──┘│6D│┌──┐┌──┐
+│1A││1B│└──┘┌──┐└──┘└──┘                  └──┘└──┘┌──┐└──┘│6E││6F│
+└──┘└──┘┌──┐│2D│┌──┐┌──┐                  ┌──┐┌──┐│7C│┌──┐└──┘└──┘
+┌──┐┌──┐│2C│└──┘│2E││2F│                  │7A││7B│└──┘│7D│┌──┐┌──┐
+│2A││2B│└──┘┌──┐└──┘└──┘┌──┐          ┌──┐└──┘└──┘┌──┐└──┘│7E││7F│
+└──┘└──┘┌──┐│3D│┌──┐┌──┐│4F│          │8A│┌──┐┌──┐│8D│┌──┐└──┘└──┘
+┌──┐┌──┐│3C│└──┘│3E││3F│└──┘          └──┘│8B││8C│└──┘│8E│┌──┐┌──┐
+│3A││3B│└──┘    └──┘└──┘                  └──┘└──┘    └──┘│8F││9F│
+└──┘└──┘  ┌──┐┌──┐┌──┐  ┌──┐          ┌──┐  ┌──┐┌──┐┌──┐  └──┘└──┘
+          │4B││4C││4D│  │4E│          │9B│  │9C││9D││9E│
+          └──┘└──┘└──┘  │  │          │  │  └──┘└──┘└──┘
+                        │  │          │  │
+                        └──┘          └──┘
+</pre>
+<p>will read keys in the following order:</p>
+<video controls="" width="922">
+<source src="assets/images/qmk-heatmap/matching-columnar-stagger-lily58.webm" alt="0D 5C 0C 0E 0F 5A 5B 5D 0A 0B 5E 5F 1D 6C 1C 1E 1F 6A 6B 6D 1A 1B 6E 6F" type="video/webm" />
+</video>
+
+<p>Is it annoying? Yes. I’m currently working on a desktop app that makes this process a lot more convenient. In the app, you’ll be able to select a bunch of circles at once, copy, drag and paste them wherever you want, undo and redo previous actions and more, so stay tuned!</p>
+
+<p>If you misclicked or placed the dot a few millimeters away from the true center of the keycap and it’s driving you mad, you can Shift+Left Click anywhere on the canvas to undo the last operation.</p>
+
+<p>Click a final time on the picture after having matched all matrix positions to points on the image to save the matching pairs and finally spawn the button that will let you upload your <code class="language-plaintext highlighter-rouge">keylog.csv</code>.</p>
+      <h2 id="4-generating-a-heatmap">
+        
+        
+          4. Generating a heatmap <a href="#4-generating-a-heatmap" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+<p>After having collected enough data in the expected format, you can now submit your <code class="language-plaintext highlighter-rouge">keylog.csv</code> file (the exact name of the csv file isn’t important) to the above tool in order to generate a pretty heatmap of your typing habits.</p>
+
+<p>A heatmap overlay will appear over the keys as soon as you upload the file.</p>
+
+<p>NOTE: Make sure the keylog file is encoded in UTF-8! Windows may create a UTF-16 file if you pipe the output of <code class="language-plaintext highlighter-rouge">hid_listen</code>.</p><hr />
+      <h1 id="how-to-collect-the-required-data">
+        
+        
+          How to collect the required data <a href="#how-to-collect-the-required-data" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h1>
+    
+
+<p>To accurately modelize your typing habits, you first need to collect enough real-word data. The more, the better.</p>
+
+<p>To avoid skewing results, don’t play typing games such <a href="https://monkeytype.com">monkeytype</a> or <a href="https://typingracer.com">typingracer</a> while logging your keystrokes. Typing random strings of words and movie quotes isn’t a good reflection of your actual keyboard usage — unless you’re into competitive typing.</p>
+
+<p>To collect key strokes data in the expected format, there are two things you need to setup:</p>
+<ol>
+  <li>Keyboard firmware</li>
+  <li>A program that logs what the keyboard firmware sends into a csv file</li>
+</ol>
+
+<p>(The following instructions primarily cater to users of a UNIX environment — sorry Windows users.)</p>
+      <h2 id="keyboard-firmware-setup">
+        
+        
+          Keyboard firmware setup <a href="#keyboard-firmware-setup" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+
+<p>First off, you need to program your keyboard firmware to send your desired information to the host.</p>
+
+<p>To do that, append the following line to <code class="language-plaintext highlighter-rouge">rules.mk</code>:</p>
+<pre><code class="language-mk">CONSOLE_ENABLE = yes
+</code></pre>
+
+<p>Next, open <code class="language-plaintext highlighter-rouge">keymap.c</code> and add these lines at the top of the file. This will import the <code class="language-plaintext highlighter-rouge">uprintf</code> function that we’ll later use, but only if <code class="language-plaintext highlighter-rouge">CONSOLE_ENABLE</code> is turned on.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONSOLE_ENABLE
+#include</span> <span class="cpf">"print.h"</span><span class="cp">
+#endif
+</span></code></pre></div></div>
+
+<p>After including <code class="language-plaintext highlighter-rouge">print.h</code>, head to the <code class="language-plaintext highlighter-rouge">process_record_user</code> function (More info about this function can be found <a href="https://docs.qmk.fm/#/custom_quantum_functions?id=programming-the-behavior-of-any-keycode">here</a>) and write the <code class="language-plaintext highlighter-rouge">#ifdef</code> code block just after the function signature but before the switch statement:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bool</span> <span class="nf">process_record_user</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">keycode</span><span class="p">,</span> <span class="n">keyrecord_t</span> <span class="o">*</span><span class="n">record</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef CONSOLE_ENABLE
+</span>        <span class="k">const</span> <span class="n">bool</span> <span class="n">is_combo</span> <span class="o">=</span> <span class="n">record</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">COMBO_EVENT</span><span class="p">;</span>
+        <span class="n">uprintf</span><span class="p">(</span><span class="s">"0x%04X,%u,%u,%u,%b,0x%02X,0x%02X,%u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+             <span class="n">keycode</span><span class="p">,</span>
+             <span class="n">is_combo</span> <span class="o">?</span> <span class="mi">254</span> <span class="o">:</span> <span class="n">record</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">.</span><span class="n">row</span><span class="p">,</span>
+             <span class="n">is_combo</span> <span class="o">?</span> <span class="mi">254</span> <span class="o">:</span> <span class="n">record</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">.</span><span class="n">col</span><span class="p">,</span>
+             <span class="n">get_highest_layer</span><span class="p">(</span><span class="n">layer_state</span><span class="p">),</span>
+             <span class="n">record</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">.</span><span class="n">pressed</span><span class="p">,</span>
+             <span class="n">get_mods</span><span class="p">(),</span>
+             <span class="n">get_oneshot_mods</span><span class="p">(),</span>
+             <span class="n">record</span><span class="o">-&gt;</span><span class="n">tap</span><span class="p">.</span><span class="n">count</span>
+             <span class="p">);</span>
+    <span class="cp">#endif
+</span>    <span class="k">switch</span> <span class="p">(</span><span class="n">keycode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>This will print the hexadecimal representation of every key you press as well as its row and its column. Make sure to not leave any space between the commas and to end the string with a newline <code class="language-plaintext highlighter-rouge">\n</code>.</p>
+
+<details>
+  <summary>Additional instructions for combos</summary>
+  <p>If you want to log combo key presses, there are a few more things you need to do. If you’re using the wrapper <code class="language-plaintext highlighter-rouge">[AB_ESC] = COMBO(combo_sequence, KC_ESC)</code>, there is nothing extra that you have to do. However, here’s what you have to insert in <code class="language-plaintext highlighter-rouge">processs_combo_event</code> if you use the <code class="language-plaintext highlighter-rouge">COMBO_ACTION</code> wrapper for defining (some of) your combos:</p>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONSOLE_ENABLE
+</span>    <span class="n">combo_t</span> <span class="o">*</span><span class="n">combo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">key_combos</span><span class="p">[</span><span class="n">combo_index</span><span class="p">];</span>
+    <span class="kt">uint8_t</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">uint16_t</span> <span class="n">combo_keycode</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">combo_keycode</span> <span class="o">=</span> <span class="n">pgm_read_word</span><span class="p">(</span><span class="o">&amp;</span><span class="n">combo</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span> <span class="o">!=</span> <span class="n">COMBO_END</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">uprintf</span><span class="p">(</span><span class="s">"0x%04X,%u,%u,%u,%u,0x%02X,0x%02X,0</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+            <span class="n">combo_keycode</span><span class="p">,</span>
+            <span class="mi">254</span><span class="p">,</span>
+            <span class="mi">254</span><span class="p">,</span>
+            <span class="n">get_highest_layer</span><span class="p">(</span><span class="n">layer_state</span><span class="p">),</span>
+            <span class="n">pressed</span><span class="p">,</span>
+            <span class="n">get_mods</span><span class="p">(),</span>
+            <span class="n">get_oneshot_mods</span><span class="p">()</span>
+            <span class="cm">/* tap_count */</span>
+        <span class="p">);</span>
+        <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="cp">#endif
+</span></code></pre></div>  </div>
+  <p>As you can notice, <code class="language-plaintext highlighter-rouge">processs_combo_event</code> doesn’t actually give any meaningful information on the matrix position of combo key presses. This is why the row and column fields in the printed output are filled in with the “magic” constant value 254 (historically called <code class="language-plaintext highlighter-rouge">KEYLOC_COMBO</code>).</p>
+
+  <p>These “missing” constant values will be automatically filled in by the QMK Heatmap Generator based on keys you’ve typed outside of combos. For example, if you have a combo involving <code class="language-plaintext highlighter-rouge">KC_A</code> and <code class="language-plaintext highlighter-rouge">KC_S</code>, executing the combo will output these two lines:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x004,254,254,0,1,0x00,0x00,0
+0x018,254,254,0,1,0x00,0x00,0
+0x004,254,254,0,0,0x00,0x00,0
+0x018,254,254,0,0,0x00,0x00,0
+</code></pre></div>  </div>
+  <p>but simply tapping those keys by themselves, one after another would produce something like:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x004,3,2,0,1,0x00,0x00,0
+0x004,3,2,0,0,0x00,0x00,0
+0x018,3,3,0,1,0x00,0x00,0
+0x018,3,3,0,0,0x00,0x00,0
+</code></pre></div>  </div>
+  <p>Based on this, we can infer that the keycode <code class="language-plaintext highlighter-rouge">0x004</code> is positionned in the third row, second column and that <code class="language-plaintext highlighter-rouge">0x018</code> is positionned in the third row, third column.</p>
+
+  <p>Thus, if you use a key <em>exclusively</em> in combos, there won’t be any row,col information associated with that keycode in your <code class="language-plaintext highlighter-rouge">keylog.csv</code> and as such, the generator cannot infer what’s the row and column of that key and it will remain 254. This is why it helps to press every key of your keyboard at least once; to get a complete record.</p>
+
+</details>
+
+<p>At this stage, the keyboard firmware is ready to go and you can flash the firmware onto your board.</p>
+      <h2 id="host-computer-setup">
+        
+        
+          Host computer setup <a href="#host-computer-setup" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h2>
+    
+
+<p>The next steps will be about setting up the host computer to listen to what the keyboard sends and actually log that output to a csv file.</p>
+
+<p>To listen to your keyboard, you’ll need to install <a href="https://www.pjrc.com/teensy/hid_listen.html">hid_listen</a>. There are pre-compiled binaries available for download for most operating systems except for Linux 64-bit for which you’ll need to download the source code and run <code class="language-plaintext highlighter-rouge">make</code> at the root of the downloaded <code class="language-plaintext highlighter-rouge">hid_listen/</code> folder.</p>
+
+<p>Now, all you need to start logging key presses is to let this command run in the background while you’re using your keyboard normally:</p>
+
+<p>UNIX system:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./hid_listen | egrep <span class="nt">--line-buffered</span> <span class="s2">"(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}"</span> | <span class="nb">tee</span> <span class="nt">-a</span> keylog.csv
+</code></pre></div></div>
+
+<p>Windows system (Powershell):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\hid_listen.exe</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-String</span><span class="w"> </span><span class="nt">-Pattern</span><span class="w"> </span><span class="s2">"(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Tee-Object</span><span class="w"> </span><span class="nx">keylog.csv</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The output should look like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x6117,2,4,0,1,0x00,0x00,0
+0x002A,10,0,0,1,0x01,0x00,0
+0x002A,10,0,0,0,0x01,0x00,0
+0x6117,2,4,0,0,0x01,0x00,0
+0x6216,2,3,0,1,0x00,0x00,1
+0x6216,2,3,0,0,0x00,0x00,1
+</code></pre></div></div>
+
+<p>Every time you press any key on your keyboard, a new line should be appended to the standard output and to the <code class="language-plaintext highlighter-rouge">keylog.csv</code> file which will be stored in the same directory as that of the <code class="language-plaintext highlighter-rouge">hid_listen</code> executable file.</p>
+
+<p>If you don’t want to flood the standard output, you can replace <code class="language-plaintext highlighter-rouge">| tee -a</code> by <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> like so:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./hid_listen | egrep <span class="nt">--line-buffered</span> <span class="s2">"(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}"</span> <span class="o">&gt;&gt;</span> keylog.csv
+</code></pre></div></div>
+<p>This will silently append <code class="language-plaintext highlighter-rouge">&lt;keycode&gt;,&lt;row&gt;,&lt;col&gt;,&lt;layer&gt;,&lt;pressed&gt;,&lt;mod_state&gt;,&lt;oneshot_mod_state&gt;,&lt;tap_count&gt;</code> to <code class="language-plaintext highlighter-rouge">keylog.csv</code> anytime you press a key on your keyboard.</p>
+      <h1 id="why-should-i-trust-this-web-tool-with-my-keylogging-data">
+        
+        
+          Why should I trust this web-tool with my keylogging data? <a href="#why-should-i-trust-this-web-tool-with-my-keylogging-data" class="heading-anchor" title="Permalink to this section">¶</a>
+        
+        
+      </h1>
+    
+<p>This entire website is static and open source, meaning none of your data gets sent to any server, all the processing happens client-side and anyone can inspect the code. More importantly, the <code class="language-plaintext highlighter-rouge">keylog.csv</code> file that you upload to the web-tool doesn’t actually contain the key<em>sym</em> you’ve typed, only the raw hexadecimal key<em>codes</em>.</p>
+
+<p>For example, there isn’t one clear-cut keycode that will always produce “A” on screen. <code class="language-plaintext highlighter-rouge">KC_LSHIFT</code> followed by <code class="language-plaintext highlighter-rouge">KC_A</code> will produce a different keycode from <code class="language-plaintext highlighter-rouge">S(KC_A)</code> and yet produces the same final output nonetheless. Tapping <code class="language-plaintext highlighter-rouge">LGUI_T(KC_A)</code> will result in yet another hexadecimal keycode and so will <code class="language-plaintext highlighter-rouge">LT(_LAYER, KC_A)</code>. And all of that doesn’t take into account the variability of regional OS keyboard layouts. <code class="language-plaintext highlighter-rouge">0x0004</code> would get interpreted as “a” if your OS is configured to use QWERTY but for all I know, you may as well be using AZERTY, in which case that keycode will instead output “q” or, to give another example, “ф” if you use ЙЦУКЕН.</p>
+
+<p>I have no desire to deal with that ambiguous mess.</p>
+
+<p>The keycodes only get used to fill in the row,col values for combo actions, so if you feel particularly paranoiac, you can delete the first column of the csv file containing the hexadecimal keycode (very easy to do in any spreadsheet application) and shuffle the order of the csv lines before uploading it. All that really matters to the generator is the <code class="language-plaintext highlighter-rouge">row</code>, the <code class="language-plaintext highlighter-rouge">col</code>, and the <code class="language-plaintext highlighter-rouge">layer</code> of each key press.</p>
+
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+            
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; precondition &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/keyboards/">Keyboards</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/pressing-e-with-the-thumb">Pressing E with the thumb‽</a></li>
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/keyboards/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/home-row-mods">
+                <div class="post-card-image" style="background-image: url(/assets/images/home-row-mods/RealisticHRM-Light-Cover-Half-GASC.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/home-row-mods">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Keymap</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Qmk</span>
+                            
+                        
+                    
+                    <h2 class="post-card-title">A guide to home row mods</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<!--{percent include floating-header.html percent}-->
+
+<!-- /post -->
+
+
+<!-- Load custom JS scripts -->
+
+    <script type="text/javascript">
+    const bgCanvas = document.getElementById("bgCanvas");
+bgCanvas.style.backgroundImage = "url(/assets/images/qmk-heatmap/example_layout_for_qmk_heatmap_generator.jpg)";
+
+document.getElementById("pictureFile").addEventListener("change", function(){
+    const pictureFile = this.files[0];
+    if (pictureFile) {
+      var reader = new FileReader();
+
+      reader.onload = function (evt) {
+          var image = new Image();
+          image.src = reader.result;
+          image.onload = function() {
+              const height = this.height;
+              const width = this.width;
+              const MAX_WIDTH = 1550;
+              const MAX_HEIGHT = 1550;
+              if (height > MAX_HEIGHT || width > MAX_WIDTH) {
+                  alert(`The image dimensions are too big.\nPlease upload a picture under ${MAX_WIDTH}x${MAX_HEIGHT} pixels`);
+              } else {
+                  bgCanvas.width = width;
+                  bgCanvas.height = height;
+                  bgCanvas.style.backgroundImage = `url(${reader.result})`;
+              }
+          }
+          resetEverything();
+      };
+
+      reader.onerror = function (evt) {
+        console.error("An error ocurred reading the pictureFile",evt);
+        alert("An error occurred reading while reading the file.");
+      };
+
+      reader.readAsDataURL(pictureFile);
+    }
+},false);
+
+function resetEverything() {
+      resetMatrix()
+      for (const cnvs of document.getElementsByClassName("heatmap-canvas")) {
+          cnvs.remove();
+      }
+     document.getElementById("howToMatchMatrix").style.display = "none"
+     document.getElementById("matrixToMatch").style.display = "none"
+     document.getElementById("resetMatrixBtnWrapper").style.display = "none"
+     document.getElementById("csvFileBtnWrapper").style.display = "none"
+}
+
+// Code to automatically resize textarea
+// Source: https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize/25621277#25621277
+// (Pure JS option)
+const tx = document.getElementById('infoMatrix');
+tx.setAttribute('style', 'height:' + (tx.scrollHeight) + 'px;overflow-y:hidden;');
+tx.addEventListener("input", function OnInput() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+}, false);
+
+/* bool */ var inMatchingMode = false;
+/* str */ var textMatrix = "";
+/* array[str] */ var rowcolInTextMatrix = [];
+/* Object[str: Object[str: int]] */ var posMatchingTable = {};
+
+// Constants taken from here:
+// https://github.com/qmk/qmk_firmware/blob/620a946d01477b64ee2f719141aa35400c0188c6/lib/python/qmk/constants.py#L22...L24
+const ROW_LETTERS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop'
+const COL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+// Taken from the length of ROW_LETTERS and COL_LETTERS
+const MAX_ROW = 52;
+const MAX_COL = 52;
+// For some reason `\b` gets turned into a weird unicode character
+// if only one backslash is used.
+const rowcolPattern = new RegExp(`\\b[${ROW_LETTERS}][${COL_LETTERS}]\\b`, 'g')
+
+function reactToTextAreaChanges(textAreaElem) {
+    textAreaContent = textAreaElem.value;
+    if (textAreaContent.length > 0) {
+        /* str */ textMatrix = textAreaContent;
+        /* str */ oldRowcolInTextMatrix = rowcolInTextMatrix;
+        /* array[str] */ rowcolInTextMatrix = textMatrix.match(rowcolPattern);
+        if (oldRowcolInTextMatrix != rowcolInTextMatrix) {
+            // Remove any pre-existing heatmap-canvas to avoid
+            // stacking another canvas on top of bgCanvas and thus stealing mouse click events.
+            for (const cnvs of document.getElementsByClassName("heatmap-canvas")) {
+                cnvs.remove();
+            }
+            eraseAllCircles();
+            inMatchingMode = true;
+            posMatchingTable = {};
+            document.getElementById("matrixToMatch").style.display = "block"
+            document.getElementById("matrixToMatch").innerText = textAreaContent
+            document.getElementById("howToMatchMatrix").style.display = "block"
+            document.getElementById("howToMatchMatrix").innerText = "Click the key on the picture that corresponds to " + rowcolInTextMatrix[0]
+            document.getElementById("infoMatrix").style.display = "none"
+            document.getElementById("resetMatrixBtnWrapper").style.display = "block"
+        }
+    } else {
+        /* bool */inMatchingMode = false
+        /* str */textMatrix = ""
+        /* array[str] */rowColInTextMatrix = []
+        document.getElementById("matrixToMatch").style.display = "none"
+        document.getElementById("howToMatchMatrix").style.display = "none"
+    }
+}
+
+function resetMatrix() {
+    /* bool */inMatchingMode = false
+    /* str */textMatrix = ""
+    /* array[str] */rowColInTextMatrix = []
+    /* int */rowcolPointer = 0
+    document.getElementById("matrixToMatch").style.display = "none"
+    document.getElementById("infoMatrix").style.display = "block"
+    document.getElementById("resetMatrixBtnWrapper").style.display = "none"
+    document.getElementById("howToMatchMatrix").style.display = "none"
+}
+
+function drawCircle(x, y) {
+    const ctx = bgCanvas.getContext("2d");
+    const pointSize = 5;
+    ctx.fillStyle = "#ff2626"; // Red color
+    ctx.beginPath();
+    // Draw a point using the arc function of the canvas with a point structure.
+    ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+    ctx.fill(); // This also closes the path
+}
+
+function eraseCircle(x, y) {
+    const ctx = bgCanvas.getContext("2d");
+    const pointSize = 5;
+    // If two circles are near one another, this may irreversibly erase parts of another circle.
+    // There are no clean ways to properly undo the last canvas draw operation.
+    ctx.clearRect(x-pointSize, y-pointSize, pointSize*Math.PI, pointSize*Math.PI);
+    // The above size and offsets are somewhat arbitrary and not super precise
+}
+
+function eraseAllCircles() {
+    const ctx = bgCanvas.getContext("2d");
+    ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+}
+
+let rowcolPointer = 0
+bgCanvas.addEventListener("click", function(e) {
+    if (inMatchingMode) {
+        if (!e.shiftKey) {
+            if (rowcolPointer < rowcolInTextMatrix.length) {
+                /*str*/matchedRowcol = rowcolInTextMatrix[rowcolPointer]
+                /*Object[str: int]*/posMatchingTable[matchedRowcol] = {x: e.offsetX, y:e.offsetY};
+                drawCircle(e.offsetX, e.offsetY);
+                rowcolPointer++
+                // matchedKeys is surrounded by "double quotes" in the HTML regardless of what quotes are used here.
+                document.getElementById("matrixToMatch").innerHTML = document.getElementById("matrixToMatch").innerHTML
+                                                                           .replace(matchedRowcol, '<span class="matchedKeys">'+matchedRowcol+'</span>')
+            } else {
+                eraseAllCircles();
+                alert("All matches are saved! Please upload your csv file now");
+                document.getElementById("howToMatchMatrix").innerText = 'Scroll down to see the "Upload key log csv" button'
+                document.getElementById("csvFileBtnWrapper").style.display = "block";
+            }
+        }
+        else if (e.shiftKey) {
+            if (rowcolPointer > 0) {
+                rowcolPointer--
+                /*str*/unmatchedRowcol = rowcolInTextMatrix[rowcolPointer]
+                // Get X, Y coordinates of the row col to unmatch and feed them to eraseCircle
+                // This lets the user erase the previous circle from anywhere on the canvas.
+                eraseCircle(...Object.values(posMatchingTable[unmatchedRowcol]));
+                delete posMatchingTable[unmatchedRowcol];
+                document.getElementById("matrixToMatch").innerHTML = document.getElementById("matrixToMatch").innerHTML
+                                                                           .replace('<span class="matchedKeys">'+unmatchedRowcol+'</span>', unmatchedRowcol)
+            } else {
+                console.log("Nothing to undo, posMatchingTable has no keys");
+            }
+        }
+        if (rowcolPointer < rowcolInTextMatrix.length) {
+          document.getElementById("howToMatchMatrix").innerText = "Click the key on the picture that corresponds to " + rowcolInTextMatrix[rowcolPointer]
+          if (rowcolPointer > 0) {
+            document.getElementById("howToMatchMatrix").innerText += "\n(Shift click to undo last operation)"
+          }
+        } else {
+          document.getElementById("howToMatchMatrix").innerText = "Click anywhere to finalize"
+        }
+    } else {
+        console.log("Not inMatchingMode");
+    }
+}, false);
+
+function fillNAs(lines) {
+    /* Fill in the missing row,col information (as denoted by "NA,NA" or "254,254") of a combo action
+     * by looking for an occurrence of the same keycode used outside of a combo
+     * and thus associated with a certain row and column.
+     */
+    keycode2rowcol = {}
+    // The keycode must be present in the expected line format
+    const expectedLineFormat = /^0x[A-F0-9]+,[0-9]+,[0-9]+/
+    // Go through each known association between a keycode and its row,col
+    // to build the `keycode2rowcol` lookup table.
+    lines.filter(line => expectedLineFormat.test(line)).forEach(line => {
+        const loggedKeycodeAndVars = line.split(",")
+        const keycode = loggedKeycodeAndVars[0]
+        const row = Number(loggedKeycodeAndVars[1])
+        const col = Number(loggedKeycodeAndVars[2])
+        if (row == 254 && col == 254) {
+            return // is a combo
+        } else {
+            keycode2rowcol[keycode] = [row, col]
+        }
+    })
+
+    // Iterate a second time through `lines` to replace "keycode,NA,NA" by "keycode,row,col" if available in `keycode2rowcol`.
+    for (i=0; i<lines.length; i++) {
+        if (lines[i].startsWith("0x")) {
+            keycode = lines[i].match(/0x[0-9A-F]+/)[0]
+            replacement_rowcol = (keycode2rowcol[keycode]||[254, 254]).join(",")
+            if (lines[i].includes("NA,NA")) {
+                lines[i] = lines[i].replace("NA,NA", replacement_rowcol)
+            } else if (lines[i].includes("254,254")) {
+                lines[i] = lines[i].replace("254,254", replacement_rowcol)
+            }
+        }
+    }
+    return lines
+}
+
+function getKeyFreq(line, keyFreq) {
+    /* Generates a hashmap that associates a key to the total amount of times it was pressed.
+     *
+     * Its format is as follows:
+     * {
+     * "2-letter code for row,column": [
+     *  total presses on layer 0, total presses on layer 1, ..., total presses on layer n
+     *  ]
+     * }
+     *
+     * Example:
+     * {"0A": [2800, 38], "9B": [50, 50]}
+     * The key in matrix position row=0, col=0 (denoted "0A")
+     * was pressed 2800 times when layer 0 was active and
+     * 38 times when layer 1 was active.
+     */
+
+    // Strip the leading keycode hexa
+    line = line.replace(/0x[0-9A-F]+,/, "")
+    const loggedVars = line.split(",")
+    const row        = Number(loggedVars[0])
+    const col        = Number(loggedVars[1])
+    const layer      = Number(loggedVars[2])
+    if (row < MAX_ROW && col < MAX_COL) {
+        rowcol = ROW_LETTERS[row] + COL_LETTERS[col]
+    } else {
+        // Is probably a combo whose row, col = 254, 254
+        rowcol = 'ØØ' // 'Ø' is totally arbitrary
+    }
+    if (keyFreq[rowcol] == undefined) {
+        keyFreq[rowcol] = []
+    }
+    keyFreq[rowcol][layer] = (keyFreq[rowcol][layer] || 0) + 1
+    return keyFreq
+}
+
+function sum(array) {
+    return array.reduce((a, b) => a+b, 0)
+}
+
+function getHighestLayer(line, highestLayer) {
+    line = line.replace(/0x[0-9A-F]+,/, "")
+    const loggedVars = line.split(",")
+    const layer = Number(loggedVars[2])
+    if (layer > highestLayer) {
+        highestLayer = layer
+     }
+    return highestLayer
+}
+
+function compileHeatmapDataPoints(rowcol2coords, rowcol2counts, highestLayer) {
+    /*array[array[Object[str: int]]]*/data = []
+    rowcols = Object.keys(rowcol2coords)
+    var i = rowcols.length
+    while (i--) {
+        rowcol = rowcols[i]
+        if (rowcol2counts[rowcol] == undefined) {
+            continue
+        }
+        for (let j=0; j<=highestLayer; j++) {
+            /*int*/const keypressesCount = rowcol2counts[rowcol][j]
+            if (keypressesCount == undefined) {
+                continue
+            }
+            // Shallow copy clone of {x: int, y: int}
+            /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]}
+            coordsAndValue["value"] = keypressesCount
+            coordsAndValue["rowcol"] = rowcol
+            if (data[j] == undefined) {
+                data[j] = []
+            }
+            data[j].push(coordsAndValue)
+        }
+        /*int*/const totalKeypressesCount = sum(rowcol2counts[rowcol])
+        /*Object[str: int]*/coordsAndValue = {...rowcol2coords[rowcol]}
+        coordsAndValue["value"] = totalKeypressesCount
+        if (data[highestLayer+1] == undefined) {
+            data[highestLayer+1] = []
+        }
+        data[highestLayer+1].push(coordsAndValue)
+    }
+    return data
+}
+
+function generateHeatmap(maxPresses, heatmapDataPoints) {
+    // Remove any pre-existing heatmap-canvas to avoid
+    // stacking multiple different heatmaps on top of each other.
+    for (const cnvs of document.getElementsByClassName("heatmap-canvas")) {
+        cnvs.remove();
+    }
+    // This creates a new heatmap-canvas inside the 'keyboard' div
+    heatmapInstance = h337.create({
+      container: document.getElementById('keyboard'),
+      maxOpacity: .6,
+      radius: 50,
+      blur: .90,
+    });
+    var heatmapFinalData = {
+        max: maxPresses,
+        data: heatmapDataPoints
+    }
+    heatmapInstance.setData(heatmapFinalData)
+}
+
+let heatmapDataPoints = []
+let maxPresses = []
+document.getElementById("csvFile").addEventListener("change", function(){
+    var csvFile = this.files[0];
+
+    if (csvFile) {
+      var reader = new FileReader();
+      const RECOMMENDED_AMOUNT_OF_ENTRIES = 100000
+
+      reader.onload = function (evt) {
+          csvText = evt.target.result
+          csvLines = csvText.split(/\n|\r\n/)
+
+          if (csvLines.length < RECOMMENDED_AMOUNT_OF_ENTRIES) {
+              document.getElementById("howToMatchMatrix").innerText = `The submitted keylog only contains ${csvLines.length} lines.\nCollect more data for more accurate results.`
+          }
+          if (csvText.includes("NA,NA") || csvText.includes("254,254")) {
+            csvLines = fillNAs(csvLines)
+          }
+          let keyFreq = {}
+          let highestLayer = 0
+          // The keycode DOES NOT have to be present in the expected line format
+          const expectedLineFormat = /^(0x[A-F0-9]+,)?[0-9]+,[0-9]+,[0-9]{1,2}/
+          csvLines.filter(line => expectedLineFormat.test(line)).forEach(line => {
+              keyFreq = getKeyFreq(line, keyFreq)
+              highestLayer = getHighestLayer(line, highestLayer)
+          })
+          maxPresses = []
+          keypressesOnEachLayer = Object.values(keyFreq)
+          for (let i=0; i<=highestLayer; i++) {
+            maxPresses.push(Math.max(...keypressesOnEachLayer.map(pressesInLayer => (pressesInLayer[i]||0))))
+          }
+          // Last element contains the total max presses for all layers combined
+          maxPresses.push(Math.max(...keypressesOnEachLayer.map(pressesInLayer => sum(pressesInLayer))))
+
+          heatmapDataPoints = compileHeatmapDataPoints(posMatchingTable, keyFreq, highestLayer);
+
+          // The code below related to updating the layerSelector can be a bit confusing because of
+          // the presence of the option "All Layers" at the first position in the drop-down list.
+          // By consequence, the option "Layer 0" has a value of "0" but an index of 0+1 etc.
+          const selector = document.getElementById("layerSelector")
+          // highestLayer+1 is the index of aggregated layers data in heatmapDataPoints.
+          currentlySelectedLayer = Math.min(Number(selector.value), highestLayer+1);
+          // Always keep at least "All layers" and "Layer 0" + whatever up to selected index or highestLayer+1
+          // These two options work with any keylog file because there is always at least a base layer.
+          selector.length = Math.max(2, Math.min(selector.selectedIndex, highestLayer+1))
+          for (let i=selector.length-1; i<=highestLayer; i++) {
+            addLayerToSelector(i)
+          }
+          generateHeatmap(maxPresses[currentlySelectedLayer], heatmapDataPoints[currentlySelectedLayer]);
+      };
+
+      reader.onerror = function (evt) {
+        console.error("An error occurred reading the csvFile",evt);
+      };
+
+      reader.readAsText(csvFile, "UTF-8");
+    }
+}, false);
+
+document.getElementById("csvFile").addEventListener("click", function(){
+  // Reset the input field, so that an updated csv file with the same filename can be uploaded.
+  var csvFile = this.files[0];
+  if (csvFile) {
+    csvFile.value = '';
+  }
+}, false);
+
+function displayLayer(selectedLayer) {
+    if (maxPresses.length > 0) {
+        chosenLayer = Math.min(Number(selectedLayer), heatmapDataPoints.length-1)
+        generateHeatmap(maxPresses[chosenLayer], heatmapDataPoints[chosenLayer])
+    }
+}
+
+function addLayerToSelector(layer) {
+    selector = document.getElementById("layerSelector")
+    layerToAdd = document.createElement("option")
+    layerToAdd.text = "Layer " + layer
+    layerToAdd.value = layer
+    selector.add(layerToAdd)
+}
+
+    </script>
+
+    <script type="text/javascript">
+    /*
+ * heatmap.js v2.0.5 | JavaScript Heatmap Library
+ *
+ * Copyright 2008-2016 Patrick Wied <heatmapjs@patrick-wied.at> - All rights reserved.
+ * Dual licensed under MIT and Beerware license 
+ *
+ * :: 2016-09-05 01:16
+ */
+(function(a,b,c){if(typeof module!=="undefined"&&module.exports){module.exports=c()}else if(typeof define==="function"&&define.amd){define(c)}else{b[a]=c()}})("h337",this,function(){var a={defaultRadius:40,defaultRenderer:"canvas2d",defaultGradient:{.25:"rgb(0,0,255)",.55:"rgb(0,255,0)",.85:"yellow",1:"rgb(255,0,0)"},defaultMaxOpacity:1,defaultMinOpacity:0,defaultBlur:.85,defaultXField:"x",defaultYField:"y",defaultValueField:"value",plugins:{}};var b=function h(){var b=function d(a){this._coordinator={};this._data=[];this._radi=[];this._min=10;this._max=1;this._xField=a["xField"]||a.defaultXField;this._yField=a["yField"]||a.defaultYField;this._valueField=a["valueField"]||a.defaultValueField;if(a["radius"]){this._cfgRadius=a["radius"]}};var c=a.defaultRadius;b.prototype={_organiseData:function(a,b){var d=a[this._xField];var e=a[this._yField];var f=this._radi;var g=this._data;var h=this._max;var i=this._min;var j=a[this._valueField]||1;var k=a.radius||this._cfgRadius||c;if(!g[d]){g[d]=[];f[d]=[]}if(!g[d][e]){g[d][e]=j;f[d][e]=k}else{g[d][e]+=j}var l=g[d][e];if(l>h){if(!b){this._max=l}else{this.setDataMax(l)}return false}else if(l<i){if(!b){this._min=l}else{this.setDataMin(l)}return false}else{return{x:d,y:e,value:j,radius:k,min:i,max:h}}},_unOrganizeData:function(){var a=[];var b=this._data;var c=this._radi;for(var d in b){for(var e in b[d]){a.push({x:d,y:e,radius:c[d][e],value:b[d][e]})}}return{min:this._min,max:this._max,data:a}},_onExtremaChange:function(){this._coordinator.emit("extremachange",{min:this._min,max:this._max})},addData:function(){if(arguments[0].length>0){var a=arguments[0];var b=a.length;while(b--){this.addData.call(this,a[b])}}else{var c=this._organiseData(arguments[0],true);if(c){if(this._data.length===0){this._min=this._max=c.value}this._coordinator.emit("renderpartial",{min:this._min,max:this._max,data:[c]})}}return this},setData:function(a){var b=a.data;var c=b.length;this._data=[];this._radi=[];for(var d=0;d<c;d++){this._organiseData(b[d],false)}this._max=a.max;this._min=a.min||0;this._onExtremaChange();this._coordinator.emit("renderall",this._getInternalData());return this},removeData:function(){},setDataMax:function(a){this._max=a;this._onExtremaChange();this._coordinator.emit("renderall",this._getInternalData());return this},setDataMin:function(a){this._min=a;this._onExtremaChange();this._coordinator.emit("renderall",this._getInternalData());return this},setCoordinator:function(a){this._coordinator=a},_getInternalData:function(){return{max:this._max,min:this._min,data:this._data,radi:this._radi}},getData:function(){return this._unOrganizeData()}};return b}();var c=function i(){var a=function(a){var b=a.gradient||a.defaultGradient;var c=document.createElement("canvas");var d=c.getContext("2d");c.width=256;c.height=1;var e=d.createLinearGradient(0,0,256,1);for(var f in b){e.addColorStop(f,b[f])}d.fillStyle=e;d.fillRect(0,0,256,1);return d.getImageData(0,0,256,1).data};var b=function(a,b){var c=document.createElement("canvas");var d=c.getContext("2d");var e=a;var f=a;c.width=c.height=a*2;if(b==1){d.beginPath();d.arc(e,f,a,0,2*Math.PI,false);d.fillStyle="rgba(0,0,0,1)";d.fill()}else{var g=d.createRadialGradient(e,f,a*b,e,f,a);g.addColorStop(0,"rgba(0,0,0,1)");g.addColorStop(1,"rgba(0,0,0,0)");d.fillStyle=g;d.fillRect(0,0,2*a,2*a)}return c};var c=function(a){var b=[];var c=a.min;var d=a.max;var e=a.radi;var a=a.data;var f=Object.keys(a);var g=f.length;while(g--){var h=f[g];var i=Object.keys(a[h]);var j=i.length;while(j--){var k=i[j];var l=a[h][k];var m=e[h][k];b.push({x:h,y:k,value:l,radius:m})}}return{min:c,max:d,data:b}};function d(b){var c=b.container;var d=this.shadowCanvas=document.createElement("canvas");var e=this.canvas=b.canvas||document.createElement("canvas");var f=this._renderBoundaries=[1e4,1e4,0,0];var g=getComputedStyle(b.container)||{};e.className="heatmap-canvas";this._width=e.width=d.width=b.width||+g.width.replace(/px/,"");this._height=e.height=d.height=b.height||+g.height.replace(/px/,"");this.shadowCtx=d.getContext("2d");this.ctx=e.getContext("2d");e.style.cssText=d.style.cssText="position:absolute;left:0;top:0;";c.style.position="relative";c.appendChild(e);this._palette=a(b);this._templates={};this._setStyles(b)}d.prototype={renderPartial:function(a){if(a.data.length>0){this._drawAlpha(a);this._colorize()}},renderAll:function(a){this._clear();if(a.data.length>0){this._drawAlpha(c(a));this._colorize()}},_updateGradient:function(b){this._palette=a(b)},updateConfig:function(a){if(a["gradient"]){this._updateGradient(a)}this._setStyles(a)},setDimensions:function(a,b){this._width=a;this._height=b;this.canvas.width=this.shadowCanvas.width=a;this.canvas.height=this.shadowCanvas.height=b},_clear:function(){this.shadowCtx.clearRect(0,0,this._width,this._height);this.ctx.clearRect(0,0,this._width,this._height)},_setStyles:function(a){this._blur=a.blur==0?0:a.blur||a.defaultBlur;if(a.backgroundColor){this.canvas.style.backgroundColor=a.backgroundColor}this._width=this.canvas.width=this.shadowCanvas.width=a.width||this._width;this._height=this.canvas.height=this.shadowCanvas.height=a.height||this._height;this._opacity=(a.opacity||0)*255;this._maxOpacity=(a.maxOpacity||a.defaultMaxOpacity)*255;this._minOpacity=(a.minOpacity||a.defaultMinOpacity)*255;this._useGradientOpacity=!!a.useGradientOpacity},_drawAlpha:function(a){var c=this._min=a.min;var d=this._max=a.max;var a=a.data||[];var e=a.length;var f=1-this._blur;while(e--){var g=a[e];var h=g.x;var i=g.y;var j=g.radius;var k=Math.min(g.value,d);var l=h-j;var m=i-j;var n=this.shadowCtx;var o;if(!this._templates[j]){this._templates[j]=o=b(j,f)}else{o=this._templates[j]}var p=(k-c)/(d-c);n.globalAlpha=p<.01?.01:p;n.drawImage(o,l,m);if(l<this._renderBoundaries[0]){this._renderBoundaries[0]=l}if(m<this._renderBoundaries[1]){this._renderBoundaries[1]=m}if(l+2*j>this._renderBoundaries[2]){this._renderBoundaries[2]=l+2*j}if(m+2*j>this._renderBoundaries[3]){this._renderBoundaries[3]=m+2*j}}},_colorize:function(){var a=this._renderBoundaries[0];var b=this._renderBoundaries[1];var c=this._renderBoundaries[2]-a;var d=this._renderBoundaries[3]-b;var e=this._width;var f=this._height;var g=this._opacity;var h=this._maxOpacity;var i=this._minOpacity;var j=this._useGradientOpacity;if(a<0){a=0}if(b<0){b=0}if(a+c>e){c=e-a}if(b+d>f){d=f-b}var k=this.shadowCtx.getImageData(a,b,c,d);var l=k.data;var m=l.length;var n=this._palette;for(var o=3;o<m;o+=4){var p=l[o];var q=p*4;if(!q){continue}var r;if(g>0){r=g}else{if(p<h){if(p<i){r=i}else{r=p}}else{r=h}}l[o-3]=n[q];l[o-2]=n[q+1];l[o-1]=n[q+2];l[o]=j?n[q+3]:r}k.data=l;this.ctx.putImageData(k,a,b);this._renderBoundaries=[1e3,1e3,0,0]},getValueAt:function(a){var b;var c=this.shadowCtx;var d=c.getImageData(a.x,a.y,1,1);var e=d.data[3];var f=this._max;var g=this._min;b=Math.abs(f-g)*(e/255)>>0;return b},getDataURL:function(){return this.canvas.toDataURL()}};return d}();var d=function j(){var b=false;if(a["defaultRenderer"]==="canvas2d"){b=c}return b}();var e={merge:function(){var a={};var b=arguments.length;for(var c=0;c<b;c++){var d=arguments[c];for(var e in d){a[e]=d[e]}}return a}};var f=function k(){var c=function h(){function a(){this.cStore={}}a.prototype={on:function(a,b,c){var d=this.cStore;if(!d[a]){d[a]=[]}d[a].push(function(a){return b.call(c,a)})},emit:function(a,b){var c=this.cStore;if(c[a]){var d=c[a].length;for(var e=0;e<d;e++){var f=c[a][e];f(b)}}}};return a}();var f=function(a){var b=a._renderer;var c=a._coordinator;var d=a._store;c.on("renderpartial",b.renderPartial,b);c.on("renderall",b.renderAll,b);c.on("extremachange",function(b){a._config.onExtremaChange&&a._config.onExtremaChange({min:b.min,max:b.max,gradient:a._config["gradient"]||a._config["defaultGradient"]})});d.setCoordinator(c)};function g(){var g=this._config=e.merge(a,arguments[0]||{});this._coordinator=new c;if(g["plugin"]){var h=g["plugin"];if(!a.plugins[h]){throw new Error("Plugin '"+h+"' not found. Maybe it was not registered.")}else{var i=a.plugins[h];this._renderer=new i.renderer(g);this._store=new i.store(g)}}else{this._renderer=new d(g);this._store=new b(g)}f(this)}g.prototype={addData:function(){this._store.addData.apply(this._store,arguments);return this},removeData:function(){this._store.removeData&&this._store.removeData.apply(this._store,arguments);return this},setData:function(){this._store.setData.apply(this._store,arguments);return this},setDataMax:function(){this._store.setDataMax.apply(this._store,arguments);return this},setDataMin:function(){this._store.setDataMin.apply(this._store,arguments);return this},configure:function(a){this._config=e.merge(this._config,a);this._renderer.updateConfig(this._config);this._coordinator.emit("renderall",this._store._getInternalData());return this},repaint:function(){this._coordinator.emit("renderall",this._store._getInternalData());return this},getData:function(){return this._store.getData()},getDataURL:function(){return this._renderer.getDataURL()},getValueAt:function(a){if(this._store.getValueAt){return this._store.getValueAt(a)}else if(this._renderer.getValueAt){return this._renderer.getValueAt(a)}else{return null}}};return g}();var g={create:function(a){return new f(a)},register:function(b,c){a.plugins[b]=c}};return g});
+    </script>
+
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">precondition</a> &copy; 2025</section>
+                <section class="poweredby">Published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    a custom theme based on
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                    <a href="https://github.com/precondition" target="_blank" rel="noopener">GitHub</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+
+    <!-- highlight.js -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>-->
+    <!--<script>$(document).ready(function() {-->
+      <!--$('pre code').each(function(i, block) {-->
+        <!--hljs.highlightBlock(block);-->
+      <!--});-->
+    <!--});</script>-->
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <!--<script-->
+        <!--src="https://code.jquery.com/jquery-3.2.1.min.js"-->
+        <!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="-->
+        <!--crossorigin="anonymous">-->
+    <!--</script>-->
+    <!--<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>-->
+    <!--<script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>-->
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

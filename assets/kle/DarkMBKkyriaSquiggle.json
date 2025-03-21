@@ -1,0 +1,282 @@
+[
+  {
+    "backcolor": "#757575",
+    "name": "Kyria",
+    "css": "@import url(http://fonts.googleapis.com/css?family=Comfortaa);\n\n.keylabel {\n    font-family: 'Comfortaa';\n    letter-spacing: 1px;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content:center;\n    /*border: 0.5px solid orange;*/\n    position: absolute;\n    top:0 !important ;\n    right:0;\n    bottom:0;\n    left:0;\n    width: 100% !important;\n    height: 100% !important;\n    max-height: 100% !important;\n    padding: 2px;\n    margin-top:0;\n}\n\n.keylabel > div {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: auto !important;\n    height: auto !important;\n}\n\n.keylabel0 {\n    font-size: 13px;\n    padding-bottom: 27px;\n    padding-right: 28px;\n}\n\n/*Center Center*/\n.keylabel4 {\n    font-size: 13px !important;\n    justify-content: flex-start;\n    padding-left:4px;\n}\n\n/*Front Left, used for centered small mod text*/\n.keylabel9 {\n    font-size: 9px !important;\n    max-height: 100% !important;\n}\n\n/*Center Top*/\n.keylabel1 {\n    font-size: 14px !important;\n    align-items: flex-start;\n    justify-content: flex-start;\n    padding-top:7px;\n    padding-left:5px;\n}\n\n/*Center Bottom*/\n.keylabel7 {\n    font-size: 14px !important;\n    align-items: flex-end;\n    justify-content: flex-start;\n    padding-bottom:7px;\n    padding-left: 5px;\n}\n\n/*bottom right*/\n.keylabel8 {\n    color: #00F0FF !important;\n    font-size: 8px !important;\n    align-items: flex-end;\n    justify-content: flex-end;\n    opacity:0.5;\n    padding-bottom:4px;\n}\n\n.keyborder {\n    transform: scaleY(0.92) scaleX(0.92);\n    border-width: 0px !important;\n    box-shadow: 0 2px 2px rgba(0,0,0,0.2);\n}\n\n.keytop {\n    border-radius: 5px !important;\n    transform: scaleX(1.03) translateY(-1px);\n    border-width: 1.5px;\n    border-color: rgba(255,255,225,0.07) !important;\n    box-shadow: 0 1px 2px rgba(0,0,0,0.4);\n\n}\n\n/*Front Edge Centered*/\n.keylabel10 {\n    color: #F90396 !important;\n    font-size: 8px !important;\n    align-items: flex-end;\n    justify-content: center;\n    padding-bottom: 0px;\n    opacity:0.8;\n    transform: translateY(9px) scaleY(0.7);\n}\n\n/*Top Right*/\n.keylabel2 {\n    color: #FF9900 !important;\n    font-size: 8px !important;\n    line-height: 8px !important;\n    align-items: flex-start;\n    justify-content: flex-end;\n    padding-top:4px;\n    opacity:0.7;\n    padding-right:0px;\n    letter-spacing: 0.5px;\n}"
+  },
+  [
+    {
+      "y": 0.25,
+      "x": 3,
+      "c": "#292929",
+      "t": "#FFFFFF",
+      "p": "DSA"
+    },
+    "\n\n*\nF8\n\n\n\n\n\nF",
+    {
+      "x": 9,
+      "p": ""
+    },
+    "U"
+  ],
+  [
+    {
+      "y": -0.75,
+      "x": 2,
+      "p": "DSA"
+    },
+    "\n\n&\nF7\n\n\n\n\n\nW",
+    {
+      "x": 1
+    },
+    "\n\n(\nF9\n\n\n\n\n\nP",
+    {
+      "x": 7,
+      "p": ""
+    },
+    "L",
+    {
+      "x": 1
+    },
+    "Y"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 5,
+      "p": "DSA"
+    },
+    "\n\n}\n\n\n\n\n\n\nB",
+    {
+      "x": 5,
+      "p": ""
+    },
+    "J"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 15
+    },
+    ":\n\n\n\n\n\n\n\n\n\n;"
+  ],
+  [
+    {
+      "y": -0.75,
+      "p": "DSA",
+      "a": 3
+    },
+    "\n\n\n\nESC",
+    {
+      "a": 4
+    },
+    "\n\n{\nF12\n\n\n\n\n\nQ"
+  ],
+  [
+    {
+      "y": -0.75,
+      "x": 3
+    },
+    "\n\n%\nF5\nLCTL\n\n\n\n\nS",
+    {
+      "x": 9,
+      "p": ""
+    },
+    "E"
+  ],
+  [
+    {
+      "y": -0.75,
+      "x": 2
+    },
+    "\n\n$\nF4\nLALT\n\n\n\n\nR",
+    {
+      "x": 1,
+      "p": "DSA",
+      "n": true
+    },
+    "\n\n^\nF6\nLSFT\n\n\n\n\nT",
+    {
+      "x": 7,
+      "p": "",
+      "n": true
+    },
+    "N",
+    {
+      "x": 1
+    },
+    "I"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 5,
+      "p": "DSA"
+    },
+    "\n\n+\n\n\n\n\n\n\nG",
+    {
+      "x": 5,
+      "p": ""
+    },
+    "M"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 15
+    },
+    "O"
+  ],
+  [
+    {
+      "y": -0.75,
+      "p": "DSA",
+      "a": 3
+    },
+    "\n\n\n\nTAB",
+    {
+      "p": "",
+      "a": 4
+    },
+    "\n\n:\nF11\nLGUI\n\n\n\n\nA"
+  ],
+  [
+    {
+      "y": -0.75,
+      "x": 3
+    },
+    "\n\n@\nF2\n\n\n\n\n\nC",
+    {
+      "x": 9
+    },
+    "<\n\n\n\n\n\n\n\n\n\n,"
+  ],
+  [
+    {
+      "y": -0.75,
+      "x": 2,
+      "p": "DSA"
+    },
+    "\n\n!\nF1\nALGR\n\n\n\n\nX",
+    {
+      "x": 1
+    },
+    "\n\n#\nF3\n\n\n\n\n\nD",
+    {
+      "x": 7,
+      "p": ""
+    },
+    "H",
+    {
+      "x": 1
+    },
+    ">\n\n\n\n\n\n\n\n\n\n."
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 5,
+      "p": "DSA"
+    },
+    "\n\n|\n\n\n\n\n\n\nV",
+    {
+      "x": 5,
+      "p": ""
+    },
+    "K"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 15
+    },
+    "?\n\n\n\n\n\n\n\n\n\n/"
+  ],
+  [
+    {
+      "y": -0.75,
+      "p": "DSA",
+      "a": 3
+    },
+    "\n\n\n\nSHIFT",
+    {
+      "p": "",
+      "a": 4
+    },
+    "\n\n~\nF10\n\n\n\n\n\nZ"
+  ],
+  [
+    {
+      "y": -0.5,
+      "x": 2.5,
+      "p": "DSA",
+      "a": 7
+    },
+    ""
+  ],
+  [
+    {
+      "rx": 4,
+      "ry": 8.175,
+      "y": -4.675,
+      "x": -0.5,
+      "a": 3
+    },
+    "\n\n\n\nESC"
+  ],
+  [
+    {
+      "r": 15,
+      "y": -1,
+      "x": -0.5,
+      "a": 0
+    },
+    "\n\nMUTE\n\nCTRL\n\n\n\n\n\n\nNSL"
+  ],
+  [
+    {
+      "r": 30,
+      "y": -2,
+      "x": -0.5
+    },
+    "\n\nPREV\n\nOPT"
+  ],
+  [
+    {
+      "x": -0.5
+    },
+    "\n\nPLAY\n\nCMD\n\n\n\n\n\n\nNAVR"
+  ],
+  [
+    {
+      "r": 45,
+      "y": -2,
+      "x": -0.5,
+      "a": 4
+    },
+    "\n\nNEXT"
+  ],
+  [
+    {
+      "x": -0.5,
+      "a": 3
+    },
+    "\n\n\n\nLOWER"
+  ],
+  [
+    {
+      "r": -30,
+      "rx": 13,
+      "y": -4.425000000000001,
+      "x": -0.25,
+      "p": "",
+      "a": 7,
+      "h": 2
+    },
+    "",
+    {
+      "h": 2
+    },
+    ""
+  ]
+]
