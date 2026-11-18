@@ -8,6 +8,7 @@ paginate: 100 # it will paginate after this number
 language: 'en'
 
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
+url: https://precondition.github.io
 baseurl: /
 
 # Website info
