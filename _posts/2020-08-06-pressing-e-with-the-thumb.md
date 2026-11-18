@@ -8,6 +8,7 @@ date: 2020-08-06
 tags: [Keyboards, Keymap]
 class: post-template
 subclass: 'post'
+giscus_discussion: 24
 author: precondition
 description: Exploring the history and reasoning behind a radical ergonomic keyboard layout and trying it out for myself.
 ---

@@ -101,8 +101,13 @@ into the {body} of the default.hbs template -->
                             data-repo-id="MDEwOlJlcG9zaXRvcnkyODk0OTc2MTU="
                             data-category="Comments"
                             data-category-id="DIC_kwDOEUFiD84CQ-f6"
+                            {% if page.giscus_discussion %}
+                            data-mapping="number"
+                            data-term="{{ page.giscus_discussion }}"
+                            {% else %}
                             data-mapping="title"
                             data-strict="0"
+                            {% endif %}
                             data-reactions-enabled="1"
                             data-emit-metadata="0"
                             data-input-position="bottom"

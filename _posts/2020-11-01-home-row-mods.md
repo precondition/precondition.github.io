@@ -11,6 +11,7 @@ tags: [Keymap, QMK]
 pinned: True
 class: post-template
 subclass: 'post'
+giscus_discussion: 26
 author: precondition
 custom-js:
     - js/home_row_mods_code_generator.js
