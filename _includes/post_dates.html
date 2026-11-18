@@ -1,0 +1,5 @@
+<time class="post-full-meta-date" datetime="{{ page.date | date:'%e %B %Y' }}">{{ page.date | date:'%e %B %Y' }}</time>
+{% if page.last_modified_at %}{% assign updated = page.last_modified_at | date: '%Y-%m-%d' %}{% assign published = page.date | date: '%Y-%m-%d' %}{% if updated > published %}
+<span class="date-divider">/</span>
+<span class="post-full-meta-date">Updated <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date:'%e %B %Y' }}</time></span>
+{% endif %}{% endif %}
