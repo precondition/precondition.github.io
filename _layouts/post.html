@@ -90,39 +90,7 @@ into the {body} of the default.hbs template -->
                 <!-- /author  -->
             </footer>
 
-            {% if site.giscus or page.giscus %}
-                <section class="post-full-comments">
-                    {% include anchor_headings.html 
-                    html='<h1 id="comments">Comments</h1>' 
-                    anchorBody="¶" anchorClass="heading-anchor" 
-                    anchorTitle="Permalink to the comments section" %}
-                    <script src="https://giscus.app/client.js"
-                            data-repo="precondition/precondition.github.io"
-                            data-repo-id="MDEwOlJlcG9zaXRvcnkyODk0OTc2MTU="
-                            data-category="Comments"
-                            data-category-id="DIC_kwDOEUFiD84CQ-f6"
-                            {% if page.giscus_discussion %}
-                            data-mapping="number"
-                            data-term="{{ page.giscus_discussion }}"
-                            {% else %}
-                            data-mapping="title"
-                            data-strict="0"
-                            {% endif %}
-                            data-reactions-enabled="1"
-                            data-emit-metadata="0"
-                            data-input-position="bottom"
-                            data-theme="dark_dimmed"
-                            data-lang="en"
-                            data-loading="lazy"
-                            crossorigin="anonymous"
-                            async>
-                    </script>
-                    <noscript>
-                        Enable Javascript to display comments powered by <a href="https://giscus.app/">giscus</a>.<br>
-                        Alternatively, you can also read and write comments directly in <a href="https://github.com/precondition/precondition.github.io/discussions/categories/comments">GitHub Discussions</a>.
-                    </noscript>
-                </section>
-            {% endif %}
+            {% include giscus.html %}
 
             <!-- If you use Disqus comments, just uncomment this block.
             The only thing you need to change is "test-apkdzgmqhj" - which
