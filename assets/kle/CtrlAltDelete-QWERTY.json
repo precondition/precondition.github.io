@@ -1,0 +1,44 @@
+[
+  {
+    "backcolor": "#1c1c21"
+  },
+  [
+    {
+      "y": 1,
+      "c": "#1f1f2b",
+      "t": "#0085ff",
+      "w": 1.25
+    },
+    "Fn",
+    {
+      "t": "#ffffff"
+    },
+    "A",
+    "S",
+    "D",
+    "F",
+    "G",
+    "H",
+    {
+      "t": "#ffffff\n\n\n#0085ff"
+    },
+    "J\n\n\nDel",
+    "K\n\n\nIns",
+    "L\n\n\nPrtSc",
+    {
+      "t": "#ffffff"
+    },
+    ":\n;",
+    "\"\n'"
+  ],
+  [
+    {
+      "y": 1,
+      "f": 9,
+      "w": 2.25,
+      "h": 1.5,
+      "d": true
+    },
+    "<i class='kb kb-Unicode-Control-1'></i>\n◆\n⎇\n⇧"
+  ]
+]

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://precondition.github.io/pressing-e-with-the-thumb</loc>
+<lastmod>2020-08-06T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://precondition.github.io/home-row-mods</loc>
+<lastmod>2023-08-31T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://precondition.github.io/qmk-heatmap</loc>
+<lastmod>2021-02-19T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://precondition.github.io/</loc>
+</url>
+<url>
+<loc>https://precondition.github.io/about/</loc>
+</url>
+<url>
+<loc>https://precondition.github.io/tag/keyboards/</loc>
+</url>
+<url>
+<loc>https://precondition.github.io/tag/keymap/</loc>
+</url>
+<url>
+<loc>https://precondition.github.io/tag/qmk/</loc>
+</url>
+</urlset>
